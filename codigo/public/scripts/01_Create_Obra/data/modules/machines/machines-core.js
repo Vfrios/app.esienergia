@@ -560,6 +560,69 @@ function buildMachinesSection(obraId, projectId, roomName, finalRoomId) {
  </div>`;
 }
 
+async function downloadMachineExcel(machineId) {
+  const machineElement = document.querySelector(
+    `[data-machine-id="${machineId}"]`,
+  );
+  if (!machineElement) {
+    console.error(`Máquina não encontrada: ${machineId}`);
+    return;
+  }
+
+  const options = Array.from(
+    machineElement.querySelectorAll('.option-item'),
+  ).map((item) => ({
+    name: item.querySelector('.option-name')?.textContent?.trim() || '',
+    selected: Boolean(item.querySelector('input[type="checkbox"]')?.checked),
+  })).filter((option) => option.name);
+  const selectedConfigs = Array.from(
+    machineElement.querySelectorAll('.config-checkbox input[type="checkbox"]:checked'),
+  ).map((input) => input.dataset.configName || input.id);
+
+  const value = (selector) => machineElement.querySelector(selector)?.value || '';
+  const payload = {
+    machine_id: machineId,
+    name: machineElement.querySelector('.machine-title-editable')?.value || '',
+    type: value('.machine-type-select'),
+    application: value('.machine-aplicacao-select'),
+    capacity: value('.machine-power-select'),
+    voltage: value('.machine-voltage-select'),
+    command_voltage: value('.machine-command-voltage-select'),
+    quantity: value('.machine-qnt-input'),
+    options,
+    configurations: selectedConfigs,
+  };
+
+  try {
+    const response = await fetch('/api/machines/export-excel', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new Error(error.error || 'Não foi possível gerar o Excel.');
+    }
+
+    const blob = await response.blob();
+    const downloadUrl = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = response.headers.get('Content-Disposition')?.match(/filename="([^"]+)"/)?.[1] || `folha-equipamento-${machineId}.xlsx`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(downloadUrl);
+  } catch (error) {
+    console.error('Erro ao baixar folha de dados da máquina:', error);
+    if (typeof window.showSystemStatus === 'function') {
+      window.showSystemStatus(error.message, 'error');
+    } else {
+      alert(error.message);
+    }
+  }
+}
+
 /**
  * Constrói HTML de máquina individual
  */
@@ -597,6 +660,9 @@ function buildMachineHTML(machineId, displayName, machines, roomId) {
  <div class="config-grid" id="config-container-${machineId}">
  <p class="empty-config-message">Selecione tipo e capacidade</p>
  </div>
+ </div>
+ <div class="machine-excel-actions">
+ <button type="button" class="btn btn-download-machine-excel" onclick="downloadMachineExcel('${machineId}')">Baixar Excel</button>
  </div>
  </div>
  </div>`;
@@ -1985,6 +2051,7 @@ export {
   loadMachinesData,
   addMachine,
   buildMachineHTML,
+  downloadMachineExcel,
   toggleMachineSection,
   updateMachineTitle,
   updateMachineOptions,
@@ -2024,6 +2091,7 @@ if (typeof window !== "undefined") {
   window.calculateMachinePrice = calculateMachinePrice;
   window.updateQuantity = updateQuantity;
   window.deleteMachine = deleteMachine;
+  window.downloadMachineExcel = downloadMachineExcel;
   window.addMachine = addMachine;
   window.toggleMachineSection = toggleMachineSection;
   window.handlePowerChange = handlePowerChange;

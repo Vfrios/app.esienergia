@@ -12,6 +12,9 @@ import re
 import tempfile
 import hashlib
 import hmac
+from io import BytesIO
+from html import escape as escape_xml
+from zipfile import ZIP_DEFLATED, ZipFile
 
 
 
@@ -152,6 +155,7 @@ class UniversalHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         "/api/word/generate/proposta-tecnica",
         "/api/word/generate/ambos",
         "/api/word/download",
+        "/api/machines/export-excel",
     }
     AUTHENTICATED_API_PREFIXES = (
         "/obras/",
@@ -1648,6 +1652,10 @@ class UniversalHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         elif path == "/api/word/generate/ambos":
             self.handle_generate_word_ambos()
             return  
+
+        elif path == "/api/machines/export-excel":
+            self.handle_export_machine_excel()
+            return
         
         # ========== ROTAS PARA EQUIPAMENTOS ==========
         elif path == "/api/acessorios/add":
@@ -5743,5 +5751,114 @@ class UniversalHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 "success": False,
                 "error": str(e)
             }, status=500)
+
+    def handle_export_machine_excel(self):
+        """Gera uma folha de dados preenchida a partir dos dados atuais da máquina."""
+        try:
+            content_length = int(self.headers.get("Content-Length", 0))
+            data = json.loads(self.rfile.read(content_length) or b"{}")
+            template_path = self.project_root / "word_templates" / "FOLHA DE DADOS EQUIPAMENTO EXCEL.xlsx"
+
+            if not template_path.exists():
+                self.send_json_response({"success": False, "error": "Template Excel não encontrado."}, status=404)
+                return
+
+            options = data.get("options") or []
+            configurations = data.get("configurations") or []
+            machine_name = str(data.get("name") or data.get("machine_id") or "Equipamento")
+            machine_type = str(data.get("type") or "")
+
+            from servidor_modules.database.repositories.machine_repository import MachineRepository
+
+            machine_catalog = MachineRepository(self.project_root).get_by_type(machine_type) or {}
+            manufacturer = (
+                machine_catalog.get("fabricante")
+                or machine_catalog.get("manufacturer")
+                or machine_catalog.get("impostos", {}).get("FORNECEDOR")
+                or machine_catalog.get("impostos", {}).get("fornecedor")
+                or ""
+            )
+
+            values = {
+                "A1": f"FOLHA DE DADOS - {machine_name}",
+                "F9": str(manufacturer),
+                "F10": machine_type,
+                "F11": machine_name,
+                "F12": str(data.get("capacity") or ""),
+                "F13": str(data.get("quantity") or ""),
+                "F15": str(data.get("voltage") or ""),
+                "F16": str(data.get("command_voltage") or ""),
+                "F17": "SIM" if any(
+                    isinstance(option, dict)
+                    and option.get("selected")
+                    and "autom" in str(option.get("name") or "").lower()
+                    for option in options
+                ) else "NÃO",
+                "F18": "SIM" if any(
+                    isinstance(option, dict)
+                    and option.get("selected")
+                    and "dupla aliment" in str(option.get("name") or "").lower()
+                    for option in options
+                ) else "NÃO",
+            }
+
+            for index, option in enumerate(options[:12], start=1):
+                row = 29 + index
+                if isinstance(option, dict):
+                    option_name = str(option.get("name") or "")
+                    option_state = "SIM" if option.get("selected") else "NÃO"
+                else:
+                    option_name = str(option)
+                    option_state = "SIM"
+                values[f"A{row}"] = f"5.{index}"
+                values[f"B{row}"] = option_name
+                values[f"E{row}"] = "-"
+                values[f"F{row}"] = option_state
+
+            output = BytesIO()
+            with ZipFile(template_path, "r") as source_zip, ZipFile(
+                output, "w", compression=ZIP_DEFLATED
+            ) as target_zip:
+                for entry in source_zip.infolist():
+                    content = source_zip.read(entry.filename)
+                    if entry.filename == "xl/worksheets/sheet1.xml":
+                        sheet_xml = content.decode("utf-8")
+                        for cell_ref, value in values.items():
+                            escaped_value = escape_xml(str(value), quote=False)
+                            cell_pattern = re.compile(
+                                rf'<c([^>]*\br="{re.escape(cell_ref)}"[^>]*)/>'
+                                rf'|<c([^>]*\br="{re.escape(cell_ref)}"[^>]*)>.*?</c>'
+                            )
+                            def replace_cell(match):
+                                attributes = match.group(1) or match.group(2) or ""
+                                attributes = re.sub(r'\s+t="[^"]*"', "", attributes)
+                                return (
+                                    f'<c{attributes} t="inlineStr"><is><t>{escaped_value}'
+                                    "</t></is></c>"
+                                )
+
+                            sheet_xml, replacements = cell_pattern.subn(
+                                replace_cell, sheet_xml, count=1
+                            )
+                            if replacements == 0:
+                                raise ValueError(f"Célula {cell_ref} não encontrada no template.")
+                        content = sheet_xml.encode("utf-8")
+                    target_zip.writestr(entry, content)
+
+            file_data = output.getvalue()
+            safe_name = re.sub(r"[^A-Za-z0-9_-]+", "-", machine_name).strip("-") or "equipamento"
+            filename = f"folha-dados-{safe_name}.xlsx"
+
+            self.send_response(200)
+            self.send_header("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+            self.send_header("Content-Disposition", f'attachment; filename="{filename}"')
+            self.send_header("Content-Length", str(len(file_data)))
+            self.end_headers()
+            self.wfile.write(file_data)
+        except json.JSONDecodeError:
+            self.send_json_response({"success": False, "error": "JSON inválido."}, status=400)
+        except Exception as error:
+            print(f" Erro em handle_export_machine_excel: {error}")
+            self.send_json_response({"success": False, "error": str(error)}, status=500)
             
         
