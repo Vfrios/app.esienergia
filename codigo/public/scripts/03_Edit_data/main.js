@@ -1,5 +1,6 @@
 // scripts/03_Edit_data/main.js
 import "./config/request-bridge.js";
+import "../01_Create_Obra/core/page-transition.js";
 import { createSmartLogger } from "../01_Create_Obra/core/logger.js";
 import "../01_Create_Obra/core/system-bootstrap.js";
 import { shutdownManual } from "../01_Create_Obra/data/adapters/shutdown-adapter.js";

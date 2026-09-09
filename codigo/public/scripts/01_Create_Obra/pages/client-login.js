@@ -2,9 +2,7 @@ import { APP_CONFIG } from '../core/config.js';
 import { createSmartLogger } from '../core/logger.js';
 import {
     clearClientSession,
-    login,
-    redirectToAdminApp,
-    redirectToClientApp
+    login
 } from '../core/auth.js';
 
 const RECOVERY_ENDPOINT = '/api/auth/recover-token';
@@ -38,6 +36,27 @@ function setLoadingState(isLoading) {
     if (buttonText) {
         buttonText.textContent = isLoading ? 'Validando...' : 'Entrar';
     }
+}
+
+function transitionToApp(redirectTo, role) {
+    const transition = document.getElementById('loginTransition');
+    const label = document.getElementById('loginTransitionLabel');
+
+    if (!transition || !label) {
+        window.location.replace(redirectTo);
+        return;
+    }
+
+    label.textContent = role === 'admin'
+        ? 'Entrando no ambiente administrativo...'
+        : 'Entrando no ambiente de obras...';
+    transition.classList.add('is-visible');
+    transition.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('is-transitioning');
+
+    window.setTimeout(() => {
+        window.location.replace(redirectTo);
+    }, 720);
 }
 
 function bindPasswordToggle() {
@@ -177,11 +196,11 @@ function bindLoginForm() {
             }
 
             if (loginResult.role === 'admin') {
-                redirectToAdminApp(loginResult.redirectTo);
+                transitionToApp(loginResult.redirectTo, 'admin');
                 return;
             }
 
-            redirectToClientApp();
+            transitionToApp(APP_CONFIG.auth?.redirectAfterLogin || '/obras/create', 'client');
         } catch (error) {
             console.error('[CLIENT-LOGIN] Erro no login:', error);
             setFeedback('Não foi possível validar o acesso.', 'error');

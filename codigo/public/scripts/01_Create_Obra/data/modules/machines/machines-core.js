@@ -10,6 +10,7 @@
 
 import { updateElementText, safeNumber } from "../../utils/core-utils.js";
 import { generateMachineId } from "../../utils/id-generator.js";
+import { isClientMode } from "../../../core/config.js";
 
 // =============================================================================
 // CACHE E ESTADO GLOBAL
@@ -672,9 +673,10 @@ function buildMachineHTML(machineId, displayName, machines, roomId) {
  <p class="empty-config-message">Selecione tipo e capacidade</p>
  </div>
  </div>
+ ${isClientMode() ? "" : `
  <div class="machine-excel-actions">
  <button type="button" class="btn btn-download-machine-excel" onclick="downloadMachineExcel('${machineId}')">Baixar Excel</button>
- </div>
+ </div>`}
  </div>
  </div>`;
 }

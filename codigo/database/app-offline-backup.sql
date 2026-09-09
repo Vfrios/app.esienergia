@@ -28,7 +28,7 @@ CREATE TABLE admins (
     raw_json TEXT NOT NULL,
     sort_order INTEGER NOT NULL
 );
-INSERT INTO "admins" VALUES('adm','5tgrySVdG458','{"usuario": "adm", "token": "5tgrySVdG458", "email": "matheus@esienergia.com.br", "criadoEm": "2026-03-19T14:30:59.996Z", "ultimoAcesso": "2026-09-08T19:43:26.625472-03:00"}',0);
+INSERT INTO "admins" VALUES('adm','5tgrySVdG458','{"usuario": "adm", "token": "5tgrySVdG458", "email": "matheus@esienergia.com.br", "criadoEm": "2026-03-19T14:30:59.996Z", "ultimoAcesso": "2026-09-09T09:52:07.044637-03:00"}',0);
 CREATE TABLE constants (
     key TEXT PRIMARY KEY,
     value_json TEXT NOT NULL,
@@ -79,8 +79,8 @@ CREATE TABLE empresas (
     raw_json TEXT NOT NULL,
     sort_order INTEGER NOT NULL
 );
-INSERT INTO "empresas" VALUES('ACT','ACTEMIUM',154,'{"usuario": "ACTE", "email": "", "token": "mt3br4g4.mbfv3pg1el8.33ebc472b6a", "data_criacao": "2026-08-18T13:49:11.152Z", "data_expiracao": "2026-10-06T19:29:34.301Z", "tempoUso": 30, "source": "manual-edit"}','{"codigo": "ACT", "nome": "ACTEMIUM", "credenciais": {"usuario": "ACTE", "email": "", "token": "mt3br4g4.mbfv3pg1el8.33ebc472b6a", "data_criacao": "2026-08-18T13:49:11.152Z", "data_expiracao": "2026-10-06T19:29:34.301Z", "tempoUso": 30, "source": "manual-edit"}, "numeroClienteAtual": 154}',0);
-INSERT INTO "empresas" VALUES('AMC','AMC SOLUÇÕES',6,NULL,'{"codigo": "AMC", "nome": "AMC SOLUÇÕES", "credenciais": null, "numeroClienteAtual": 5}',1);
+INSERT INTO "empresas" VALUES('ACT','ACTEMIUM',154,'{"usuario": "ACTE", "email": "", "token": "fbbc771d-586c-2a48-999a-d0d9c5b05cd0", "data_criacao": "2026-08-18T13:49:11.152Z", "data_expiracao": "2026-10-09T12:45:10.954Z", "tempoUso": 30, "source": "manual-edit"}','{"codigo": "ACT", "nome": "ACTEMIUM", "credenciais": {"usuario": "ACTE", "email": "", "token": "fbbc771d-586c-2a48-999a-d0d9c5b05cd0", "data_criacao": "2026-08-18T13:49:11.152Z", "data_expiracao": "2026-10-09T12:45:10.954Z", "tempoUso": 30, "source": "manual-edit"}, "numeroClienteAtual": 154}',0);
+INSERT INTO "empresas" VALUES('AMC','AMC SOLUÇÕES',6,'{"usuario": "amc", "email": "", "token": "Nj/erm8csSIgZ84zV4CDQyzstIAVGKw/", "data_criacao": "2026-09-09T12:45:06.017Z", "data_expiracao": "2026-10-09T12:45:08.290Z", "tempoUso": 30, "source": "manual-edit"}','{"codigo": "AMC", "nome": "AMC SOLUÇÕES", "credenciais": {"usuario": "amc", "email": "", "token": "Nj/erm8csSIgZ84zV4CDQyzstIAVGKw/", "data_criacao": "2026-09-09T12:45:06.017Z", "data_expiracao": "2026-10-09T12:45:08.290Z", "tempoUso": 30, "source": "manual-edit"}, "numeroClienteAtual": 6}',1);
 INSERT INTO "empresas" VALUES('ARC','ARCON',0,NULL,'{"codigo": "ARC", "nome": "ARCON", "credenciais": null, "numeroClienteAtual": 0}',2);
 INSERT INTO "empresas" VALUES('ART','ARTECAL',1,NULL,'{"codigo": "ART", "nome": "ARTECAL", "credenciais": null, "numeroClienteAtual": 1}',3);
 INSERT INTO "empresas" VALUES('BLC','BlueLink Consulting',0,NULL,'{"codigo": "BLC", "nome": "BlueLink Consulting", "credenciais": null, "numeroClienteAtual": 0}',18);

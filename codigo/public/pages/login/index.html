@@ -9,6 +9,82 @@
     <link rel="icon" type="image/png" href="https://esienergia.com.br/wp-content/uploads/2024/02/favicon5.png">
     <link rel="stylesheet" href="/public/dist/login.min.css?v=20260323-3">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .login-transition {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            display: grid;
+            place-items: center;
+            background: #f7fafc;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 260ms ease;
+        }
+
+        .login-transition.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .login-transition-content {
+            display: grid;
+            justify-items: center;
+            gap: 18px;
+            color: #334155;
+            text-align: center;
+        }
+
+        .login-transition-logo {
+            width: 112px;
+            height: 112px;
+            object-fit: contain;
+            animation: loginTransitionLogo 900ms ease-in-out infinite alternate;
+        }
+
+        .login-transition-label {
+            margin: 0;
+            font-size: 0.95rem;
+            letter-spacing: 0.02em;
+        }
+
+        .login-transition-loader {
+            width: 42px;
+            height: 3px;
+            overflow: hidden;
+            background: #cbd5e1;
+            border-radius: 999px;
+        }
+
+        .login-transition-loader::after {
+            display: block;
+            width: 55%;
+            height: 100%;
+            content: "";
+            background: #3156c9;
+            border-radius: inherit;
+            animation: loginTransitionLoader 900ms ease-in-out infinite;
+        }
+
+        @keyframes loginTransitionLogo {
+            from { transform: scale(0.94); opacity: 0.72; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes loginTransitionLoader {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(190%); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .login-transition,
+            .login-transition-logo,
+            .login-transition-loader::after {
+                animation: none;
+                transition: none;
+            }
+        }
+    </style>
     <script>
         window.__APP_CONFIG_OVERRIDES__ = {
             mode: 'client',
@@ -158,6 +234,16 @@
 </head>
 
 <body>
+    <div class="login-transition" id="loginTransition" aria-hidden="true">
+        <div class="login-transition-content" role="status" aria-live="polite">
+            <img class="login-transition-logo"
+                src="https://esienergia.com.br/wp-content/uploads/2024/02/favicon5.png"
+                alt="ESI Energia">
+            <p class="login-transition-label" id="loginTransitionLabel">Preparando seu acesso...</p>
+            <div class="login-transition-loader" aria-hidden="true"></div>
+        </div>
+    </div>
+
     <div class="login-container">
         <div class="login-card">
             <div class="login-header">
