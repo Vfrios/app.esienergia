@@ -47,7 +47,9 @@ function createJsonResponse(data, status = 200) {
 }
 
 async function requestSystemBootstrap() {
-    const response = await fetch(SYSTEM_BOOTSTRAP_ENDPOINT);
+    const response = await fetch(SYSTEM_BOOTSTRAP_ENDPOINT, {
+        credentials: 'same-origin'
+    });
 
     if (!response.ok) {
         throw new Error(`Erro HTTP ao carregar bootstrap do sistema: ${response.status}`);

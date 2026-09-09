@@ -170,6 +170,7 @@ export async function saveData(options = {}) {
 
     const response = await fetch("/api/system-data/save", {
       method: "POST",
+      credentials: "same-origin",
       headers: {
         "Content-Type": "application/json",
       },

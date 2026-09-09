@@ -240,6 +240,7 @@ async function login({ usuario, token }) {
     try {
         response = await fetch(AUTH_ENDPOINT, {
             method: 'POST',
+            credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json'
             },

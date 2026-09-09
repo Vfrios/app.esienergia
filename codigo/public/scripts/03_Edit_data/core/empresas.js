@@ -673,6 +673,13 @@ function showCredentialsModal(index) {
                 <span id="credentialsAutosaveStatus" style="margin-right: auto; color: #a0aec0; font-size: 0.85rem;">
                     Pré-salvamento automático ao sair do campo.
                 </span>
+                <button type="button" onclick="window.saveCredentials?.(${index})"
+                        class="btn btn-primary"
+                        style="padding: 8px 16px; background: #2b6cb0; color: white; border: none; border-radius: 6px; font-weight: 500; cursor: pointer; transition: background 0.2s ease;"
+                        onmouseover="this.style.background='#3182ce'"
+                        onmouseout="this.style.background='#2b6cb0'">
+                    Salvar
+                </button>
                 <button type="button" onclick="window.closeCredentialsModal?.(${index})" 
                         class="btn btn-secondary"
                         style="padding: 8px 16px; background: #4a5568; color: white; border: none; border-radius: 6px; font-weight: 500; cursor: pointer; transition: background 0.2s ease;"
@@ -713,6 +720,7 @@ function showCredentialsModal(index) {
     
     window.atualizarDataExpiracao = atualizarDataExpiracao;
     window.closeCredentialsModal = closeCredentialsModal;
+    atualizarDataExpiracao();
     updateCredentialsAutosaveStatus();
 }
 

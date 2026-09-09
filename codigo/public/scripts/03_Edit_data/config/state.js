@@ -25,6 +25,7 @@ export let currentEditType = null;
 
 // Variável interna para gerenciar o índice da máquina atual
 let _currentMachineIndex = null;
+let autoSaveTimer = null;
 
 // Exportar para acesso global
 window.systemData = systemData;
@@ -157,7 +158,32 @@ export function UpdatePendingChanges(section) {
 
 // Versão melhorada do addPendingChange
 export function addPendingChange(section) {
-  UpdatePendingChanges(section);
+  const hasChanges = UpdatePendingChanges(section);
+
+  if (!hasChanges || typeof window.saveDataSilently !== "function") {
+    return;
+  }
+
+  clearTimeout(autoSaveTimer);
+  autoSaveTimer = setTimeout(() => {
+    autoSaveTimer = null;
+
+    if (window.__adminDataAutoSavePromise) {
+      return;
+    }
+
+    const savePromise = window.saveDataSilently();
+    const trackedPromise = savePromise.finally(() => {
+      if (window.__adminDataAutoSavePromise === trackedPromise) {
+        window.__adminDataAutoSavePromise = null;
+      }
+    });
+    window.__adminDataAutoSavePromise = trackedPromise;
+
+    window.__adminDataAutoSavePromise.catch((error) => {
+      console.error("Falha no pre-salvamento automatico:", error);
+    });
+  }, 700);
 }
 
 export function clearPendingChanges() {
