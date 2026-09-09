@@ -364,20 +364,45 @@ function filterAdmins(admins) {
     return admins.filter((admin) => admin.usuario.toLowerCase().includes(search));
 }
 
+async function copyAdminCredentials(button) {
+    const card = button.closest('[data-admin-id]');
+    if (!card) return;
+
+    const admin = getAdmins().find((item) => item.id === card.dataset.adminId);
+    if (!admin) return;
+
+    const credentials = `Usuario: ${admin.usuario}\nSenha: ${admin.token}`;
+    try {
+        await navigator.clipboard.writeText(credentials);
+    } catch (error) {
+        const textarea = document.createElement('textarea');
+        textarea.value = credentials;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        textarea.remove();
+    }
+
+    button.textContent = 'Copiado';
+    window.setTimeout(() => { button.textContent = 'Copiar credenciais'; }, 1600);
+}
+
 function renderAdminCard(admin, index) {
     return `
         <article class="admin-card" data-admin-id="${escapeHtml(admin.id)}">
             <div class="admin-card-header">
                 <div class="admin-card-info">
                     <span class="admin-index-badge">ADM ${index + 1}</span>
-                    <strong>@${escapeHtml(admin.usuario)}</strong>
                 </div>
             </div>
 
             <div class="admin-card-body">
                 <div class="admin-card-detail">
                     <span class="detail-label">Usuário</span>
-                    <span class="detail-value">@${escapeHtml(admin.usuario)}</span>
+                    <span class="detail-value">${escapeHtml(admin.usuario)}</span>
                 </div>
                 <div class="admin-card-detail">
                     <span class="detail-label">Email de recuperação</span>
@@ -398,8 +423,8 @@ function renderAdminCard(admin, index) {
             </div>
 
             <div class="admin-card-footer">
+                <button class="btn-icon copy-admin" type="button" title="Copiar usuário e senha">Copiar credenciais</button>
                 <button class="btn-icon edit-admin" type="button" title="Editar administrador">Editar</button>
-                <button class="btn-icon reset-password" type="button" title="Gerar nova senha">Nova senha</button>
                 <button class="btn-icon delete-admin" type="button" title="Remover administrador">Remover</button>
             </div>
         </article>
@@ -558,8 +583,13 @@ function handleAdminAction(event) {
         return;
     }
 
+    if (event.target.closest('.copy-admin')) {
+        copyAdminCredentials(event.target.closest('.copy-admin'));
+        return;
+    }
+
     if (event.target.closest('.reset-password')) {
-        showConfirmation(`Gerar nova senha para @${admin.usuario}?`, () => {
+        showConfirmation(`Gerar nova senha para ${admin.usuario}?`, () => {
             const newToken = generateToken();
             const nextAdmins = admins.map((item) => (
                 item.id === adminId
@@ -569,7 +599,7 @@ function handleAdminAction(event) {
 
             saveAdmins(nextAdmins);
             renderAdminCredentials();
-            showInfo(`Nova senha de @${admin.usuario}: ${newToken}`);
+            showInfo(`Nova senha de ${admin.usuario}: ${newToken}`);
         });
         return;
     }
@@ -580,7 +610,7 @@ function handleAdminAction(event) {
             return;
         }
 
-        showConfirmation(`Remover @${admin.usuario} da lista de ADM?`, () => {
+        showConfirmation(`Remover ${admin.usuario} da lista de ADM?`, () => {
             const nextAdmins = admins.filter((item) => item.id !== adminId);
             saveAdmins(nextAdmins);
             renderAdminCredentials();
