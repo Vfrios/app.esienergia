@@ -136,12 +136,26 @@ CREATE TABLE IF NOT EXISTS obra_notifications (
     last_sent_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS obra_history (
+    id TEXT PRIMARY KEY,
+    obra_id TEXT NOT NULL,
+    obra_nome TEXT NOT NULL DEFAULT '',
+    empresa_codigo TEXT NOT NULL DEFAULT '',
+    empresa_nome TEXT NOT NULL DEFAULT '',
+    export_format TEXT NOT NULL DEFAULT 'ambos',
+    snapshot_json TEXT NOT NULL,
+    files_json TEXT NOT NULL,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+);
+
 CREATE INDEX IF NOT EXISTS idx_empresas_sort_order ON empresas(sort_order);
 CREATE INDEX IF NOT EXISTS idx_machine_catalog_sort_order ON machine_catalog(sort_order);
 CREATE INDEX IF NOT EXISTS idx_obras_empresa_codigo ON obras(empresa_codigo);
 CREATE INDEX IF NOT EXISTS idx_obras_empresa_codigo_numero_cliente ON obras(empresa_codigo, numero_cliente_final DESC);
 CREATE INDEX IF NOT EXISTS idx_obras_sort_order ON obras(sort_order);
 CREATE INDEX IF NOT EXISTS idx_obra_notifications_sent_at ON obra_notifications(last_sent_at);
+CREATE INDEX IF NOT EXISTS idx_obra_history_empresa ON obra_history(empresa_codigo, created_at);
 CREATE INDEX IF NOT EXISTS idx_projetos_obra_id_sort ON projetos(obra_id, sort_order);
 CREATE INDEX IF NOT EXISTS idx_salas_projeto_id_sort ON salas(projeto_id, sort_order);
 CREATE INDEX IF NOT EXISTS idx_sala_maquinas_sala_id_sort ON sala_maquinas(sala_id, sort_order);

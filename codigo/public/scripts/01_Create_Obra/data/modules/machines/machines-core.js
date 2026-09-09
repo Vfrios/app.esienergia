@@ -580,8 +580,19 @@ async function downloadMachineExcel(machineId) {
   ).map((input) => input.dataset.configName || input.id);
 
   const value = (selector) => machineElement.querySelector(selector)?.value || '';
+  const obraElement = machineElement.closest('.obra-block');
+  const empresaCodigo = obraElement?.dataset.empresaSigla || '';
+  const numeroObra = obraElement?.dataset.numeroClienteFinal || '';
+  const obraTag = obraElement?.dataset.identificadorObra ||
+    (empresaCodigo && numeroObra ? `${empresaCodigo}-${numeroObra}` : '');
   const payload = {
     machine_id: machineId,
+    obra_id: obraElement?.dataset.obraId || '',
+    obra_name: obraElement?.dataset.obraName || '',
+    empresa_codigo: empresaCodigo,
+    empresa_nome: obraElement?.dataset.empresaNome || '',
+    numero_cliente_final: obraElement?.dataset.numeroClienteFinal || '',
+    obra_tag: obraTag,
     name: machineElement.querySelector('.machine-title-editable')?.value || '',
     type: value('.machine-type-select'),
     application: value('.machine-aplicacao-select'),

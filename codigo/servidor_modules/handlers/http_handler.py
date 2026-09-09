@@ -3,7 +3,7 @@
 import http.server
 import json
 import time
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import parse_qs, unquote, urlparse
 from pathlib import Path
 import os
 import gzip
@@ -143,6 +143,7 @@ class UniversalHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     AUTHENTICATED_API_ROUTES = {
         "/obras",
         "/api/obras/catalog",
+        "/api/obras/historico",
         "/api/backup-completo",
         "/api/runtime/bootstrap",
         "/api/runtime/system-bootstrap",
@@ -219,6 +220,7 @@ class UniversalHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         "/api/tubos/polegadas",
     }
     ADMIN_ONLY_API_PREFIXES = (
+        "/api/obras/historico/",
         "/api/dados/empresas/",
         "/api/empresas/",
         "/api/machines/type/",
@@ -1373,6 +1375,116 @@ class UniversalHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         catalog = self.routes_core.obra_repository.get_catalog()
         self.send_json_response({"obras": self._filter_obras_for_session(catalog)})
 
+    def handle_get_obra_history(self):
+        from servidor_modules.database.repositories.obra_history_repository import ObraHistoryRepository
+
+        empresa = parse_qs(urlparse(self.path).query).get("empresa", [""])[0].strip()
+        history = ObraHistoryRepository(self.project_root).get_all(empresa or None)
+        self.send_json_response({"success": True, "historico": history})
+
+    def handle_get_obra_history_file(self, path):
+        from servidor_modules.database.repositories.obra_history_repository import ObraHistoryRepository
+
+        parts = path.split("/")
+        if len(parts) < 6:
+            self.send_error(404, "Arquivo historico nao encontrado")
+            return
+        history_id = unquote(parts[4])
+        filename = unquote("/".join(parts[5:]))
+        repository = ObraHistoryRepository(self.project_root)
+        history = repository.get_by_id(history_id)
+        if not history:
+            self.send_error(404, "Arquivo historico nao encontrado")
+            return
+
+        if filename == "download":
+            self._history_machine_payload = history["payload"]
+            self.handle_export_machine_excel()
+            self._history_machine_payload = None
+            return
+
+        if filename != "dados.json":
+            self.send_error(404, "Arquivo historico nao encontrado")
+            return
+
+        file_data = json.dumps(history["payload"], ensure_ascii=False, indent=2).encode("utf-8")
+        self.send_response(200)
+        self.send_header("Content-Type", "application/json; charset=utf-8")
+        self.send_header("Content-Disposition", f'attachment; filename="{filename}"')
+        self.send_header("Content-Length", str(len(file_data)))
+        self.end_headers()
+        self.wfile.write(file_data)
+
+    def handle_post_obra_history(self):
+        self.send_json_response(
+            {"success": False, "error": "Historicos sao criados automaticamente apos um download."},
+            status=405,
+        )
+
+    def handle_post_obra_history_register(self):
+        from servidor_modules.database.repositories.obra_history_repository import ObraHistoryRepository
+
+        try:
+            payload = self._read_json_body()
+            obra_id = str(payload.get("obraId") or payload.get("obra_id") or "").strip()
+            download_ids = [str(value).strip() for value in payload.get("downloadIds", []) if str(value).strip()]
+            if not obra_id or not download_ids:
+                self.send_json_response({"success": False, "error": "Dados do historico incompletos."}, 400)
+                return
+
+            obra = self.routes_core.obra_repository.get_by_id(obra_id)
+            if not obra:
+                self.send_json_response({"success": False, "error": "Obra nao encontrada."}, 404)
+                return
+
+            files = []
+            for download_id in download_ids:
+                info_path = Path(tempfile.gettempdir()) / f"{download_id}.json"
+                if not info_path.is_file():
+                    continue
+                info = json.loads(info_path.read_text(encoding="utf-8"))
+                files.append({
+                    "path": info.get("file_path"),
+                    "filename": info.get("filename"),
+                    "template_type": info.get("template_type", ""),
+                })
+
+            if not files:
+                self.send_json_response({"success": False, "error": "Arquivos de download expirados."}, 404)
+                return
+
+            self.send_json_response(
+                {"success": False, "error": "O historico aceita somente folhas Excel de maquinas."},
+                409,
+            )
+        except Exception as error:
+            print(f" Erro ao registrar historico: {error}")
+            self.send_json_response({"success": False, "error": str(error)}, 500)
+
+    def handle_post_obra_history_action(self, path):
+        from servidor_modules.database.repositories.obra_history_repository import ObraHistoryRepository
+
+        parts = path.strip("/").split("/")
+        history_id = unquote(parts[3]) if len(parts) > 3 else ""
+        action = parts[4] if len(parts) > 4 else "update"
+        repository = ObraHistoryRepository(self.project_root)
+        try:
+            payload = self._read_json_body()
+        except json.JSONDecodeError:
+            self.send_json_response({"success": False, "error": "JSON invalido"}, 400)
+            return
+
+        if action == "delete":
+            deleted = repository.delete(history_id)
+            self.send_json_response({"success": deleted}, 200 if deleted else 404)
+            return
+
+        updated = repository.update(history_id, payload)
+        self.send_json_response(
+            {"success": bool(updated), "historico": updated},
+            200 if updated else 404,
+        )
+
     def handle_get_obras_secure(self):
         if self._has_role("admin"):
             obras = self.routes_core.handle_get_obras()
@@ -1555,6 +1667,14 @@ class UniversalHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.handle_get_obras_catalog_secure()
             return
 
+        if path == "/api/obras/historico":
+            self.handle_get_obra_history()
+            return
+
+        if path.startswith("/api/obras/historico/") and path.count("/") >= 4:
+            self.handle_get_obra_history_file(path)
+            return
+
         if path in {"/session-obras", "/api/session-obras"}:
             self.handle_get_session_obras_secure()
             return
@@ -1702,6 +1822,17 @@ class UniversalHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
         elif path == "/api/export":
             self.handle_post_export()
+            return
+
+        elif path == "/api/obras/historico":
+            self.handle_post_obra_history()
+            return
+        elif path == "/api/obras/historico/register":
+            self.handle_post_obra_history_register()
+            return
+
+        elif path.startswith("/api/obras/historico/"):
+            self.handle_post_obra_history_action(path)
             return
 
         elif path == "/api/obra/notificar":
@@ -4823,6 +4954,7 @@ class UniversalHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
     def _run_export_job(self, job_id, payload):
         from servidor_modules.utils.export_utils import cleanup_temp_files, prepare_export_assets
+        from servidor_modules.database.repositories.obra_history_repository import ObraHistoryRepository
 
         obra_id = str(payload.get("obra_id") or "").strip()
         export_type = str(payload.get("export_type") or "").strip().lower()
@@ -4871,6 +5003,10 @@ class UniversalHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 )
                 if not downloads:
                     raise RuntimeError("Nenhum arquivo foi disponibilizado para download.")
+
+            history = None
+            if need_download:
+                history = None
 
             if need_email:
                 background_jobs.set_stage(
@@ -4931,6 +5067,7 @@ class UniversalHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 "size": sum(download.get("size", 0) for download in downloads),
                 "email_job_id": email_job_id,
                 "email_error": email_error,
+                "history_id": history.get("id") if history else "",
             }
         except Exception:
             cleanup_temp_files(
@@ -4970,6 +5107,7 @@ class UniversalHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     def _run_word_generation_job(self, job_id, template_type, obra_id, notify_admin=False):
         from servidor_modules.handlers.word_handler import WordHandler
         from servidor_modules.utils.export_utils import cleanup_temp_files
+        from servidor_modules.database.repositories.obra_history_repository import ObraHistoryRepository
 
         background_jobs.set_stage(
             job_id,
@@ -5023,6 +5161,8 @@ class UniversalHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             cleanup_temp_files(*(file_info.get("path") for file_info in generated_files))
             raise RuntimeError("Nenhum documento foi disponibilizado para download.")
 
+        history = None
+
         notification_job_id = None
         notification_error = ""
         notification_files = []
@@ -5052,6 +5192,7 @@ class UniversalHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             "size": sum(download.get("size", 0) for download in downloads),
             "notification_job_id": notification_job_id,
             "notification_error": notification_error,
+            "history_id": history.get("id") if history else "",
         }
 
     def _normalize_export_message(
@@ -5756,7 +5897,9 @@ class UniversalHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         """Gera uma folha de dados preenchida a partir dos dados atuais da máquina."""
         try:
             content_length = int(self.headers.get("Content-Length", 0))
-            data = json.loads(self.rfile.read(content_length) or b"{}")
+            data = getattr(self, "_history_machine_payload", None)
+            if data is None:
+                data = json.loads(self.rfile.read(content_length) or b"{}")
             template_path = self.project_root / "word_templates" / "FOLHA DE DADOS EQUIPAMENTO EXCEL.xlsx"
 
             if not template_path.exists():
@@ -5767,6 +5910,11 @@ class UniversalHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             configurations = data.get("configurations") or []
             machine_name = str(data.get("name") or data.get("machine_id") or "Equipamento")
             machine_type = str(data.get("type") or "")
+
+            if data.get("obra_id") and not getattr(self, "_history_machine_payload", None):
+                from servidor_modules.database.repositories.obra_history_repository import ObraHistoryRepository
+                history = ObraHistoryRepository(self.project_root).create_version(data)
+                data["history_id"] = history["id"]
 
             from servidor_modules.database.repositories.machine_repository import MachineRepository
 

@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "baseline": {
+    "digest": "d652e3eb50fe4a2f6f4ea1c51c671bd1b1c8260097c6f8b20c27dcbebfc550cc",
+    "snapshot_path": "C:\\Users\\vitor\\OneDrive\\Repositórios\\app.esienergia\\codigo\\database\\sync-base.json",
+    "last_updated_at": "2026-08-18T13:49:13.513079+00:00"
+  },
+  "offline": {
+    "digest": "72096a574d2590058fa6117bfeacab162af713ce73c28782ce45156ac22f1ba1",
+    "base_online_digest": "d652e3eb50fe4a2f6f4ea1c51c671bd1b1c8260097c6f8b20c27dcbebfc550cc",
+    "baseline_digest": "d652e3eb50fe4a2f6f4ea1c51c671bd1b1c8260097c6f8b20c27dcbebfc550cc",
+    "last_source": "reconnect-monitor",
+    "last_synced_at": "2026-08-18T13:49:13.513079+00:00",
+    "sqlite_path": "C:\\Users\\vitor\\OneDrive\\Repositórios\\app.esienergia\\codigo\\database\\app.sqlite3",
+    "sql_dump_path": "C:\\Users\\vitor\\OneDrive\\Repositórios\\app.esienergia\\codigo\\database\\app-offline-backup.sql",
+    "local_changes_pending": true,
+    "manual_sync_required": true,
+    "restored_notice_pending": true,
+    "last_local_change_at": "2026-08-21T19:03:30.859359+00:00",
+    "last_local_change_source": "empresas:upsert"
+  },
+  "online": {
+    "last_seen_digest": "e280111b5113d2e572dd0a8ea4724586616770b846257ba94b0c77835f39afc4",
+    "last_imported_digest": "e280111b5113d2e572dd0a8ea4724586616770b846257ba94b0c77835f39afc4",
+    "last_imported_at": "2026-08-18T13:49:13.513079+00:00",
+    "last_exported_digest": "e280111b5113d2e572dd0a8ea4724586616770b846257ba94b0c77835f39afc4",
+    "last_exported_at": "2026-08-18T13:49:13.513079+00:00"
+  },
+  "reconcile": {
+    "last_mode": "reconnect-monitor",
+    "last_attempt_at": "2026-08-18T13:49:13.513079+00:00",
+    "last_status": "conflict",
+    "last_conflict_count": 1,
+    "last_conflicts": [
+      {
+        "table": "admins",
+        "item": "admins[usuario=adm]",
+        "identity": {
+          "usuario": "adm"
+        },
+        "changed_columns": [
+          "raw_json.ultimoAcesso"
+        ],
+        "field_conflicts": [
+          {
+            "field": "raw_json.ultimoAcesso",
+            "baseline_has_value": true,
+            "baseline_value": "2026-04-14T16:58:04.078019-03:00",
+            "offline_has_value": true,
+            "offline_value": "2026-08-18T10:30:25.192280-03:00",
+            "online_has_value": true,
+            "online_value": "2026-07-31T21:47:36.626413-03:00",
+            "recommended_action": "export",
+            "recommended_label": "Exportar o valor offline"
+          }
+        ],
+        "auto_merged_columns": [],
+        "reason": "Os campos abaixo foram alterados ao mesmo tempo no online e no offline. O sistema manteve o valor offline no computador e o valor online no banco para evitar perda de dados."
+      }
+    ],
+    "last_blocked_offline_changes_count": 0,
+    "last_blocked_offline_changes": []
+  },
+  "storage_guard": {
+    "forced_offline": false,
+    "last_percent_used": 2.46,
+    "last_checked_at": "2026-08-18T14:21:19.429522+00:00",
+    "reason": ""
+  }
+}

@@ -132,6 +132,25 @@ export async function waitForBackgroundJob(jobId, options = {}) {
 }
 
 function normalizeDownloadIds(result) {
+
+  async function registerDownloadHistory(obraId, result) {
+    if (result?.history_id) {
+      window.dispatchEvent(new CustomEvent("obra-history-updated"));
+      return;
+    }
+    const downloadIds = normalizeDownloadIds(result);
+    if (!downloadIds.length) return;
+    const response = await fetch("/api/obras/historico/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ obraId, downloadIds, formato: result?.template_type || "ambos" }),
+    });
+    if (!response.ok) {
+      console.warn("[HISTÓRICO DE OBRAS] Registro não confirmado", await response.text());
+      return;
+    }
+    window.dispatchEvent(new CustomEvent("obra-history-updated"));
+  }
   if (Array.isArray(result?.download_ids) && result.download_ids.length) {
     return result.download_ids.filter(Boolean);
   }
@@ -287,6 +306,8 @@ function setupModalEvents(
       }
 
       // Baixar os arquivos em sequência
+      // Registrar antes do download consumir os arquivos temporários do servidor.
+      await registerDownloadHistory(obraId, finalResult);
       await downloadGeneratedFiles(normalizeDownloadIds(finalResult));
 
       if (finalResult.notification_error) {

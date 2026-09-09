@@ -531,6 +531,16 @@ async function submitExport(state, shell) {
         ? [finalResult.download_id]
         : [];
 
+    if (downloadIds.length && !finalResult.history_id) {
+      const historyResponse = await fetch("/api/obras/historico/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ obraId: state.obraId, downloadIds, formato: state.selectedFormat }),
+      });
+      if (historyResponse.ok) window.dispatchEvent(new CustomEvent("obra-history-updated"));
+    }
+    if (downloadIds.length) window.dispatchEvent(new CustomEvent("obra-history-updated"));
+
     if (downloadIds.length) {
       await downloadGeneratedFiles(downloadIds);
     }

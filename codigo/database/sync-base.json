@@ -1,0 +1,918 @@
+{
+  "admins": [
+    {
+      "raw_json": "{\"usuario\":\"adm\",\"token\":\"5tgrySVdG458\",\"email\":\"matheus@esienergia.com.br\",\"criadoEm\":\"2026-03-19T14:30:59.996Z\",\"ultimoAcesso\":\"2026-04-14T16:58:04.078019-03:00\"}",
+      "sort_order": 0,
+      "token": "5tgrySVdG458",
+      "usuario": "adm"
+    }
+  ],
+  "empresas": [
+    {
+      "codigo": "ACT",
+      "credenciais_json": null,
+      "nome": "ACTEMIUM",
+      "raw_json": "{\"codigo\": \"ACT\", \"nome\": \"ACTEMIUM\", \"credenciais\": null, \"numeroClienteAtual\": 153}",
+      "sort_order": 0,
+      "ultimo_numero_cliente": 0
+    },
+    {
+      "codigo": "AMC",
+      "credenciais_json": null,
+      "nome": "AMC SOLUÇÕES",
+      "raw_json": "{\"codigo\": \"AMC\", \"nome\": \"AMC SOLUÇÕES\", \"credenciais\": null, \"numeroClienteAtual\": 5}",
+      "sort_order": 1,
+      "ultimo_numero_cliente": 0
+    },
+    {
+      "codigo": "ARC",
+      "credenciais_json": null,
+      "nome": "ARCON",
+      "raw_json": "{\"codigo\": \"ARC\", \"nome\": \"ARCON\", \"credenciais\": null, \"numeroClienteAtual\": 0}",
+      "sort_order": 2,
+      "ultimo_numero_cliente": 0
+    },
+    {
+      "codigo": "ART",
+      "credenciais_json": null,
+      "nome": "ARTECAL",
+      "raw_json": "{\"codigo\": \"ART\", \"nome\": \"ARTECAL\", \"credenciais\": null, \"numeroClienteAtual\": 1}",
+      "sort_order": 3,
+      "ultimo_numero_cliente": 0
+    },
+    {
+      "codigo": "BLC",
+      "credenciais_json": null,
+      "nome": "BlueLink Consulting",
+      "raw_json": "{\"codigo\": \"BLC\", \"nome\": \"BlueLink Consulting\", \"credenciais\": null, \"numeroClienteAtual\": 0}",
+      "sort_order": 18,
+      "ultimo_numero_cliente": 0
+    },
+    {
+      "codigo": "CAM",
+      "credenciais_json": null,
+      "nome": "CAM ENGENHARIA",
+      "raw_json": "{\"codigo\": \"CAM\", \"nome\": \"CAM ENGENHARIA\", \"credenciais\": null, \"numeroClienteAtual\": 0}",
+      "sort_order": 16,
+      "ultimo_numero_cliente": 0
+    },
+    {
+      "codigo": "CAT",
+      "credenciais_json": null,
+      "nome": "Catalogo Ltda",
+      "raw_json": "{\"codigo\": \"CAT\", \"nome\": \"Catalogo Ltda\", \"credenciais\": null, \"numeroClienteAtual\": 0}",
+      "sort_order": 19,
+      "ultimo_numero_cliente": 0
+    },
+    {
+      "codigo": "CIC",
+      "credenciais_json": null,
+      "nome": "CICLO SOLAR",
+      "raw_json": "{\"codigo\": \"CIC\", \"nome\": \"CICLO SOLAR\", \"credenciais\": null, \"numeroClienteAtual\": 0}",
+      "sort_order": 4,
+      "ultimo_numero_cliente": 0
+    },
+    {
+      "codigo": "EMA",
+      "credenciais_json": null,
+      "nome": "EMAC",
+      "raw_json": "{\"codigo\": \"EMA\", \"nome\": \"EMAC\", \"credenciais\": null, \"numeroClienteAtual\": 0}",
+      "sort_order": 13,
+      "ultimo_numero_cliente": 0
+    },
+    {
+      "codigo": "ENG",
+      "credenciais_json": null,
+      "nome": "ENGESULT",
+      "raw_json": "{\"codigo\": \"ENG\", \"nome\": \"ENGESULT\", \"credenciais\": null, \"numeroClienteAtual\": 0}",
+      "sort_order": 15,
+      "ultimo_numero_cliente": 0
+    },
+    {
+      "codigo": "GEE",
+      "credenciais_json": null,
+      "nome": "GE POWER",
+      "raw_json": "{\"codigo\": \"GEE\", \"nome\": \"GE POWER\", \"credenciais\": null, \"numeroClienteAtual\": 0}",
+      "sort_order": 12,
+      "ultimo_numero_cliente": 0
+    },
+    {
+      "codigo": "GEP",
+      "credenciais_json": null,
+      "nome": "GRUPO ELETROPAINEL",
+      "raw_json": "{\"codigo\": \"GEP\", \"nome\": \"GRUPO ELETROPAINEL\", \"credenciais\": null, \"numeroClienteAtual\": 0}",
+      "sort_order": 5,
+      "ultimo_numero_cliente": 0
+    },
+    {
+      "codigo": "INO",
+      "credenciais_json": null,
+      "nome": "INOVAR",
+      "raw_json": "{\"codigo\": \"INO\", \"nome\": \"INOVAR\", \"credenciais\": null, \"numeroClienteAtual\": 0}",
+      "sort_order": 10,
+      "ultimo_numero_cliente": 0
+    },
+    {
+      "codigo": "MAR",
+      "credenciais_json": null,
+      "nome": "MARP PAINÉIS",
+      "raw_json": "{\"codigo\": \"MAR\", \"nome\": \"MARP PAINÉIS\", \"credenciais\": null, \"numeroClienteAtual\": 0}",
+      "sort_order": 14,
+      "ultimo_numero_cliente": 0
+    },
+    {
+      "codigo": "SEN",
+      "credenciais_json": null,
+      "nome": "SENIOR",
+      "raw_json": "{\"codigo\": \"SEN\", \"nome\": \"SENIOR\", \"credenciais\": null, \"numeroClienteAtual\": 0}",
+      "sort_order": 7,
+      "ultimo_numero_cliente": 0
+    },
+    {
+      "codigo": "SEP",
+      "credenciais_json": null,
+      "nome": "SEMPEL",
+      "raw_json": "{\"codigo\": \"SEP\", \"nome\": \"SEMPEL\", \"credenciais\": null, \"numeroClienteAtual\": 2}",
+      "sort_order": 6,
+      "ultimo_numero_cliente": 0
+    },
+    {
+      "codigo": "SIE",
+      "credenciais_json": null,
+      "nome": "SIEMENS",
+      "raw_json": "{\"codigo\": \"SIE\", \"nome\": \"SIEMENS\", \"credenciais\": null, \"numeroClienteAtual\": 0}",
+      "sort_order": 11,
+      "ultimo_numero_cliente": 0
+    },
+    {
+      "codigo": "SIT",
+      "credenciais_json": null,
+      "nome": "SIMATEC",
+      "raw_json": "{\"codigo\": \"SIT\", \"nome\": \"SIMATEC\", \"credenciais\": null, \"numeroClienteAtual\": 0}",
+      "sort_order": 9,
+      "ultimo_numero_cliente": 0
+    },
+    {
+      "codigo": "SRA",
+      "credenciais_json": null,
+      "nome": "SRA",
+      "raw_json": "{\"codigo\":\"SRA\",\"nome\":\"SRA\",\"numeroClienteAtual\":6}",
+      "sort_order": 17,
+      "ultimo_numero_cliente": 0
+    },
+    {
+      "codigo": "TEC",
+      "credenciais_json": null,
+      "nome": "TECNOTEMP",
+      "raw_json": "{\"codigo\": \"TEC\", \"nome\": \"TECNOTEMP\", \"credenciais\": null, \"numeroClienteAtual\": 0}",
+      "sort_order": 8,
+      "ultimo_numero_cliente": 0
+    },
+    {
+      "codigo": "TESTE",
+      "credenciais_json": null,
+      "nome": "Empresa Teste",
+      "raw_json": "{\"codigo\": \"TESTE\", \"nome\": \"Empresa Teste\", \"credenciais\": null, \"numeroClienteAtual\": 0}",
+      "sort_order": 20,
+      "ultimo_numero_cliente": 0
+    }
+  ],
+  "constants": [
+    {
+      "description": "Calor específico do ar",
+      "key": "AUX_c_ArExterno",
+      "value_json": "{\"value\": 0.24, \"description\": \"Calor específico do ar\"}"
+    },
+    {
+      "description": "Carga latente por ocupante",
+      "key": "AUX_OCp_Clp",
+      "value_json": "{\"value\": 133.3, \"description\": \"Carga latente por ocupante\"}"
+    },
+    {
+      "description": "Carga sensível por ocupante",
+      "key": "AUX_OCp_Csp",
+      "value_json": "{\"value\": 86.5, \"description\": \"Carga sensível por ocupante\"}"
+    },
+    {
+      "description": "Coeficiente U de transmissão térmica do piso",
+      "key": "AUX_U_Value_Piso",
+      "value_json": "{\"value\": 2.7, \"description\": \"Coeficiente U de transmissão térmica do piso\"}"
+    },
+    {
+      "description": "Coeficiente de perda térmica por densidade",
+      "key": "VARIAVEL_PD",
+      "value_json": "{\"value\": 0.0402, \"description\": \"Coeficiente de perda térmica por densidade\"}"
+    },
+    {
+      "description": "Coeficiente de perda térmica por superfície",
+      "key": "VARIAVEL_PS",
+      "value_json": "{\"value\": 0.024, \"description\": \"Coeficiente de perda térmica por superfície\"}"
+    },
+    {
+      "description": "Delta T divisória climatizada 1",
+      "key": "deltaT_divi_clim1",
+      "value_json": "{\"value\": 3, \"description\": \"Delta T divisória climatizada 1\"}"
+    },
+    {
+      "description": "Delta T divisória climatizada 2",
+      "key": "deltaT_divi_clim2",
+      "value_json": "{\"value\": 3, \"description\": \"Delta T divisória climatizada 2\"}"
+    },
+    {
+      "description": "Delta T divisória não climatizada 1",
+      "key": "deltaT_divi_N_clim1",
+      "value_json": "{\"value\": 10, \"description\": \"Delta T divisória não climatizada 1\"}"
+    },
+    {
+      "description": "Delta T divisória não climatizada 2",
+      "key": "deltaT_divi_N_clim2",
+      "value_json": "{\"value\": 10, \"description\": \"Delta T divisória não climatizada 2\"}"
+    },
+    {
+      "description": "Densidade do ar",
+      "key": "Densi_ar",
+      "value_json": "{\"value\": 1, \"description\": \"Densidade do ar\"}"
+    },
+    {
+      "description": "Diferença de temperatura da parede leste",
+      "key": "deltaT_parede_Les",
+      "value_json": "{\"value\": 13, \"description\": \"Diferença de temperatura da parede leste\"}"
+    },
+    {
+      "description": "Diferença de temperatura da parede norte",
+      "key": "deltaT_parede_Nor",
+      "value_json": "{\"value\": 13, \"description\": \"Diferença de temperatura da parede norte\"}"
+    },
+    {
+      "description": "Diferença de temperatura da parede oeste",
+      "key": "deltaT_parede_Oes",
+      "value_json": "{\"value\": 13, \"description\": \"Diferença de temperatura da parede oeste\"}"
+    },
+    {
+      "description": "Diferença de temperatura da parede sul",
+      "key": "deltaT_parede_Sul",
+      "value_json": "{\"value\": 13, \"description\": \"Diferença de temperatura da parede sul\"}"
+    },
+    {
+      "description": "Diferença de temperatura do ar externo",
+      "key": "AUX_deltaT_ArExterno",
+      "value_json": "{\"value\": 10, \"description\": \"Diferença de temperatura do ar externo\"}"
+    },
+    {
+      "description": "Diferença de temperatura do piso",
+      "key": "deltaT_piso",
+      "value_json": "{\"value\": 7.5, \"description\": \"Diferença de temperatura do piso\"}"
+    },
+    {
+      "description": "Diferença de temperatura do teto",
+      "key": "deltaT_teto",
+      "value_json": "{\"value\": 20, \"description\": \"Diferença de temperatura do teto\"}"
+    },
+    {
+      "description": "Diferença de umidade absoluta do ar externo",
+      "key": "AUX_deltaUa_ArExterno",
+      "value_json": "{\"value\": 8.47, \"description\": \"Diferença de umidade absoluta do ar externo\"}"
+    },
+    {
+      "description": "Fator de carga térmica por iluminação",
+      "key": "AUX_Fator_Iluminacao",
+      "value_json": "{\"value\": 7, \"description\": \"Fator de carga térmica por iluminação\"}"
+    },
+    {
+      "description": "Fator de conversão térmica dos painéis",
+      "key": "AUX_Fator_Conver_Painel",
+      "value_json": "{\"value\": 1, \"description\": \"Fator de conversão térmica dos painéis\"}"
+    },
+    {
+      "description": "Fator de renovação do ar externo",
+      "key": "AUX_f_ArExterno",
+      "value_json": "{\"value\": 3.01, \"description\": \"Fator de renovação do ar externo\"}"
+    },
+    {
+      "description": "Fator de simultaneidade da iluminação",
+      "key": "AUX_Fs_Iluminacao",
+      "value_json": "{\"value\": 1, \"description\": \"Fator de simultaneidade da iluminação\"}"
+    },
+    {
+      "description": "Fator de simultaneidade dos painéis",
+      "key": "AUX_Fs_Paineis",
+      "value_json": "{\"value\": 100, \"description\": \"Fator de simultaneidade dos painéis\"}"
+    },
+    {
+      "description": "Margem de segurança aplicada à capacidade final",
+      "key": "FATOR_SEGURANCA_CAPACIDADE",
+      "value_json": "{\"value\": 10, \"description\": \"Margem de segurança aplicada à capacidade final\"}"
+    },
+    {
+      "description": "Varivel referente ao calor específico",
+      "key": "fatorEspecifico",
+      "value_json": "{\"value\": 0.24, \"description\": \"Varivel referente ao calor específico\"}"
+    }
+  ],
+  "materials": [
+    {
+      "key": "BARRA_ROSCADA_3_8",
+      "raw_json": "{\"value\": 23.65, \"unit\": \"m\", \"description\": \"Barra roscada de 3/8 polegada\"}",
+      "sort_order": 7
+    },
+    {
+      "key": "CHUMBADOR_3_8",
+      "raw_json": "{\"value\": 2.88, \"unit\": \"un\", \"description\": \"Chumbador 3/8 por 2 1/2 polegadas\"}",
+      "sort_order": 8
+    },
+    {
+      "key": "COBRE",
+      "raw_json": "{\"value\": 99, \"unit\": \"kg\", \"description\": \"Cobre utilizado na instalação\"}",
+      "sort_order": 0
+    },
+    {
+      "key": "GAS_R_410A",
+      "raw_json": "{\"value\": 43.88, \"unit\": \"kg\", \"description\": \"Gás refrigerante R-410A\"}",
+      "sort_order": 4
+    },
+    {
+      "key": "ISOLANTE_1_1_8",
+      "raw_json": "{\"value\": 41.73, \"unit\": \"m\", \"description\": \"TUBOS: Isolante térmico para tubulação de 1 1/8 polegada\"}",
+      "sort_order": 2
+    },
+    {
+      "key": "ISOLANTE_5_8",
+      "raw_json": "{\"value\": 29.1, \"unit\": \"m\", \"description\": \"TUBOS: Isolante térmico para tubulação de 5/8 polegada\"}",
+      "sort_order": 3
+    },
+    {
+      "key": "Material_Duto",
+      "raw_json": "{\"value\": 99, \"unit\": \"kg\", \"description\": \"Material utilizado no duto\"}",
+      "sort_order": 1
+    },
+    {
+      "key": "TUBO_PVC_1",
+      "raw_json": "{\"value\": 19.2, \"unit\": \"m\", \"description\": \"Tubo PVC de 1 polegada\"}",
+      "sort_order": 6
+    },
+    {
+      "key": "TUBO_PVC_3_4",
+      "raw_json": "{\"value\": 15.16, \"unit\": \"m\", \"description\": \"Tubo PVC de 3/4 polegada\"}",
+      "sort_order": 5
+    }
+  ],
+  "machine_catalog": [
+    {
+      "aplicacao": "climatizacao",
+      "raw_json": "{\"type\": \"ACJ (janela)\", \"aplicacao\": \"climatizacao\", \"impostos\": {\"PIS_COFINS\": \"INCL\", \"IPI\": \"ISENTO\", \"ICMS\": \"12%\", \"PRAZO\": \"45 a 60 dias\", \"FRETE\": \"FOB/Cabreúva/SP\", \"FORNECEDOR\": \"TOSI\"}, \"configuracoes_instalacao\": [{\"id\": 1, \"nome\": \"Instalação cassete\"}], \"baseValues\": {\"7BTU/h\": 1800, \"9BTU/h\": 1800, \"12BTU/h\": 2100, \"18BTU/h\": 1800, \"21BTU/h\": 3850, \"27BTU/h\": 4700}, \"options\": [{\"id\": 1, \"name\": \"Quente/Frio\", \"values\": {\"7BTU/h\": 1550, \"9BTU/h\": 2000, \"12BTU/h\": 2250, \"18BTU/h\": 1550, \"21BTU/h\": 4150, \"27BTU/h\": 5100}}], \"voltages\": [{\"id\": 1, \"name\": \"220V/1F\", \"value\": 1500}]}",
+      "sort_order": 5,
+      "type": "ACJ (janela)"
+    },
+    {
+      "aplicacao": "climatizacao",
+      "raw_json": "{\"type\": \"Rooftop\", \"aplicacao\": \"climatizacao\", \"impostos\": {\"PIS_COFINS\": \"INCL\", \"IPI\": \"ISENTO\", \"ICMS\": \"12%\", \"PRAZO\": \"70 dias\", \"FRETE\": \"FOB/Cabreúva/SP\", \"FORNECEDOR\": \"TOSI\"}, \"configuracoes_instalacao\": [], \"baseValues\": {}, \"options\": [], \"voltages\": []}",
+      "sort_order": 13,
+      "type": "Rooftop"
+    },
+    {
+      "aplicacao": "climatizacao",
+      "raw_json": "{\"type\": \"Split Hi-Wall\", \"aplicacao\": \"climatizacao\", \"impostos\": {\"PIS_COFINS\": \"INCL\", \"IPI\": \"ISENTO\", \"ICMS\": \"12%\", \"PRAZO\": \"45 a 60 dias\", \"FRETE\": \"FOB/Cabreúva/SP\", \"FORNECEDOR\": \"TOSI\"}, \"configuracoes_instalacao\": [{\"id\": 1, \"nome\": \"Instalação em parede convencional\"}], \"baseValues\": {\"7BTU/h\": 2, \"9BTU/h\": 1550, \"12BTU/h\": 1950, \"18BTU/h\": 2700, \"21BTU/h\": 2700, \"24BTU/h\": 3450, \"30BTU/h\": 6000}, \"options\": [{\"id\": 1, \"name\": \"Inverter\", \"values\": {\"7BTU/h\": 5, \"9BTU/h\": 1900, \"12BTU/h\": 2100, \"18BTU/h\": 3200, \"21BTU/h\": 3400, \"24BTU/h\": 3400, \"30BTU/h\": 6350}}, {\"id\": 2, \"name\": \"Quente/Frio\", \"values\": {\"7BTU/h\": 3, \"9BTU/h\": 1750, \"12BTU/h\": 2100, \"18BTU/h\": 2880, \"21BTU/h\": 3100, \"24BTU/h\": 3550, \"30BTU/h\": 5500}}, {\"id\": 3, \"name\": \"Inverter e Quente/Frio\", \"values\": {\"7BTU/h\": 7, \"9BTU/h\": 2100, \"12BTU/h\": 2300, \"18BTU/h\": 3500, \"21BTU/h\": 3650, \"24BTU/h\": 3967.5, \"30BTU/h\": 7175}}, {\"id\": 4, \"name\": \"Mão de Obra de Instalação\", \"values\": {\"7BTU/h\": 800, \"9BTU/h\": 850, \"12BTU/h\": 900, \"18BTU/h\": 950, \"21BTU/h\": 1000, \"24BTU/h\": 1200, \"30BTU/h\": 1300}}], \"voltages\": [{\"id\": 1, \"name\": \"220V/1F\", \"value\": 2000}]}",
+      "sort_order": 4,
+      "type": "Split Hi-Wall"
+    },
+    {
+      "aplicacao": "climatizacao",
+      "raw_json": "{\"type\": \"Split Piso-Teto\", \"aplicacao\": \"climatizacao\", \"impostos\": {\"PIS_COFINS\": \"INCL\", \"IPI\": \"ISENTO\", \"ICMS\": \"12%\", \"PRAZO\": \"45 a 60 dias\", \"FRETE\": \"FOB/Cabreúva/SP\", \"FORNECEDOR\": \"TOSI\"}, \"configuracoes_instalacao\": [{\"id\": 1, \"nome\": \"Instalação piso-teto padrão\"}], \"baseValues\": {\"18BTU/h\": 10, \"21BTU/h\": 8, \"24BTU/h\": 4600, \"30BTU/h\": 5850, \"36BTU/h\": 6700, \"48BTU/h\": 7900, \"60BTU/h\": 8600, \"70BTU/h\": 10550, \"80BTU/h\": 10200}, \"options\": [{\"id\": 1, \"name\": \"Inverter\", \"values\": {\"18BTU/h\": 6, \"21BTU/h\": 4, \"24BTU/h\": 6532, \"30BTU/h\": 8307, \"36BTU/h\": 8950, \"48BTU/h\": 11350, \"60BTU/h\": 11610, \"70BTU/h\": 2, \"80BTU/h\": 13770}}, {\"id\": 2, \"name\": \"Quente/Frio\", \"values\": {\"18BTU/h\": 7, \"21BTU/h\": 5, \"24BTU/h\": 3, \"30BTU/h\": 1, \"36BTU/h\": 8200, \"48BTU/h\": 9470, \"60BTU/h\": 10250, \"70BTU/h\": 9, \"80BTU/h\": 8}}, {\"id\": 3, \"name\": \"Inverter e Quente/Frio\", \"values\": {\"18BTU/h\": 10, \"21BTU/h\": 3, \"24BTU/h\": 5, \"30BTU/h\": 7, \"36BTU/h\": 2, \"48BTU/h\": 4, \"60BTU/h\": 6, \"70BTU/h\": 8, \"80BTU/h\": 1}}, {\"id\": 4, \"name\": \"Mão de Obra de Instalação\", \"values\": {\"18BTU/h\": 1200, \"21BTU/h\": 1200, \"24BTU/h\": 1300, \"30BTU/h\": 1400, \"36BTU/h\": 1500, \"48BTU/h\": 1600, \"60BTU/h\": 1700, \"70BTU/h\": 9, \"80BTU/h\": 1800}}], \"voltages\": [{\"id\": 1, \"name\": \"220V/1F\", \"value\": 3000}, {\"id\": 2, \"name\": \"220V/3F\", \"value\": 3000}]}",
+      "sort_order": 3,
+      "type": "Split Piso-Teto"
+    },
+    {
+      "aplicacao": "climatizacao",
+      "raw_json": "{\"type\": \"Split System/Self Contained (conforto)\", \"aplicacao\": \"climatizacao\", \"impostos\": {\"PIS_COFINS\": \"INCL\", \"IPI\": \"ISENTO\", \"ICMS\": \"12%\", \"PRAZO\": \"45 a 60 dias\", \"FRETE\": \"FOB/Cabreúva/SP\", \"FORNECEDOR\": \"TOSI\"}, \"configuracoes_instalacao\": [{\"id\": 1, \"nome\": \"Unidade interna instalada no forro\"}, {\"id\": 2, \"nome\": \"Unidade externa em laje técnica\"}, {\"id\": 3, \"nome\": \"Sistema de drenagem integrado\"}], \"baseValues\": {\"1TR\": 5, \"2TR\": 7900, \"3TR\": 8945, \"4TR\": 7, \"5TR\": 11480, \"7,5TR\": 14200, \"10TR\": 20100, \"12,5TR\": 22700, \"15TR\": 25200, \"20TR\": 38900, \"25TR\": 45900, \"30TR\": 52990, \"35TR\": 62500, \"40TR\": 73200, \"45TR\": 3, \"50TR\": 8, \"55TR\": 6, \"60TR\": 4}, \"options\": [{\"id\": 1, \"name\": \"Automação Embarcada\", \"values\": {\"1TR\": 2, \"2TR\": 5, \"3TR\": 3, \"4TR\": 7, \"5TR\": 1, \"7,5TR\": 8, \"10TR\": 4, \"12,5TR\": 6, \"15TR\": 9, \"20TR\": 2, \"25TR\": 5, \"30TR\": 3, \"35TR\": 7, \"40TR\": 1, \"45TR\": 8, \"50TR\": 4, \"55TR\": 6, \"60TR\": 9}}, {\"id\": 2, \"name\": \"1 Damper Manual\", \"values\": {\"1TR\": 3, \"2TR\": 6, \"3TR\": 4, \"4TR\": 8, \"5TR\": 2, \"7,5TR\": 9, \"10TR\": 5, \"12,5TR\": 7, \"15TR\": 1, \"20TR\": 4, \"25TR\": 6, \"30TR\": 8, \"35TR\": 2, \"40TR\": 5, \"45TR\": 7, \"50TR\": 3, \"55TR\": 9, \"60TR\": 1}}, {\"id\": 3, \"name\": \"2 Dampers Manuais\", \"values\": {\"1TR\": 4, \"2TR\": 7, \"3TR\": 5, \"4TR\": 9, \"5TR\": 3, \"7,5TR\": 1, \"10TR\": 6, \"12,5TR\": 8, \"15TR\": 2, \"20TR\": 5, \"25TR\": 7, \"30TR\": 9, \"35TR\": 3, \"40TR\": 6, \"45TR\": 8, \"50TR\": 4, \"55TR\": 1, \"60TR\": 2}}, {\"id\": 4, \"name\": \"1 Damper com atuador on/off\", \"values\": {\"1TR\": 5, \"2TR\": 8, \"3TR\": 6, \"4TR\": 1, \"5TR\": 4, \"7,5TR\": 2, \"10TR\": 7, \"12,5TR\": 9, \"15TR\": 3, \"20TR\": 6, \"25TR\": 8, \"30TR\": 1, \"35TR\": 4, \"40TR\": 7, \"45TR\": 9, \"50TR\": 5, \"55TR\": 2, \"60TR\": 3}}, {\"id\": 5, \"name\": \"2 Dampers com atuador on/off\", \"values\": {\"1TR\": 6, \"2TR\": 9, \"3TR\": 7, \"4TR\": 2, \"5TR\": 5, \"7,5TR\": 3, \"10TR\": 8, \"12,5TR\": 1, \"15TR\": 4, \"20TR\": 7, \"25TR\": 9, \"30TR\": 2, \"35TR\": 5, \"40TR\": 8, \"45TR\": 1, \"50TR\": 6, \"55TR\": 3, \"60TR\": 4}}, {\"id\": 6, \"name\": \"Ventilador Eletrônico\", \"values\": {\"1TR\": 7, \"2TR\": 1, \"3TR\": 8, \"4TR\": 3, \"5TR\": 6, \"7,5TR\": 4, \"10TR\": 9, \"12,5TR\": 2, \"15TR\": 5, \"20TR\": 8, \"25TR\": 1, \"30TR\": 3, \"35TR\": 6, \"40TR\": 9, \"45TR\": 2, \"50TR\": 7, \"55TR\": 4, \"60TR\": 5}}, {\"id\": 7, \"name\": \"Controle de Condensação Proporcional\", \"values\": {\"1TR\": 8, \"2TR\": 2, \"3TR\": 9, \"4TR\": 4, \"5TR\": 7, \"7,5TR\": 5, \"10TR\": 1, \"12,5TR\": 3, \"15TR\": 6, \"20TR\": 9, \"25TR\": 2, \"30TR\": 4, \"35TR\": 7, \"40TR\": 1, \"45TR\": 3, \"50TR\": 8, \"55TR\": 5, \"60TR\": 6}}, {\"id\": 8, \"name\": \"Goldfin\", \"values\": {\"1TR\": 9, \"2TR\": 3, \"3TR\": 1, \"4TR\": 5, \"5TR\": 8, \"7,5TR\": 6, \"10TR\": 2, \"12,5TR\": 4, \"15TR\": 7, \"20TR\": 1, \"25TR\": 3, \"30TR\": 5, \"35TR\": 8, \"40TR\": 2, \"45TR\": 4, \"50TR\": 9, \"55TR\": 6, \"60TR\": 7}}, {\"id\": 9, \"name\": \"Sensor de Filtro Sujo\", \"values\": {\"1TR\": 1, \"2TR\": 4, \"3TR\": 2, \"4TR\": 6, \"5TR\": 9, \"7,5TR\": 7, \"10TR\": 3, \"12,5TR\": 5, \"15TR\": 8, \"20TR\": 2, \"25TR\": 4, \"30TR\": 6, \"35TR\": 9, \"40TR\": 3, \"45TR\": 5, \"50TR\": 1, \"55TR\": 7, \"60TR\": 8}}, {\"id\": 10, \"name\": \"Resistencia de Aquecimento\", \"values\": {\"1TR\": 2, \"2TR\": 5, \"3TR\": 3, \"4TR\": 7, \"5TR\": 1, \"7,5TR\": 8, \"10TR\": 4, \"12,5TR\": 6, \"15TR\": 9, \"20TR\": 3, \"25TR\": 5, \"30TR\": 7, \"35TR\": 1, \"40TR\": 4, \"45TR\": 6, \"50TR\": 2, \"55TR\": 8, \"60TR\": 9}}, {\"id\": 11, \"name\": \"Pintura Especial\", \"values\": {\"1TR\": 3, \"2TR\": 6, \"3TR\": 4, \"4TR\": 8, \"5TR\": 2, \"7,5TR\": 9, \"10TR\": 5, \"12,5TR\": 7, \"15TR\": 1, \"20TR\": 4, \"25TR\": 6, \"30TR\": 8, \"35TR\": 2, \"40TR\": 5, \"45TR\": 7, \"50TR\": 3, \"55TR\": 9, \"60TR\": 1}}, {\"id\": 12, \"name\": \"Chaparia em Inox\", \"values\": {\"1TR\": 4, \"2TR\": 7, \"3TR\": 5, \"4TR\": 9, \"5TR\": 3, \"7,5TR\": 1, \"10TR\": 6, \"12,5TR\": 8, \"15TR\": 2, \"20TR\": 5, \"25TR\": 7, \"30TR\": 9, \"35TR\": 3, \"40TR\": 6, \"45TR\": 8, \"50TR\": 4, \"55TR\": 1, \"60TR\": 2}}], \"voltages\": [{\"id\": 1, \"name\": \"220V/1F\", \"value\": 5000}, {\"id\": 2, \"name\": \"220V/3F\", \"value\": 5000}, {\"id\": 3, \"name\": \"380V/3F\", \"value\": 5000}]}",
+      "sort_order": 1,
+      "type": "Split System/Self Contained (conforto)"
+    },
+    {
+      "aplicacao": "climatizacao",
+      "raw_json": "{\"type\": \"Split System/Self Contained (industrial)\", \"aplicacao\": \"climatizacao\", \"impostos\": {\"PIS_COFINS\": \"INCL\", \"IPI\": \"ISENTO\", \"ICMS\": \"12%\", \"PRAZO\": \"45 a 60 dias\", \"FRETE\": \"FOB/Cabreúva/SP\", \"FORNECEDOR\": \"TOSI\"}, \"configuracoes_instalacao\": [{\"id\": 1, \"nome\": \"Instalação em casa de máquinas\"}, {\"id\": 2, \"nome\": \"Sistema de exaustão integrado\"}], \"baseValues\": {\"1TR\": 2, \"2TR\": 11850, \"3TR\": 13417.5, \"4TR\": 9, \"5TR\": 17220, \"7,5TR\": 21300, \"10TR\": 30150, \"12,5TR\": 34050, \"15TR\": 37800, \"20TR\": 58350, \"25TR\": 68850, \"30TR\": 79485, \"35TR\": 93750, \"40TR\": 109800, \"45TR\": 1, \"50TR\": 5, \"55TR\": 7, \"60TR\": 3}, \"options\": [{\"id\": 1, \"name\": \"Automação Embarcada\", \"values\": {\"1TR\": 3, \"2TR\": 6, \"3TR\": 4, \"4TR\": 8, \"5TR\": 2, \"7,5TR\": 9, \"10TR\": 5, \"12,5TR\": 7, \"15TR\": 1, \"20TR\": 4, \"25TR\": 6, \"30TR\": 8, \"35TR\": 2, \"40TR\": 5, \"45TR\": 7, \"50TR\": 3, \"55TR\": 9, \"60TR\": 1}}, {\"id\": 2, \"name\": \"1 Damper Manual\", \"values\": {\"1TR\": 4, \"2TR\": 7, \"3TR\": 5, \"4TR\": 9, \"5TR\": 3, \"7,5TR\": 1, \"10TR\": 6, \"12,5TR\": 8, \"15TR\": 2, \"20TR\": 5, \"25TR\": 7, \"30TR\": 9, \"35TR\": 3, \"40TR\": 6, \"45TR\": 8, \"50TR\": 4, \"55TR\": 1, \"60TR\": 2}}, {\"id\": 3, \"name\": \"2 Dampers Manuais\", \"values\": {\"1TR\": 5, \"2TR\": 8, \"3TR\": 6, \"4TR\": 1, \"5TR\": 4, \"7,5TR\": 2, \"10TR\": 7, \"12,5TR\": 9, \"15TR\": 3, \"20TR\": 6, \"25TR\": 8, \"30TR\": 1, \"35TR\": 4, \"40TR\": 7, \"45TR\": 9, \"50TR\": 5, \"55TR\": 2, \"60TR\": 3}}, {\"id\": 4, \"name\": \"1 Damper com atuador on/off\", \"values\": {\"1TR\": 6, \"2TR\": 9, \"3TR\": 7, \"4TR\": 2, \"5TR\": 5, \"7,5TR\": 3, \"10TR\": 8, \"12,5TR\": 1, \"15TR\": 4, \"20TR\": 7, \"25TR\": 9, \"30TR\": 2, \"35TR\": 5, \"40TR\": 8, \"45TR\": 1, \"50TR\": 6, \"55TR\": 3, \"60TR\": 4}}, {\"id\": 5, \"name\": \"2 Dampers com atuador on/off\", \"values\": {\"1TR\": 7, \"2TR\": 1, \"3TR\": 8, \"4TR\": 3, \"5TR\": 6, \"7,5TR\": 4, \"10TR\": 9, \"12,5TR\": 2, \"15TR\": 5, \"20TR\": 8, \"25TR\": 1, \"30TR\": 3, \"35TR\": 6, \"40TR\": 9, \"45TR\": 2, \"50TR\": 7, \"55TR\": 4, \"60TR\": 5}}, {\"id\": 6, \"name\": \"Ventilador Eletrônico\", \"values\": {\"1TR\": 8, \"2TR\": 2, \"3TR\": 9, \"4TR\": 4, \"5TR\": 7, \"7,5TR\": 5, \"10TR\": 1, \"12,5TR\": 3, \"15TR\": 6, \"20TR\": 9, \"25TR\": 2, \"30TR\": 4, \"35TR\": 7, \"40TR\": 1, \"45TR\": 3, \"50TR\": 8, \"55TR\": 5, \"60TR\": 6}}, {\"id\": 7, \"name\": \"Controle de Condensação Proporcional\", \"values\": {\"1TR\": 9, \"2TR\": 3, \"3TR\": 1, \"4TR\": 5, \"5TR\": 8, \"7,5TR\": 6, \"10TR\": 2, \"12,5TR\": 4, \"15TR\": 7, \"20TR\": 1, \"25TR\": 3, \"30TR\": 5, \"35TR\": 8, \"40TR\": 2, \"45TR\": 4, \"50TR\": 9, \"55TR\": 6, \"60TR\": 7}}, {\"id\": 8, \"name\": \"Goldfin\", \"values\": {\"1TR\": 1, \"2TR\": 4, \"3TR\": 2, \"4TR\": 6, \"5TR\": 9, \"7,5TR\": 7, \"10TR\": 3, \"12,5TR\": 5, \"15TR\": 8, \"20TR\": 2, \"25TR\": 4, \"30TR\": 6, \"35TR\": 9, \"40TR\": 3, \"45TR\": 5, \"50TR\": 1, \"55TR\": 7, \"60TR\": 8}}, {\"id\": 9, \"name\": \"Sensor de Filtro Sujo\", \"values\": {\"1TR\": 2, \"2TR\": 5, \"3TR\": 3, \"4TR\": 7, \"5TR\": 1, \"7,5TR\": 8, \"10TR\": 4, \"12,5TR\": 6, \"15TR\": 9, \"20TR\": 3, \"25TR\": 5, \"30TR\": 7, \"35TR\": 1, \"40TR\": 4, \"45TR\": 6, \"50TR\": 2, \"55TR\": 8, \"60TR\": 9}}, {\"id\": 10, \"name\": \"Resistencia de Aquecimento\", \"values\": {\"1TR\": 3, \"2TR\": 6, \"3TR\": 4, \"4TR\": 8, \"5TR\": 2, \"7,5TR\": 9, \"10TR\": 5, \"12,5TR\": 7, \"15TR\": 1, \"20TR\": 4, \"25TR\": 6, \"30TR\": 8, \"35TR\": 2, \"40TR\": 5, \"45TR\": 7, \"50TR\": 3, \"55TR\": 9, \"60TR\": 1}}, {\"id\": 11, \"name\": \"Pintura Especial\", \"values\": {\"1TR\": 4, \"2TR\": 7, \"3TR\": 5, \"4TR\": 9, \"5TR\": 3, \"7,5TR\": 1, \"10TR\": 6, \"12,5TR\": 8, \"15TR\": 2, \"20TR\": 5, \"25TR\": 7, \"30TR\": 9, \"35TR\": 3, \"40TR\": 6, \"45TR\": 8, \"50TR\": 4, \"55TR\": 1, \"60TR\": 2}}, {\"id\": 12, \"name\": \"Chaparia em Inox\", \"values\": {\"1TR\": 5, \"2TR\": 8, \"3TR\": 6, \"4TR\": 1, \"5TR\": 4, \"7,5TR\": 2, \"10TR\": 7, \"12,5TR\": 9, \"15TR\": 3, \"20TR\": 6, \"25TR\": 8, \"30TR\": 1, \"35TR\": 4, \"40TR\": 7, \"45TR\": 9, \"50TR\": 5, \"55TR\": 2, \"60TR\": 3}}], \"voltages\": [{\"id\": 1, \"name\": \"220V/1F\", \"value\": 5000}, {\"id\": 2, \"name\": \"220V/3F\", \"value\": 5000}, {\"id\": 3, \"name\": \"380V/3F\", \"value\": 5000}, {\"id\": 4, \"name\": \"440V/3F\", \"value\": 5000}]}",
+      "sort_order": 2,
+      "type": "Split System/Self Contained (industrial)"
+    },
+    {
+      "aplicacao": "climatizacao",
+      "raw_json": "{\"type\": \"Wall Mounted\", \"aplicacao\": \"climatizacao\", \"impostos\": {\"PIS_COFINS\": \"INCL\", \"IPI\": \"ISENTO\", \"ICMS\": \"12% (recupera 8,8%)\", \"PRAZO\": \"60 a 70 dias\", \"FRETE\": \"FOB/Cabreúva/SP\", \"FORNECEDOR\": \"TOSI\"}, \"configuracoes_instalacao\": [{\"id\": 1, \"nome\": \"Bocal de insuflamento protegido por grelha diretamente no ambiente\"}, {\"id\": 2, \"nome\": \"Bocal acoplado à rede de dutos por lona flexível. Distribuição por grelhas\"}, {\"id\": 3, \"nome\": \"Condicionadores fixados externamente à SE, sobre mão-francesa na parede\"}, {\"id\": 4, \"nome\": \"Evaporadoras internas ao ambiente climatizado\"}, {\"id\": 5, \"nome\": \"Evaporadoras em casa de máquinas\"}, {\"id\": 6, \"nome\": \"Condensadores fixados externamente à sala elétrica\"}], \"baseValues\": {\"1TR\": 29579, \"2TR\": 31945, \"3TR\": 40456, \"4TR\": 48138, \"5TR\": 46462, \"7,5TR\": 51466, \"10TR\": 71491, \"12,5TR\": 87342, \"15TR\": 96082, \"20TR\": 120254, \"25TR\": 140600, \"30TR\": 155980}, \"options\": [{\"id\": 1, \"name\": \"Automação Embarcada\", \"values\": {\"1TR\": 5300, \"2TR\": 5300, \"3TR\": 5833, \"4TR\": 5300, \"5TR\": 5833, \"7,5TR\": 5833, \"10TR\": 5300, \"12,5TR\": 5300, \"15TR\": 0, \"20TR\": 5833, \"25TR\": 0, \"30TR\": 0}}, {\"id\": 2, \"name\": \"1 Damper Manual\", \"values\": {\"1TR\": 200, \"2TR\": 200, \"3TR\": 200, \"4TR\": 200, \"5TR\": 200, \"7,5TR\": 200, \"10TR\": 200, \"12,5TR\": 200, \"15TR\": 200, \"20TR\": 3450, \"25TR\": 200, \"30TR\": 200}}, {\"id\": 3, \"name\": \"Umidificação\", \"values\": {\"1TR\": 9200, \"2TR\": 9200, \"3TR\": 9200, \"4TR\": 9200, \"5TR\": 9200, \"7,5TR\": 9200, \"10TR\": 9200, \"12,5TR\": 9200, \"15TR\": 9200, \"20TR\": 9200, \"25TR\": 9200, \"30TR\": 9200}}, {\"id\": 4, \"name\": \"1 Damper com atuador on/off\", \"values\": {\"1TR\": 2070, \"2TR\": 2070, \"3TR\": 2070, \"4TR\": 2070, \"5TR\": 2070, \"7,5TR\": 2070, \"10TR\": 2070, \"12,5TR\": 2070, \"15TR\": 2070, \"20TR\": 2070, \"25TR\": 2070, \"30TR\": 2070}}, {\"id\": 5, \"name\": \"2 Dampers com atuador on/off\", \"values\": {\"1TR\": 4470, \"2TR\": 4470, \"3TR\": 4470, \"4TR\": 4470, \"5TR\": 4470, \"7,5TR\": 4470, \"10TR\": 4470, \"12,5TR\": 4470, \"15TR\": 4470, \"20TR\": 4470, \"25TR\": 4470, \"30TR\": 4470}}, {\"id\": 6, \"name\": \"Ventilador Eletrônico\", \"values\": {\"1TR\": 4000, \"2TR\": 4000, \"3TR\": 4000, \"4TR\": 4000, \"5TR\": 4000, \"7,5TR\": 4000, \"10TR\": 4000, \"12,5TR\": 4000, \"15TR\": 4000, \"20TR\": 8000, \"25TR\": 8000, \"30TR\": 8000}}, {\"id\": 7, \"name\": \"Controle de Condensação Proporcional\", \"values\": {\"1TR\": 9300, \"2TR\": 9300, \"3TR\": 9300, \"4TR\": 9300, \"5TR\": 9300, \"7,5TR\": 9300, \"10TR\": 9300, \"12,5TR\": 9300, \"15TR\": 4000, \"20TR\": 8000, \"25TR\": 8000, \"30TR\": 8000}}, {\"id\": 8, \"name\": \"Goldfin\", \"values\": {\"1TR\": 1400, \"2TR\": 1400, \"3TR\": 1400, \"4TR\": 1400, \"5TR\": 1700, \"7,5TR\": 2000, \"10TR\": 1400, \"12,5TR\": 1400, \"15TR\": 1400, \"20TR\": 1400, \"25TR\": 1400, \"30TR\": 1400}}, {\"id\": 9, \"name\": \"Sensor de Filtro Sujo\", \"values\": {\"1TR\": 1100, \"2TR\": 1100, \"3TR\": 1500, \"4TR\": 1100, \"5TR\": 1500, \"7,5TR\": 1700, \"10TR\": 1100, \"12,5TR\": 1100, \"15TR\": 1100, \"20TR\": 1100, \"25TR\": 1100, \"30TR\": 1100}}, {\"id\": 10, \"name\": \"Resistencia de Aquecimento\", \"values\": {\"1TR\": 2100, \"2TR\": 2100, \"3TR\": 2100, \"4TR\": 2100, \"5TR\": 2100, \"7,5TR\": 2100, \"10TR\": 3300, \"12,5TR\": 3300, \"15TR\": 3300, \"20TR\": 4500, \"25TR\": 4500, \"30TR\": 4500}}, {\"id\": 11, \"name\": \"Pintura Especial\", \"values\": {\"1TR\": 5500, \"2TR\": 5500, \"3TR\": 5500, \"4TR\": 5500, \"5TR\": 5500, \"7,5TR\": 5500, \"10TR\": 6500, \"12,5TR\": 6500, \"15TR\": 6500, \"20TR\": 7500, \"25TR\": 7500, \"30TR\": 7500}}, {\"id\": 12, \"name\": \"Chaparia em Inox\", \"values\": {\"1TR\": 13445, \"2TR\": 14251.7, \"3TR\": 17426.4, \"4TR\": 21475.6, \"5TR\": 22021.5, \"7,5TR\": 24141.5, \"10TR\": 31894.34, \"12,5TR\": 38965.6, \"15TR\": 42864.81, \"20TR\": 54393.9, \"25TR\": 62725.5, \"30TR\": 70900}}], \"voltages\": [{\"id\": 1, \"name\": \"220V/1F\", \"value\": 0}, {\"id\": 2, \"name\": \"220V/3F\", \"value\": 0}, {\"id\": 3, \"name\": \"380V/3F\", \"value\": 0}, {\"id\": 4, \"name\": \"440V/3F\", \"value\": 0}, {\"id\": 5, \"name\": \"460V/3F\", \"value\": 0}, {\"id\": 6, \"name\": \"480V/3F\", \"value\": 0}]}",
+      "sort_order": 0,
+      "type": "Wall Mounted"
+    },
+    {
+      "aplicacao": "exaustao",
+      "raw_json": "{\"type\": \"Tubo Axial\", \"aplicacao\": \"exaustao\", \"impostos\": {\"PIS_COFINS\": \"INCL\", \"IPI\": \"ISENTO\", \"ICMS\": \"12%\", \"PRAZO\": \"45 a 60 dias\", \"FRETE\": \"FOB/Cabreúva/SP\", \"FORNECEDOR\": \"TOSI\"}, \"configuracoes_instalacao\": [{\"id\": 1, \"nome\": \"Instalação dutos axiais\"}], \"baseValues\": {\"1400m³/h\": 2400, \"2200m³/h\": 2300, \"3100m³/h\": 4, \"3400m³/h\": 6, \"3600m³/h\": 8, \"4900m³/h\": 2, \"5500m³/h\": 5, \"6200m³/h\": 7, \"6800m³/h\": 5100, \"8400m³/h\": 3, \"9100m³/h\": 5750, \"10100m³/h\": 9, \"11500m³/h\": 1, \"12500m³/h\": 7100, \"14300m³/h\": 10, \"15900m³/h\": 4, \"18200m³/h\": 6, \"18600m³/h\": 8, \"22800m³/h\": 2, \"24800m³/h\": 9800, \"25500m³/h\": 5, \"36100m³/h\": 11200, \"38800m³/h\": 13900, \"39800m³/h\": 7, \"47800m³/h\": 9, \"52100m³/h\": 1, \"55800m³/h\": 10, \"61500m³/h\": 3}, \"options\": [{\"id\": 1, \"name\": \"com 10mmCA\", \"values\": {\"1400m³/h\": 0, \"2200m³/h\": 0, \"3100m³/h\": 5, \"3400m³/h\": 7, \"3600m³/h\": 2, \"4900m³/h\": 9, \"5500m³/h\": 4, \"6200m³/h\": 6, \"6800m³/h\": 8, \"8400m³/h\": 1, \"9100m³/h\": 3, \"10100m³/h\": 10, \"11500m³/h\": 5, \"12500m³/h\": 7, \"14300m³/h\": 2, \"15900m³/h\": 9, \"18200m³/h\": 4, \"18600m³/h\": 6, \"22800m³/h\": 8, \"24800m³/h\": 1, \"25500m³/h\": 3, \"36100m³/h\": 10, \"38800m³/h\": 5, \"39800m³/h\": 7, \"47800m³/h\": 2, \"52100m³/h\": 9, \"55800m³/h\": 4, \"61500m³/h\": 6}}, {\"id\": 2, \"name\": \"com 15mmCA\", \"values\": {\"1400m³/h\": 0, \"2200m³/h\": 0, \"3100m³/h\": 3, \"3400m³/h\": 8, \"3600m³/h\": 5, \"4900m³/h\": 1, \"5500m³/h\": 7, \"6200m³/h\": 4, \"6800m³/h\": 9, \"8400m³/h\": 2, \"9100m³/h\": 6, \"10100m³/h\": 10, \"11500m³/h\": 3, \"12500m³/h\": 8, \"14300m³/h\": 5, \"15900m³/h\": 1, \"18200m³/h\": 7, \"18600m³/h\": 4, \"22800m³/h\": 9, \"24800m³/h\": 2, \"25500m³/h\": 6, \"36100m³/h\": 10, \"38800m³/h\": 3, \"39800m³/h\": 8, \"47800m³/h\": 5, \"52100m³/h\": 1, \"55800m³/h\": 7, \"61500m³/h\": 4}}, {\"id\": 3, \"name\": \"Grade de Proteção\", \"values\": {\"1400m³/h\": 130, \"2200m³/h\": 130, \"3100m³/h\": 5, \"3400m³/h\": 7, \"3600m³/h\": 2, \"4900m³/h\": 9, \"5500m³/h\": 4, \"6200m³/h\": 6, \"6800m³/h\": 8, \"8400m³/h\": 1, \"9100m³/h\": 3, \"10100m³/h\": 10, \"11500m³/h\": 5, \"12500m³/h\": 7, \"14300m³/h\": 2, \"15900m³/h\": 9, \"18200m³/h\": 4, \"18600m³/h\": 6, \"22800m³/h\": 8, \"24800m³/h\": 1, \"25500m³/h\": 3, \"36100m³/h\": 10, \"38800m³/h\": 5, \"39800m³/h\": 7, \"47800m³/h\": 2, \"52100m³/h\": 9, \"55800m³/h\": 4, \"61500m³/h\": 6}}, {\"id\": 4, \"name\": \"Proteção de Chuva\", \"values\": {\"1400m³/h\": 250, \"2200m³/h\": 250, \"3100m³/h\": 3, \"3400m³/h\": 8, \"3600m³/h\": 5, \"4900m³/h\": 1, \"5500m³/h\": 7, \"6200m³/h\": 4, \"6800m³/h\": 9, \"8400m³/h\": 2, \"9100m³/h\": 6, \"10100m³/h\": 10, \"11500m³/h\": 3, \"12500m³/h\": 8, \"14300m³/h\": 5, \"15900m³/h\": 1, \"18200m³/h\": 7, \"18600m³/h\": 4, \"22800m³/h\": 9, \"24800m³/h\": 2, \"25500m³/h\": 6, \"36100m³/h\": 10, \"38800m³/h\": 3, \"39800m³/h\": 8, \"47800m³/h\": 5, \"52100m³/h\": 1, \"55800m³/h\": 7, \"61500m³/h\": 4}}], \"voltages\": [{\"id\": 1, \"name\": \"220V/1F\", \"value\": 1000}, {\"id\": 2, \"name\": \"220V/3F\", \"value\": 1000}, {\"id\": 3, \"name\": \"380V/3F\", \"value\": 1000}]}",
+      "sort_order": 6,
+      "type": "Tubo Axial"
+    },
+    {
+      "aplicacao": "pressurizacao_ventilacao",
+      "raw_json": "{\"type\": \"Filtro Cartucho\", \"aplicacao\": \"pressurizacao_ventilacao\", \"impostos\": {\"PIS_COFINS\": \"INCL\", \"IPI\": \"ISENTO\", \"ICMS\": \"12%\", \"PRAZO\": \"45 a 60 dias\", \"FRETE\": \"FOB/Cabreúva/SP\", \"FORNECEDOR\": \"TOSI\"}, \"configuracoes_instalacao\": [{\"id\": 1, \"nome\": \"Instalação filtro cartucho\"}], \"baseValues\": {\"2000m³/h\": 17200, \"4200m³/h\": 28400}, \"options\": [{\"id\": 1, \"name\": \"com 10mmCA\", \"values\": {\"2000m³/h\": 3, \"4200m³/h\": 7}}, {\"id\": 2, \"name\": \"com 15mmCA\", \"values\": {\"2000m³/h\": 5, \"4200m³/h\": 9}}, {\"id\": 3, \"name\": \"com 20mmCA\", \"values\": {\"2000m³/h\": 8, \"4200m³/h\": 2}}], \"voltages\": [{\"id\": 1, \"name\": \"220V/1F\", \"value\": 600}]}",
+      "sort_order": 8,
+      "type": "Filtro Cartucho"
+    },
+    {
+      "aplicacao": "pressurizacao_ventilacao",
+      "raw_json": "{\"type\": \"Filtro Quimico\", \"aplicacao\": \"pressurizacao_ventilacao\", \"impostos\": {\"PIS_COFINS\": \"INCL\", \"IPI\": \"ISENTO\", \"ICMS\": \"12%\", \"PRAZO\": \"45 a 60 dias\", \"FRETE\": \"FOB/Cabreúva/SP\", \"FORNECEDOR\": \"TOSI\"}, \"configuracoes_instalacao\": [], \"baseValues\": {}, \"options\": [], \"voltages\": []}",
+      "sort_order": 12,
+      "type": "Filtro Quimico"
+    },
+    {
+      "aplicacao": "pressurizacao_ventilacao",
+      "raw_json": "{\"type\": \"Gabinete Centrífugo\", \"aplicacao\": \"pressurizacao_ventilacao\", \"impostos\": {\"PIS_COFINS\": \"INCL\", \"IPI\": \"ISENTO\", \"ICMS\": \"12%\", \"PRAZO\": \"45 a 60 dias\", \"FRETE\": \"FOB/Cabreúva/SP\", \"FORNECEDOR\": \"TOSI\"}, \"configuracoes_instalacao\": [{\"id\": 1, \"nome\": \"Instalação ventilador centrífugo\"}], \"baseValues\": {\"1500m³/h\": 3900, \"30000m³/h\": 28700}, \"options\": [{\"id\": 1, \"name\": \"com 10mmCA\", \"values\": {\"1500m³/h\": 0, \"30000m³/h\": 0}}, {\"id\": 2, \"name\": \"com 15mmCA\", \"values\": {\"1500m³/h\": 0, \"30000m³/h\": 0}}, {\"id\": 3, \"name\": \"com 20mmCA\", \"values\": {\"1500m³/h\": 0, \"30000m³/h\": 0}}], \"voltages\": [{\"id\": 1, \"name\": \"220V/1F\", \"value\": 500}, {\"id\": 2, \"name\": \"220V/3F\", \"value\": 500}]}",
+      "sort_order": 9,
+      "type": "Gabinete Centrífugo"
+    },
+    {
+      "aplicacao": "pressurizacao_ventilacao",
+      "raw_json": "{\"type\": \"Pressurizador Externo\", \"aplicacao\": \"pressurizacao_ventilacao\", \"impostos\": {\"PIS_COFINS\": \"INCL\", \"IPI\": \"ISENTO\", \"ICMS\": \"12%\", \"PRAZO\": \"45 a 60 dias\", \"FRETE\": \"FOB/Cabreúva/SP\", \"FORNECEDOR\": \"TOSI\"}, \"configuracoes_instalacao\": [{\"id\": 1, \"nome\": \"Instalação caixa ventilação\"}], \"baseValues\": {\"500m³/h\": 2500, \"750m³/h\": 2800, \"1000m³/h\": 2900, \"1200m³/h\": 2900, \"1500m³/h\": 3000, \"2000m³/h\": 3100, \"2500m³/h\": 3200, \"3000m³/h\": 5, \"3500m³/h\": 7, \"4000m³/h\": 2, \"4500m³/h\": 9, \"5000m³/h\": 4, \"6000m³/h\": 6, \"7000m³/h\": 8}, \"options\": [{\"id\": 1, \"name\": \"com 10mmCA\", \"values\": {\"500m³/h\": 3, \"750m³/h\": 6, \"1000m³/h\": 4, \"1200m³/h\": 8, \"1500m³/h\": 2, \"2000m³/h\": 9, \"2500m³/h\": 5, \"3000m³/h\": 7, \"3500m³/h\": 1, \"4000m³/h\": 4, \"4500m³/h\": 6, \"5000m³/h\": 8, \"6000m³/h\": 2, \"7000m³/h\": 5}}, {\"id\": 2, \"name\": \"com 15mmCA\", \"values\": {\"500m³/h\": 4, \"750m³/h\": 7, \"1000m³/h\": 5, \"1200m³/h\": 9, \"1500m³/h\": 3, \"2000m³/h\": 1, \"2500m³/h\": 6, \"3000m³/h\": 8, \"3500m³/h\": 2, \"4000m³/h\": 5, \"4500m³/h\": 7, \"5000m³/h\": 9, \"6000m³/h\": 3, \"7000m³/h\": 6}}, {\"id\": 3, \"name\": \"com 20mmCA\", \"values\": {\"500m³/h\": 5, \"750m³/h\": 8, \"1000m³/h\": 6, \"1200m³/h\": 1, \"1500m³/h\": 4, \"2000m³/h\": 2, \"2500m³/h\": 7, \"3000m³/h\": 9, \"3500m³/h\": 3, \"4000m³/h\": 6, \"4500m³/h\": 8, \"5000m³/h\": 1, \"6000m³/h\": 4, \"7000m³/h\": 7}}], \"voltages\": [{\"id\": 1, \"name\": \"220V/1F\", \"value\": 800}]}",
+      "sort_order": 7,
+      "type": "Pressurizador Externo"
+    },
+    {
+      "aplicacao": "pressurizacao_ventilacao",
+      "raw_json": "{\"type\": \"Pressurizador Inline\", \"aplicacao\": \"pressurizacao_ventilacao\", \"impostos\": {\"PIS_COFINS\": \"INCL\", \"IPI\": \"ISENTO\", \"ICMS\": \"12%\", \"PRAZO\": \"45 a 60 dias\", \"FRETE\": \"FOB/Cabreúva/SP\", \"FORNECEDOR\": \"TOSI\"}, \"configuracoes_instalacao\": [{\"id\": 1, \"nome\": \"Instalação gabinete inline\"}], \"baseValues\": {\"1200m³/h\": 12500}, \"options\": [{\"id\": 1, \"name\": \"com 10mmCA\", \"values\": {\"1000m³/h\": 0}}, {\"id\": 2, \"name\": \"com 15mmCA\", \"values\": {\"1000m³/h\": 0}}, {\"id\": 3, \"name\": \"com 20mmCA\", \"values\": {\"1000m³/h\": 0}}], \"voltages\": [{\"id\": 1, \"name\": \"220V/1F\", \"value\": 400}]}",
+      "sort_order": 10,
+      "type": "Pressurizador Inline"
+    },
+    {
+      "aplicacao": "pressurizacao_ventilacao",
+      "raw_json": "{\"type\": \"Pressurizador Suspenso Horizontal\", \"aplicacao\": \"pressurizacao_ventilacao\", \"impostos\": {\"PIS_COFINS\": \"INCL\", \"IPI\": \"ISENTO\", \"ICMS\": \"12%\", \"PRAZO\": \"45 a 60 dias\", \"FRETE\": \"FOB/Cabreúva/SP\", \"FORNECEDOR\": \"A definir\"}, \"configuracoes_instalacao\": [{\"id\": 1, \"nome\": \"Instalação filtros FH\"}], \"baseValues\": {\"FH 150 G4 300m³/h\": 1500, \"FH 200 G4+F5 700m³/h\": 3, \"FH 250 G4+F5 900m³/h\": 2350, \"FH 315 G4+F5 1200m³/h\": 2500, \"FH 355 G4+F5 1200m³/h\": 3000, \"FH 400 G4+F5 1800m³/h\": 3900}, \"options\": [{\"id\": 1, \"name\": \"com 10mmCA\", \"values\": {\"1000m³/h\": 0}}, {\"id\": 2, \"name\": \"com 15mmCA\", \"values\": {\"1000m³/h\": 0}}, {\"id\": 3, \"name\": \"com 20mmCA\", \"values\": {\"1000m³/h\": 0}}], \"voltages\": [{\"id\": 1, \"name\": \"220V/1F\", \"value\": 300}]}",
+      "sort_order": 11,
+      "type": "Pressurizador Suspenso Horizontal"
+    }
+  ],
+  "acessorios": [
+    {
+      "descricao": "Dampers Corta-fogo 120 minutos",
+      "raw_json": "{\"codigo\": \"DCF_120\", \"descricao\": \"Dampers Corta-fogo 120 minutos\", \"valores_padrao\": {\"250x250\": 25500, \"300x300\": 29500, \"350x350\": 34000, \"400x400\": 39000, \"450x450\": 44500, \"500x500\": 50500, \"550x550\": 57000, \"600x600\": 64000, \"650x650\": 71500, \"700x700\": 79500, \"750x750\": 88000, \"800x800\": 97000, \"850x850\": 106500, \"900x900\": 116500, \"950x950\": 127000, \"1000x1000\": 138000, \"1050x1050\": 149500, \"1100x1100\": 161500, \"1150x1150\": 174000, \"1200x600\": 185000}}",
+      "sort_order": 4,
+      "tipo": "DCF_120"
+    },
+    {
+      "descricao": "Dampers Corta-fogo 90 minutos",
+      "raw_json": "{\"codigo\": \"DCF_90\", \"descricao\": \"Dampers Corta-fogo 90 minutos\", \"valores_padrao\": {\"200x200\": 18500, \"250x250\": 21000, \"300x300\": 24000, \"350x350\": 27500, \"400x400\": 31500, \"450x450\": 36000, \"500x500\": 41000, \"550x550\": 46500, \"600x600\": 52500, \"650x650\": 59000, \"700x700\": 66000, \"750x750\": 73500, \"800x800\": 81500, \"850x850\": 90000, \"900x900\": 99000, \"950x950\": 108500, \"1000x1000\": 118500, \"1050x1050\": 129000, \"1100x1100\": 140000, \"1150x1150\": 151500, \"1200x1200\": 163500, \"1250x1250\": 176000, \"1300x1300\": 189000, \"1350x1350\": 202500, \"1400x1400\": 216500, \"1450x1450\": 231000, \"1500x1500\": 246000, \"1550x1550\": 261500, \"1600x800\": 275000}}",
+      "sort_order": 3,
+      "tipo": "DCF_90"
+    },
+    {
+      "descricao": "Dampers de Sobrepressão 15m/s",
+      "raw_json": "{\"codigo\": \"DSP_15\", \"descricao\": \"Dampers de Sobrepressão 15m/s\", \"valores_padrao\": {\"150x150\": 8500, \"200x150\": 9000, \"200x200\": 9500, \"250x250\": 10500, \"300x300\": 11500, \"400x400\": 13500, \"500x500\": 16000, \"600x600\": 19000, \"700x700\": 22500, \"800x800\": 26500, \"900x900\": 31000, \"1000x1000\": 36000, \"1100x1100\": 41500, \"1200x1200\": 47500, \"1300x1200\": 51000, \"1400x1200\": 55000, \"1500x1200\": 59000, \"1600x1200\": 63500, \"1700x1200\": 68500, \"1800x1200\": 74000, \"1900x1200\": 80000, \"2000x1200\": 86500}}",
+      "sort_order": 1,
+      "tipo": "DSP_15"
+    },
+    {
+      "descricao": "Dampers de Sobrepressão 30m/s",
+      "raw_json": "{\"codigo\": \"DSP_30\", \"descricao\": \"Dampers de Sobrepressão 30m/s\", \"valores_padrao\": {\"150x150\": 12000, \"200x200\": 13500, \"250x250\": 15000, \"300x300\": 17000, \"400x400\": 21000, \"500x500\": 25500, \"600x600\": 30500, \"700x700\": 36500, \"800x800\": 43000, \"900x900\": 50500, \"1000x1000\": 59000, \"1100x1100\": 68500, \"1200x1200\": 79000, \"1300x1300\": 90500, \"1400x1400\": 103000, \"1500x1500\": 117000, \"1600x1600\": 132000, \"1700x1700\": 148000, \"1800x1800\": 165000, \"1900x1900\": 183000, \"1920x2000\": 195000}}",
+      "sort_order": 2,
+      "tipo": "DSP_30"
+    },
+    {
+      "descricao": "Difusores",
+      "raw_json": "{\"codigo\": \"DF\", \"descricao\": \"Difusores\", \"valores_padrao\": {\"100\": 45, \"150\": 68, \"200\": 95, \"250\": 128, \"300\": 165, \"350\": 210, \"400\": 260, \"450\": 315, \"500\": 375, \"600\": 520, \"750\": 780, \"900\": 1120, \"1200\": 1850}}",
+      "sort_order": 8,
+      "tipo": "DF"
+    },
+    {
+      "descricao": "Filtros",
+      "raw_json": "{\"codigo\": \"FH\", \"descricao\": \"Filtros\", \"valores_padrao\": {\"200x200\": 28.5, \"300x200\": 42.8, \"300x300\": 64.2, \"400x200\": 57, \"400x300\": 85.5, \"400x400\": 114, \"500x200\": 71.25, \"500x300\": 106.88, \"500x400\": 142.5, \"500x500\": 178.13, \"600x300\": 128.25, \"600x400\": 171, \"600x500\": 213.75, \"600x600\": 256.5, \"800x400\": 228, \"800x600\": 342, \"1000x500\": 356.25, \"1000x600\": 427.5, \"1200x600\": 513}}",
+      "sort_order": 9,
+      "tipo": "FH"
+    },
+    {
+      "descricao": "Grelhas de Insuflamento",
+      "raw_json": "{\"codigo\": \"GI\", \"descricao\": \"Grelhas de Insuflamento\", \"valores_padrao\": {\"225x125\": 102.63, \"225x165\": 108.87, \"225x225\": 94.06, \"325x125\": 137.46, \"325x165\": 153, \"325x225\": 175, \"325x325\": 244, \"425x125\": 153}}",
+      "sort_order": 5,
+      "tipo": "GI"
+    },
+    {
+      "descricao": "Grelhas de Retorno",
+      "raw_json": "{\"codigo\": \"GR\", \"descricao\": \"Grelhas de Retorno\", \"valores_padrao\": {\"225x125\": 66.32, \"225x165\": 72.5, \"225x225\": 94.9, \"325x125\": 89.43, \"325x165\": 98.2}}",
+      "sort_order": 6,
+      "tipo": "GR"
+    },
+    {
+      "descricao": "Tomada de Ar Externo",
+      "raw_json": "{\"codigo\": \"TAE\", \"descricao\": \"Tomada de Ar Externo\", \"valores_padrao\": {\"200x200\": 158.37, \"300x200\": 205, \"300x300\": 261.38, \"400x200\": 236.79, \"400x300\": 298.5, \"400x400\": 376.08, \"500x200\": 594.36, \"500x300\": 680, \"500x400\": 825, \"500x500\": 950}}",
+      "sort_order": 7,
+      "tipo": "TAE"
+    },
+    {
+      "descricao": "Venezianas",
+      "raw_json": "{\"codigo\": \"VZ\", \"descricao\": \"Venezianas\", \"valores_padrao\": {\"200x100\": 12000, \"250x100\": 12500, \"200x150\": 13000, \"250x150\": 13500, \"300x200\": 14500, \"400x300\": 16500, \"500x400\": 18500, \"600x500\": 21000, \"700x600\": 24000, \"800x700\": 27000, \"900x800\": 30500, \"1000x900\": 34000, \"1100x1000\": 38000, \"1200x1100\": 42000, \"1300x1200\": 46000, \"1400x1200\": 50000, \"1500x1200\": 54000}}",
+      "sort_order": 0,
+      "tipo": "VZ"
+    }
+  ],
+  "dutos": [
+    {
+      "descricao": "Duto em aco inox para ambientes agressivos",
+      "raw_json": "{\"type\": \"Chapa de aco inox\", \"valor\": 180, \"descricao\": \"Duto em aco inox para ambientes agressivos\", \"opcionais\": [{\"id\": 1, \"nome\": \"Polimento\", \"value\": 45, \"descricao\": \"Acabamento liso para ambientes hospitalares\"}, {\"id\": 2, \"nome\": \"Isolamento termico reforcado\", \"value\": 70, \"descricao\": \"Isolamento para altas temperaturas\"}, {\"id\": 3, \"nome\": \"Tratamento anticorrosivo\", \"value\": 55, \"descricao\": \"Protecao extra contra corrosao quimica\"}]}",
+      "sort_order": 0,
+      "type": "Chapa de aco inox"
+    },
+    {
+      "descricao": "Duto metalico de chapa preta padrao",
+      "raw_json": "{\"type\": \"Chapa preta\", \"valor\": 105, \"descricao\": \"Duto metalico de chapa preta padrao\", \"opcionais\": [{\"id\": 1, \"nome\": \"Pintura epoxi\", \"value\": 30, \"descricao\": \"Pintura epoxi de alta resistencia\"}, {\"id\": 2, \"nome\": \"Isolamento acustico\", \"value\": 40, \"descricao\": \"Reducao de ruido no sistema\"}, {\"id\": 3, \"nome\": \"Reforco estrutural\", \"value\": 35, \"descricao\": \"Reforco para dutos de grande vao\"}]}",
+      "sort_order": 1,
+      "type": "Chapa preta"
+    },
+    {
+      "descricao": "Duto pesado para grandes vazoes e infraestrutura",
+      "raw_json": "{\"type\": \"Concreto armado\", \"valor\": 220, \"descricao\": \"Duto pesado para grandes vazoes e infraestrutura\", \"opcionais\": [{\"id\": 1, \"nome\": \"Impermeabilizacao interna\", \"value\": 50, \"descricao\": \"Revestimento interno impermeavel\"}, {\"id\": 2, \"nome\": \"Reforco estrutural adicional\", \"value\": 65, \"descricao\": \"Reforco para cargas extremas\"}, {\"id\": 3, \"nome\": \"Revestimento acustico\", \"value\": 45, \"descricao\": \"Reducao de ruido em grandes dutos\"}]}",
+      "sort_order": 4,
+      "type": "Concreto armado"
+    },
+    {
+      "descricao": "Duto plastico resistente a agentes quimicos",
+      "raw_json": "{\"type\": \"Polipropileno (PP)\", \"valor\": 110, \"descricao\": \"Duto plastico resistente a agentes quimicos\", \"opcionais\": [{\"id\": 1, \"nome\": \"Soldagem termica\", \"value\": 25, \"descricao\": \"Soldagem especial para vedacao total\"}, {\"id\": 2, \"nome\": \"Protecao UV\", \"value\": 20, \"descricao\": \"Protecao contra degradacao solar\"}, {\"id\": 3, \"nome\": \"Flanges reforcados\", \"value\": 30, \"descricao\": \"Flanges para maior resistencia mecanica\"}]}",
+      "sort_order": 2,
+      "type": "Polipropileno (PP)"
+    },
+    {
+      "descricao": "Duto textil para distribuicao uniforme de ar",
+      "raw_json": "{\"type\": \"Fibra textil\", \"valor\": 70, \"descricao\": \"Duto textil para distribuicao uniforme de ar\", \"opcionais\": [{\"id\": 1, \"nome\": \"Tratamento antibacteriano\", \"value\": 20, \"descricao\": \"Previne proliferacao de fungos e bacterias\"}, {\"id\": 2, \"nome\": \"Resistencia ao fogo\", \"value\": 30, \"descricao\": \"Tratamento ignifugo\"}, {\"id\": 3, \"nome\": \"Cor personalizada\", \"value\": 15, \"descricao\": \"Personalizacao de cor do duto\"}]}",
+      "sort_order": 3,
+      "type": "Fibra textil"
+    }
+  ],
+  "tubos": [
+    {
+      "mm": 12.7,
+      "polegadas": "1/2",
+      "raw_json": "{\"polegadas\": \"1/2\", \"mm\": 12.7, \"valor\": 26.5}",
+      "sort_order": 2,
+      "valor": 26.5
+    },
+    {
+      "mm": 15.87,
+      "polegadas": "5/8",
+      "raw_json": "{\"polegadas\": \"5/8\", \"mm\": 15.87, \"valor\": 31}",
+      "sort_order": 3,
+      "valor": 31.0
+    },
+    {
+      "mm": 19.05,
+      "polegadas": "3/4",
+      "raw_json": "{\"polegadas\": \"3/4\", \"mm\": 19.05, \"valor\": 36.8}",
+      "sort_order": 4,
+      "valor": 36.8
+    },
+    {
+      "mm": 22.22,
+      "polegadas": "7/8",
+      "raw_json": "{\"polegadas\": \"7/8\", \"mm\": 22.22, \"valor\": 42}",
+      "sort_order": 5,
+      "valor": 42.0
+    },
+    {
+      "mm": 25.4,
+      "polegadas": "1",
+      "raw_json": "{\"polegadas\": \"1\", \"mm\": 25.4, \"valor\": 48.9}",
+      "sort_order": 6,
+      "valor": 48.9
+    },
+    {
+      "mm": 31.75,
+      "polegadas": "1.1/4",
+      "raw_json": "{\"polegadas\": \"1.1/4\", \"mm\": 31.75, \"valor\": 62}",
+      "sort_order": 7,
+      "valor": 62.0
+    },
+    {
+      "mm": 34.92,
+      "polegadas": "1.3/8",
+      "raw_json": "{\"polegadas\": \"1.3/8\", \"mm\": 34.92, \"valor\": 68.5}",
+      "sort_order": 8,
+      "valor": 68.5
+    },
+    {
+      "mm": 38.1,
+      "polegadas": "1.1/2",
+      "raw_json": "{\"polegadas\": \"1.1/2\", \"mm\": 38.1, \"valor\": 75}",
+      "sort_order": 9,
+      "valor": 75.0
+    },
+    {
+      "mm": 41.27,
+      "polegadas": "1.5/8",
+      "raw_json": "{\"polegadas\": \"1.5/8\", \"mm\": 41.27, \"valor\": 82.4}",
+      "sort_order": 10,
+      "valor": 82.4
+    },
+    {
+      "mm": 47.62,
+      "polegadas": "1.7/8",
+      "raw_json": "{\"polegadas\": \"1.7/8\", \"mm\": 47.62, \"valor\": 96}",
+      "sort_order": 11,
+      "valor": 96.0
+    },
+    {
+      "mm": 6.35,
+      "polegadas": "1/4",
+      "raw_json": "{\"polegadas\": \"1/4\", \"mm\": 6.35, \"valor\": 18.5}",
+      "sort_order": 0,
+      "valor": 18.5
+    },
+    {
+      "mm": 9.52,
+      "polegadas": "3/8",
+      "raw_json": "{\"polegadas\": \"3/8\", \"mm\": 9.52, \"valor\": 22}",
+      "sort_order": 1,
+      "valor": 22.0
+    }
+  ],
+  "obras": [
+    {
+      "empresa_codigo": "AMC",
+      "empresa_id": "empresa_obra_u98",
+      "empresa_nome": "AMC SOLUÇÕES",
+      "id": "obra_u98",
+      "nome": "AMC-5",
+      "numero_cliente_final": 5,
+      "raw_json": "{\"id\": \"obra_u98\", \"nome\": \"AMC-5\", \"empresa_id\": \"empresa_obra_u98\", \"empresaSigla\": \"AMC\", \"empresaNome\": \"AMC SOLUÇÕES\", \"numeroClienteFinal\": 5, \"clienteFinal\": \"vale\", \"codigoCliente\": \"VALE9999\", \"dataCadastro\": \"01/04/2026\", \"idGerado\": \"obra_AMC_5\", \"projetos\": [{\"id\": \"obra_u98_proj_l28_3\", \"nome\": \"ELETROCENTRO MOAGEM\", \"salas\": [{\"id\": \"obra_u98_proj_l28_3_sala_w85_1\", \"nome\": \"SP\", \"inputs\": {\"ambiente\": \"SP\", \"backup\": \"n+1\", \"peDireito\": 3, \"tipoConstrucao\": \"Eletrocentro\", \"paredeOeste\": 10, \"paredeLeste\": 10, \"paredeNorte\": 5, \"paredeSul\": 5, \"area\": 50, \"volume\": 150, \"dissipacao\": 10000, \"numPessoas\": 1, \"pressurizacaoSetpoint\": 25, \"setpointTemp\": 25, \"numPortasDuplas\": 1, \"numPortasSimples\": 1, \"combateIncendio\": \"manual\", \"pressurizacao\": true}, \"maquinas\": [{\"nome\": \"Wall Mounted-01A (7,5TR)\", \"tipo\": \"Wall Mounted\", \"potencia\": \"7,5TR\", \"tensao\": \"440V/3F\", \"tensao_comando\": \"220V\", \"quantidade\": 2, \"aplicacao_machines\": \"climatizacao\", \"precoBase\": 59114, \"opcoesSelecionadas\": [{\"id\": 1, \"name\": \"Automação Embarcada\", \"value\": 5300, \"originalName\": \"Automação Embarcada\", \"potenciaAplicada\": \"7,5TR\"}, {\"id\": 4, \"name\": \"1 Damper com atuador on/off\", \"value\": 2070, \"originalName\": \"1 Damper com atuador on/off\", \"potenciaAplicada\": \"7,5TR\"}, {\"id\": 6, \"name\": \"Ventilador Eletrônico\", \"value\": 4000, \"originalName\": \"Ventilador Eletrônico\", \"potenciaAplicada\": \"7,5TR\"}, {\"id\": 7, \"name\": \"Controle de Condensação Proporcional\", \"value\": 9300, \"originalName\": \"Controle de Condensação Proporcional\", \"potenciaAplicada\": \"7,5TR\"}, {\"id\": 8, \"name\": \"Goldfin\", \"value\": 1400, \"originalName\": \"Goldfin\", \"potenciaAplicada\": \"7,5TR\"}, {\"id\": 9, \"name\": \"Sensor de Filtro Sujo\", \"value\": 1100, \"originalName\": \"Sensor de Filtro Sujo\", \"potenciaAplicada\": \"7,5TR\"}], \"configuracoesSelecionadas\": [], \"precoTotal\": 164568, \"potenciaSelecionada\": \"7,5TR\", \"tipoSelecionado\": \"Wall Mounted\"}], \"capacidade\": {\"fatorSeguranca\": 0, \"capacidadeUnitaria\": 7.5, \"solucao\": 1, \"solucaoBackup\": 2, \"totalCapacidade\": 7.5, \"folga\": 2.2, \"backup\": \"n+1\"}, \"ventilacao\": {\"tempInterna\": 45, \"tempExterna\": 35}, \"ganhosTermicos\": {\"total-ganhos-w\": 25830, \"total-tr-aprox\": 8, \"total-tr-exato\": 7.34, \"total-externo\": 2456, \"total-divisoes\": 0, \"total-piso\": 1013, \"total-iluminacao\": 350, \"total-dissi\": 10000, \"total-pessoas\": 220, \"total-ar-sensivel\": 3328, \"total-ar-latente\": 8465}, \"acessorios\": [], \"dutos\": [], \"tubulacao\": {\"conjuntos\": [], \"valorTotalGeralTubos\": 0}}], \"servicos\": {\"engenharia\": {\"valor\": 0, \"descricao\": \"Referente ao projeto HVAC e acompanhamento do start-up nas dependências do cliente (região metropolitana de Belo Horizonte/MG). Impostos inclusos (ISS), faturado pela ESI.\"}, \"adicionais\": []}, \"valorTotalProjeto\": 164568}], \"valorTotalObra\": 164568}",
+      "sort_order": 0
+    },
+    {
+      "empresa_codigo": "SRA",
+      "empresa_id": "empresa_obra_a28",
+      "empresa_nome": "SRA",
+      "id": "obra_a28",
+      "nome": "SRA-006",
+      "numero_cliente_final": 6,
+      "raw_json": "{\"id\": \"obra_a28\", \"nome\": \"SRA-006\", \"empresa_id\": \"empresa_obra_a28\", \"empresaSigla\": \"SRA\", \"empresaNome\": \"SRA\", \"numeroClienteFinal\": 6, \"clienteFinal\": \"Tecnokor\", \"codigoCliente\": \"25158\", \"dataCadastro\": \"18/06/2026\", \"orcamentistaResponsavel\": \"Eduardo Corrêa\", \"idGerado\": \"obra_SRA_1\", \"projetos\": [{\"id\": \"obra_a28_proj_a68_3\", \"nome\": \"Sala de Painéis\", \"salas\": [{\"id\": \"obra_a28_proj_a68_3_sala_f34_1\", \"nome\": \"SP\", \"inputs\": {\"ambiente\": \"SP\", \"backup\": \"n+1\", \"peDireito\": 3.9, \"tipoConstrucao\": \"Eletrocentro\", \"paredeOeste\": 9, \"paredeLeste\": 9, \"paredeNorte\": 4.8, \"paredeSul\": 4.8, \"area\": 43.2, \"volume\": 168.48, \"divisoriaNaoClima1\": 0, \"divisoriaClima1\": -1, \"dissipacao\": 26630, \"numPessoas\": 1, \"pressurizacaoSetpoint\": 30, \"setpointTemp\": 23, \"numPortasDuplas\": 0, \"numPortasSimples\": 1, \"combateIncendio\": \"manual\", \"pressurizacao\": true}, \"maquinas\": [{\"nome\": \"Wall Mounted-01A (7,5TR)\", \"tipo\": \"Wall Mounted\", \"potencia\": \"7,5TR\", \"tensao\": \"\", \"tensao_comando\": \"220V\", \"quantidade\": 3, \"aplicacao_machines\": \"climatizacao\", \"precoBase\": 51466, \"opcoesSelecionadas\": [{\"id\": 1, \"name\": \"Automação Embarcada\", \"value\": 5833, \"originalName\": \"Automação Embarcada\", \"potenciaAplicada\": \"7,5TR\"}, {\"id\": 8, \"name\": \"Goldfin\", \"value\": 1400, \"originalName\": \"Goldfin\", \"potenciaAplicada\": \"7,5TR\"}, {\"id\": 9, \"name\": \"Sensor de Filtro Sujo\", \"value\": 1700, \"originalName\": \"Sensor de Filtro Sujo\", \"potenciaAplicada\": \"7,5TR\"}], \"configuracoesSelecionadas\": [{\"id\": 1, \"nome\": \"Bocal de insuflamento protegido por grelha diretamente no ambiente\"}], \"precoTotal\": 181197, \"potenciaSelecionada\": \"7,5TR\", \"tipoSelecionado\": \"Wall Mounted\"}, {\"nome\": \"Pressurizador Inline-01A (1200m³/h)\", \"tipo\": \"Pressurizador Inline\", \"potencia\": \"1200m³/h\", \"tensao\": \"220V/1F\", \"tensao_comando\": \"220V\", \"quantidade\": 1, \"aplicacao_machines\": \"pressurizacao\", \"precoBase\": 12900, \"opcoesSelecionadas\": [{\"id\": 1, \"name\": \"com 10mmCA\", \"value\": 0, \"originalName\": \"com 10mmCA\", \"potenciaAplicada\": \"1200m³/h\"}], \"configuracoesSelecionadas\": [], \"precoTotal\": 12900, \"potenciaSelecionada\": \"1200m³/h\", \"tipoSelecionado\": \"Pressurizador Inline\"}], \"capacidade\": {\"fatorSeguranca\": 10, \"capacidadeUnitaria\": 7.5, \"solucao\": 2, \"solucaoBackup\": 3, \"totalCapacidade\": 15, \"folga\": 50, \"backup\": \"n+1\"}, \"ventilacao\": {\"tempInterna\": 45, \"tempExterna\": 35}, \"ganhosTermicos\": {\"total-ganhos-w\": 35401, \"total-tr-aprox\": 11, \"total-tr-exato\": 10.07, \"total-externo\": 2557, \"total-divisoes\": -13, \"total-piso\": 875, \"total-iluminacao\": 303, \"total-dissi\": 26630, \"total-pessoas\": 220, \"total-ar-sensivel\": 1364, \"total-ar-latente\": 3468}, \"acessorios\": [{\"id\": \"1781808761847p7obwv8u6\", \"aplicacao_Acessorio\": \"pressurizacao\", \"tipo\": \"GI\", \"dimensao\": \"325x325\", \"quantidade\": 12, \"valor_unitario\": 244, \"valor_total\": 2928, \"descricao\": \"GI\"}], \"dutos\": [{\"id\": \"1781808793891766pnfxvq\", \"tipo\": \"Chapa preta\", \"tipo_descricao\": \"Chapa preta\", \"opcional_id\": \"\", \"opcional_nome\": \"Nenhum opcional\", \"aplicacao_Dutos\": \"pressurizacao\", \"kg\": 27, \"quantidade\": 1, \"valor_tipo\": 105, \"valor_opcional\": 0, \"valor_material_por_kg\": 99, \"valor_unitario\": 2778, \"valor_total\": 2778}], \"tubulacao\": {\"conjuntos\": [], \"valorTotalGeralTubos\": 0}}], \"servicos\": {\"engenharia\": {\"valor\": 12700, \"descricao\": \"Referente ao projeto HVAC e acompanhamento do start-up nas dependências do cliente (região metropolitana de Belo Horizonte/MG). Impostos inclusos (ISS), faturado pela ESI.\"}, \"adicionais\": []}, \"valorTotalProjeto\": 212503}], \"valorTotalObra\": 212503}",
+      "sort_order": 3
+    },
+    {
+      "empresa_codigo": null,
+      "empresa_id": "empresa_obra_c61",
+      "empresa_nome": null,
+      "id": "obra_c61",
+      "nome": "AMC-082",
+      "numero_cliente_final": null,
+      "raw_json": "{\"id\": \"obra_c61\", \"nome\": \"AMC-082\", \"empresa_id\": \"empresa_obra_c61\", \"projetos\": [{\"id\": \"obra_c61_proj_t96_3\", \"nome\": \"Eletrocentro\", \"salas\": [{\"id\": \"obra_c61_proj_t96_3_sala_r63_1\", \"nome\": \"SP\", \"inputs\": {\"ambiente\": \"SP\", \"backup\": \"n+1\", \"peDireito\": 3.3, \"tipoConstrucao\": \"Eletrocentro\", \"paredeOeste\": 11.35, \"paredeLeste\": 11.35, \"paredeNorte\": 4.9, \"paredeSul\": 0, \"area\": 55.62, \"volume\": 183.55, \"divisoriaNaoClima1\": 4.9, \"dissipacao\": 34571, \"numPessoas\": 1, \"pressurizacaoSetpoint\": 25, \"setpointTemp\": 24, \"numPortasDuplas\": 1, \"numPortasSimples\": 1, \"combateIncendio\": \"manual\", \"pressurizacao\": true}, \"maquinas\": [], \"capacidade\": {\"fatorSeguranca\": 10, \"capacidadeUnitaria\": 1, \"solucao\": 16, \"solucaoBackup\": 17, \"totalCapacidade\": 16, \"folga\": 10.6, \"backup\": \"n+1\"}, \"ventilacao\": {\"tempInterna\": 45, \"tempExterna\": 35}, \"ganhosTermicos\": {\"total-ganhos-w\": 50880, \"total-tr-aprox\": 15, \"total-tr-exato\": 14.47, \"total-externo\": 2600, \"total-divisoes\": 182, \"total-piso\": 1127, \"total-iluminacao\": 390, \"total-dissi\": 34571, \"total-pessoas\": 220, \"total-ar-sensivel\": 3328, \"total-ar-latente\": 8465}, \"acessorios\": [], \"dutos\": [], \"tubulacao\": {\"conjuntos\": [], \"valorTotalGeralTubos\": 0}}, {\"id\": \"obra_c61_proj_t96_3_sala_i53_2\", \"nome\": \"SA\", \"inputs\": {\"ambiente\": \"SA\", \"backup\": \"n+1\", \"peDireito\": 3.3, \"tipoConstrucao\": \"Eletrocentro\", \"paredeOeste\": 3.4, \"paredeLeste\": 0, \"paredeNorte\": 3.11, \"area\": 10.57, \"volume\": 34.88, \"divisoriaNaoClima1\": 3.1, \"divisoriaClima1\": 3.4, \"dissipacao\": 1200, \"numPessoas\": 1, \"pressurizacaoSetpoint\": 25, \"setpointTemp\": 24, \"numPortasSimples\": 2, \"combateIncendio\": \"manual\", \"pressurizacao\": true, \"numPortasDuplas\": 0}, \"maquinas\": [], \"capacidade\": {\"fatorSeguranca\": 10, \"capacidadeUnitaria\": 1, \"solucao\": 4, \"solucaoBackup\": 5, \"totalCapacidade\": 4, \"folga\": 25, \"backup\": \"n+1\"}, \"ventilacao\": {\"tempInterna\": 45, \"tempExterna\": 35}, \"ganhosTermicos\": {\"total-ganhos-w\": 11259, \"total-tr-aprox\": 4, \"total-tr-exato\": 3.2, \"total-externo\": 555, \"total-divisoes\": 153, \"total-piso\": 215, \"total-iluminacao\": 74, \"total-dissi\": 1200, \"total-pessoas\": 220, \"total-ar-sensivel\": 2496, \"total-ar-latente\": 6349}, \"acessorios\": [], \"dutos\": [], \"tubulacao\": {\"conjuntos\": [], \"valorTotalGeralTubos\": 0}}], \"servicos\": {\"engenharia\": {\"valor\": 0, \"descricao\": \"Referente ao projeto HVAC e acompanhamento do start-up nas dependências do cliente (região metropolitana de Belo Horizonte/MG). Impostos inclusos (ISS), faturado pela ESI.\"}, \"adicionais\": []}, \"valorTotalProjeto\": 0}], \"valorTotalObra\": 0}",
+      "sort_order": 7
+    },
+    {
+      "empresa_codigo": null,
+      "empresa_id": "empresa_obra_k89",
+      "empresa_nome": null,
+      "id": "obra_k89",
+      "nome": "Obra1",
+      "numero_cliente_final": null,
+      "raw_json": "{\"id\": \"obra_k89\", \"nome\": \"Obra1\", \"empresa_id\": \"empresa_obra_k89\", \"projetos\": [{\"id\": \"obra_k89_proj_u89_3\", \"nome\": \"Projeto1\", \"salas\": [{\"id\": \"obra_k89_proj_u89_3_sala_g87_1\", \"nome\": \"Sala1\", \"inputs\": {\"ambiente\": \"Sala1\", \"peDireito\": 3, \"area\": 0, \"volume\": 0, \"numPessoas\": 1, \"pressurizacaoSetpoint\": 25, \"setpointTemp\": 25, \"pressurizacao\": true, \"numPortasDuplas\": 0, \"numPortasSimples\": 0}, \"maquinas\": [], \"capacidade\": {\"fatorSeguranca\": 10, \"capacidadeUnitaria\": 1, \"solucao\": \"-\", \"solucaoBackup\": \"-\", \"totalCapacidade\": \"-\", \"folga\": \"-\", \"backup\": \"n\"}, \"ventilacao\": {\"tempInterna\": 45, \"tempExterna\": 35}, \"ganhosTermicos\": {\"total-ganhos-w\": 0, \"total-tr-aprox\": 0, \"total-tr-exato\": 0, \"total-externo\": 0, \"total-divisoes\": 0, \"total-piso\": 0, \"total-iluminacao\": 0, \"total-dissi\": 0, \"total-pessoas\": 0, \"total-ar-sensivel\": 0, \"total-ar-latente\": 0}, \"acessorios\": [], \"dutos\": [], \"tubulacao\": {\"conjuntos\": [], \"valorTotalGeralTubos\": 0}}], \"servicos\": {\"engenharia\": {\"valor\": 0, \"descricao\": \"Referente ao projeto HVAC e acompanhamento do start-up nas dependências do cliente (região metropolitana de Belo Horizonte/MG). Impostos inclusos (ISS), faturado pela ESI.\"}, \"adicionais\": []}, \"valorTotalProjeto\": 0}], \"valorTotalObra\": 0}",
+      "sort_order": 1
+    },
+    {
+      "empresa_codigo": null,
+      "empresa_id": "empresa_obra_l69",
+      "empresa_nome": null,
+      "id": "obra_l69",
+      "nome": "TOS-009",
+      "numero_cliente_final": null,
+      "raw_json": "{\"id\": \"obra_l69\", \"nome\": \"TOS-009\", \"empresa_id\": \"empresa_obra_l69\", \"projetos\": [{\"id\": \"obra_l69_proj_o80_3\", \"nome\": \"Vepan\", \"salas\": [{\"id\": \"obra_l69_proj_o80_3_sala_t55_1\", \"nome\": \"SP\", \"inputs\": {\"ambiente\": \"SP\", \"backup\": \"n+1\", \"peDireito\": 3, \"tipoConstrucao\": \"Eletrocentro\", \"paredeOeste\": 15, \"paredeLeste\": 15, \"paredeNorte\": 5, \"paredeSul\": 5, \"area\": 75, \"volume\": 225, \"dissipacao\": 15000, \"numPessoas\": 1, \"pressurizacaoSetpoint\": 25, \"setpointTemp\": 25, \"numPortasDuplas\": 1, \"numPortasSimples\": 1, \"combateIncendio\": \"manual\", \"pressurizacao\": true}, \"maquinas\": [{\"nome\": \"Wall Mounted-01A (5TR)\", \"tipo\": \"Wall Mounted\", \"potencia\": \"5TR\", \"tensao\": \"440V/3F\", \"tensao_comando\": \"220V\", \"quantidade\": 3, \"aplicacao_machines\": \"climatizacao\", \"precoBase\": 46462, \"opcoesSelecionadas\": [{\"id\": 1, \"name\": \"Automação Embarcada\", \"value\": 5833, \"originalName\": \"Automação Embarcada\", \"potenciaAplicada\": \"5TR\"}, {\"id\": 6, \"name\": \"Ventilador Eletrônico\", \"value\": 4000, \"originalName\": \"Ventilador Eletrônico\", \"potenciaAplicada\": \"5TR\"}, {\"id\": 9, \"name\": \"Sensor de Filtro Sujo\", \"value\": 1500, \"originalName\": \"Sensor de Filtro Sujo\", \"potenciaAplicada\": \"5TR\"}, {\"id\": 10, \"name\": \"Resistencia de Aquecimento\", \"value\": 2100, \"originalName\": \"Resistencia de Aquecimento\", \"potenciaAplicada\": \"5TR\"}, {\"id\": 11, \"name\": \"Pintura Especial\", \"value\": 5500, \"originalName\": \"Pintura Especial\", \"potenciaAplicada\": \"5TR\"}], \"configuracoesSelecionadas\": [{\"id\": 1, \"nome\": \"Bocal de insuflamento protegido por grelha diretamente no ambiente\"}], \"precoTotal\": 196185, \"potenciaSelecionada\": \"5TR\", \"tipoSelecionado\": \"Wall Mounted\"}], \"capacidade\": {\"fatorSeguranca\": 0, \"capacidadeUnitaria\": 5, \"solucao\": 2, \"solucaoBackup\": 3, \"totalCapacidade\": 10, \"folga\": 8.1, \"backup\": \"n+1\"}, \"ventilacao\": {\"tempInterna\": 45, \"tempExterna\": 35}, \"ganhosTermicos\": {\"total-ganhos-w\": 32520, \"total-tr-aprox\": 10, \"total-tr-exato\": 9.25, \"total-externo\": 3465, \"total-divisoes\": 0, \"total-piso\": 1519, \"total-iluminacao\": 525, \"total-dissi\": 15000, \"total-pessoas\": 220, \"total-ar-sensivel\": 3328, \"total-ar-latente\": 8465}, \"acessorios\": [], \"dutos\": [], \"tubulacao\": {\"conjuntos\": [], \"valorTotalGeralTubos\": 0}}], \"servicos\": {\"engenharia\": {\"valor\": 0, \"descricao\": \"Referente ao projeto HVAC e acompanhamento do start-up nas dependências do cliente (região metropolitana de Belo Horizonte/MG). Impostos inclusos (ISS), faturado pela ESI.\"}, \"adicionais\": []}, \"valorTotalProjeto\": 196185}], \"valorTotalObra\": 196185}",
+      "sort_order": 6
+    },
+    {
+      "empresa_codigo": null,
+      "empresa_id": "empresa_obra_m71",
+      "empresa_nome": null,
+      "id": "obra_m71",
+      "nome": "IHM-500",
+      "numero_cliente_final": null,
+      "raw_json": "{\"id\": \"obra_m71\", \"nome\": \"IHM-500\", \"empresa_id\": \"empresa_obra_m71\", \"projetos\": [{\"id\": \"obra_m71_proj_w38_3\", \"nome\": \"IHM-500\", \"salas\": [{\"id\": \"obra_m71_proj_w38_3_sala_t63_1\", \"nome\": \"Sala de Painéis\", \"inputs\": {\"ambiente\": \"Sala de Painéis\", \"backup\": \"n+1\", \"peDireito\": 3.5, \"tipoConstrucao\": \"Eletrocentro\", \"paredeOeste\": 15, \"paredeLeste\": 15, \"paredeNorte\": 5, \"paredeSul\": 5, \"area\": 75, \"volume\": 262.5, \"dissipacao\": 10000, \"numPessoas\": 1, \"pressurizacaoSetpoint\": 25, \"setpointTemp\": 24, \"numPortasDuplas\": 1, \"numPortasSimples\": 1, \"combateIncendio\": \"manual\", \"pressurizacao\": true}, \"maquinas\": [{\"nome\": \"Wall Mounted-01A (5TR)\", \"tipo\": \"Wall Mounted\", \"potencia\": \"5TR\", \"tensao\": \"440V/3F\", \"tensao_comando\": \"220V\", \"quantidade\": 3, \"aplicacao_machines\": \"climatizacao\", \"precoBase\": 54361, \"opcoesSelecionadas\": [{\"id\": 1, \"name\": \"Automação Embarcada\", \"value\": 5300, \"originalName\": \"Automação Embarcada\", \"potenciaAplicada\": \"5TR\"}, {\"id\": 6, \"name\": \"Ventilador Eletrônico\", \"value\": 4000, \"originalName\": \"Ventilador Eletrônico\", \"potenciaAplicada\": \"5TR\"}, {\"id\": 8, \"name\": \"Goldfin\", \"value\": 1400, \"originalName\": \"Goldfin\", \"potenciaAplicada\": \"5TR\"}, {\"id\": 9, \"name\": \"Sensor de Filtro Sujo\", \"value\": 1100, \"originalName\": \"Sensor de Filtro Sujo\", \"potenciaAplicada\": \"5TR\"}], \"configuracoesSelecionadas\": [{\"id\": 1, \"nome\": \"Bocal de insuflamento protegido por grelha diretamente no ambiente\"}], \"precoTotal\": 198483, \"potenciaSelecionada\": \"5TR\", \"tipoSelecionado\": \"Wall Mounted\"}, {\"nome\": \"Pressurizador Inline-01A (1200m³/h)\", \"tipo\": \"Pressurizador Inline\", \"potencia\": \"1200m³/h\", \"tensao\": \"220V/1F\", \"tensao_comando\": \"220V\", \"quantidade\": 1, \"aplicacao_machines\": \"pressurizacao\", \"precoBase\": 12900, \"opcoesSelecionadas\": [{\"id\": 1, \"name\": \"com 10mmCA\", \"value\": 0, \"originalName\": \"com 10mmCA\", \"potenciaAplicada\": \"1200m³/h\"}], \"configuracoesSelecionadas\": [], \"precoTotal\": 12900, \"potenciaSelecionada\": \"1200m³/h\", \"tipoSelecionado\": \"Pressurizador Inline\"}], \"capacidade\": {\"fatorSeguranca\": 10, \"capacidadeUnitaria\": 5, \"solucao\": 2, \"solucaoBackup\": 3, \"totalCapacidade\": 10, \"folga\": 26.4, \"backup\": \"n+1\"}, \"ventilacao\": {\"tempInterna\": 45, \"tempExterna\": 35}, \"ganhosTermicos\": {\"total-ganhos-w\": 27812, \"total-tr-aprox\": 8, \"total-tr-exato\": 7.91, \"total-externo\": 3756, \"total-divisoes\": 0, \"total-piso\": 1519, \"total-iluminacao\": 525, \"total-dissi\": 10000, \"total-pessoas\": 220, \"total-ar-sensivel\": 3328, \"total-ar-latente\": 8465}, \"acessorios\": [], \"dutos\": [], \"tubulacao\": {\"conjuntos\": [], \"valorTotalGeralTubos\": 0}}], \"servicos\": {\"engenharia\": {\"valor\": 0, \"descricao\": \"Referente ao projeto HVAC e acompanhamento do start-up nas dependências do cliente (região metropolitana de Belo Horizonte/MG). Impostos inclusos (ISS), faturado pela ESI.\"}, \"adicionais\": []}, \"valorTotalProjeto\": 211383}], \"valorTotalObra\": 211383}",
+      "sort_order": 4
+    },
+    {
+      "empresa_codigo": null,
+      "empresa_id": "empresa_obra_t32",
+      "empresa_nome": null,
+      "id": "obra_t32",
+      "nome": "MEC-020",
+      "numero_cliente_final": null,
+      "raw_json": "{\"id\": \"obra_t32\", \"nome\": \"MEC-020\", \"empresa_id\": \"empresa_obra_t32\", \"projetos\": [{\"id\": \"obra_t32_proj_i73_3\", \"nome\": \"MEC-020\", \"salas\": [{\"id\": \"obra_t32_proj_i73_3_sala_d38_1\", \"nome\": \"SALA DE PAINÉIS BT\", \"inputs\": {\"ambiente\": \"SALA DE PAINÉIS BT\", \"peDireito\": 3, \"area\": 0, \"volume\": 0, \"numPessoas\": 1, \"pressurizacaoSetpoint\": 25, \"setpointTemp\": 25, \"numPortasDuplas\": 0, \"numPortasSimples\": 0, \"pressurizacao\": true}, \"maquinas\": [{\"nome\": \"Wall Mounted-01A (5TR)\", \"tipo\": \"Wall Mounted\", \"potencia\": \"5TR\", \"tensao\": \"440V/3F\", \"tensao_comando\": \"220V\", \"quantidade\": 1, \"aplicacao_machines\": \"climatizacao\", \"precoBase\": 46462, \"opcoesSelecionadas\": [{\"id\": 1, \"name\": \"Automação Embarcada\", \"value\": 5833, \"originalName\": \"Automação Embarcada\", \"potenciaAplicada\": \"5TR\"}, {\"id\": 8, \"name\": \"Goldfin\", \"value\": 1700, \"originalName\": \"Goldfin\", \"potenciaAplicada\": \"5TR\"}, {\"id\": 9, \"name\": \"Sensor de Filtro Sujo\", \"value\": 1500, \"originalName\": \"Sensor de Filtro Sujo\", \"potenciaAplicada\": \"5TR\"}], \"configuracoesSelecionadas\": [{\"id\": 1, \"nome\": \"Bocal de insuflamento protegido por grelha diretamente no ambiente\"}], \"precoTotal\": 55495, \"potenciaSelecionada\": \"5TR\", \"tipoSelecionado\": \"Wall Mounted\"}, {\"nome\": \"Wall Mounted-02A (3TR)\", \"tipo\": \"Wall Mounted\", \"potencia\": \"3TR\", \"tensao\": \"440V/3F\", \"tensao_comando\": \"220V\", \"quantidade\": 1, \"aplicacao_machines\": \"climatizacao\", \"precoBase\": 40456, \"opcoesSelecionadas\": [{\"id\": 1, \"name\": \"Automação Embarcada\", \"value\": 5833, \"originalName\": \"Automação Embarcada\", \"potenciaAplicada\": \"3TR\"}, {\"id\": 8, \"name\": \"Goldfin\", \"value\": 1400, \"originalName\": \"Goldfin\", \"potenciaAplicada\": \"3TR\"}, {\"id\": 9, \"name\": \"Sensor de Filtro Sujo\", \"value\": 1500, \"originalName\": \"Sensor de Filtro Sujo\", \"potenciaAplicada\": \"3TR\"}], \"configuracoesSelecionadas\": [{\"id\": 1, \"nome\": \"Bocal de insuflamento protegido por grelha diretamente no ambiente\"}], \"precoTotal\": 49189, \"potenciaSelecionada\": \"3TR\", \"tipoSelecionado\": \"Wall Mounted\"}], \"capacidade\": {\"fatorSeguranca\": 10, \"capacidadeUnitaria\": 1, \"solucao\": \"N/A\", \"solucaoBackup\": \"N/A\", \"totalCapacidade\": \"N/A\", \"folga\": \"N/A\", \"backup\": \"n\"}, \"ventilacao\": {\"tempInterna\": 45, \"tempExterna\": 35}, \"ganhosTermicos\": {\"total-ganhos-w\": 220, \"total-tr-aprox\": 1, \"total-tr-exato\": 0.06, \"total-externo\": 0, \"total-divisoes\": 0, \"total-piso\": 0, \"total-iluminacao\": 0, \"total-dissi\": 0, \"total-pessoas\": 220, \"total-ar-sensivel\": 0, \"total-ar-latente\": 0}, \"acessorios\": [], \"dutos\": [], \"tubulacao\": {\"conjuntos\": [], \"valorTotalGeralTubos\": 0}}], \"servicos\": {\"engenharia\": {\"valor\": 0, \"descricao\": \"Referente ao projeto HVAC e acompanhamento do start-up nas dependências do cliente (região metropolitana de Belo Horizonte/MG). Impostos inclusos (ISS), faturado pela ESI.\"}, \"adicionais\": []}, \"valorTotalProjeto\": 104684}], \"valorTotalObra\": 104684}",
+      "sort_order": 5
+    },
+    {
+      "empresa_codigo": null,
+      "empresa_id": "empresa_obra_w60",
+      "empresa_nome": null,
+      "id": "obra_w60",
+      "nome": "TOS-018",
+      "numero_cliente_final": null,
+      "raw_json": "{\"id\": \"obra_w60\", \"nome\": \"TOS-018\", \"empresa_id\": \"empresa_obra_w60\", \"clienteFinal\": \"Blu Traffos\", \"codigoCliente\": \"SE2\", \"dataCadastro\": \"17/06/2026\", \"orcamentistaResponsavel\": \"Lizandra\", \"projetos\": [{\"id\": \"obra_w60_proj_j86_3\", \"nome\": \"TOS-018\", \"salas\": [{\"id\": \"obra_w60_proj_j86_3_sala_u51_1\", \"nome\": \"SP\", \"inputs\": {\"ambiente\": \"SP\", \"backup\": \"n+1\", \"peDireito\": 3.4, \"tipoConstrucao\": \"Eletrocentro\", \"paredeOeste\": 12, \"paredeLeste\": 12, \"paredeNorte\": 3.4, \"paredeSul\": 3.4, \"area\": 40.8, \"volume\": 138.72, \"dissipacao\": 4571, \"numPessoas\": 1, \"pressurizacaoSetpoint\": 25, \"setpointTemp\": 24, \"numPortasDuplas\": 1, \"numPortasSimples\": 1, \"combateIncendio\": \"manual\", \"pressurizacao\": true}, \"maquinas\": [], \"capacidade\": {\"fatorSeguranca\": 10, \"capacidadeUnitaria\": 7.5, \"solucao\": 1, \"solucaoBackup\": 2, \"totalCapacidade\": 7.5, \"folga\": 30.9, \"backup\": \"n+1\"}, \"ventilacao\": {\"tempInterna\": 45, \"tempExterna\": 35}, \"ganhosTermicos\": {\"total-ganhos-w\": 20154, \"total-tr-aprox\": 6, \"total-tr-exato\": 5.73, \"total-externo\": 2460, \"total-divisoes\": 0, \"total-piso\": 827, \"total-iluminacao\": 286, \"total-dissi\": 4571, \"total-pessoas\": 220, \"total-ar-sensivel\": 3328, \"total-ar-latente\": 8465}, \"acessorios\": [], \"dutos\": [], \"tubulacao\": {\"conjuntos\": [], \"valorTotalGeralTubos\": 0}}], \"servicos\": {\"engenharia\": {\"valor\": 0, \"descricao\": \"Referente ao projeto HVAC e acompanhamento do start-up nas dependências do cliente (região metropolitana de Belo Horizonte/MG). Impostos inclusos (ISS), faturado pela ESI.\"}, \"adicionais\": []}, \"valorTotalProjeto\": 0}], \"valorTotalObra\": 0}",
+      "sort_order": 2
+    }
+  ],
+  "projetos": [
+    {
+      "id": "obra_a28_proj_a68_3",
+      "nome": "Sala de Painéis",
+      "obra_id": "obra_a28",
+      "raw_json": "{\"id\": \"obra_a28_proj_a68_3\", \"obra_id\": \"obra_a28\", \"nome\": \"Sala de Painéis\"}",
+      "sort_order": 0
+    },
+    {
+      "id": "obra_c61_proj_t96_3",
+      "nome": "Eletrocentro",
+      "obra_id": "obra_c61",
+      "raw_json": "{\"id\": \"obra_c61_proj_t96_3\", \"obra_id\": \"obra_c61\", \"nome\": \"Eletrocentro\"}",
+      "sort_order": 0
+    },
+    {
+      "id": "obra_k89_proj_u89_3",
+      "nome": "Projeto1",
+      "obra_id": "obra_k89",
+      "raw_json": "{\"id\": \"obra_k89_proj_u89_3\", \"obra_id\": \"obra_k89\", \"nome\": \"Projeto1\"}",
+      "sort_order": 0
+    },
+    {
+      "id": "obra_l69_proj_o80_3",
+      "nome": "Vepan",
+      "obra_id": "obra_l69",
+      "raw_json": "{\"id\": \"obra_l69_proj_o80_3\", \"obra_id\": \"obra_l69\", \"nome\": \"Vepan\"}",
+      "sort_order": 0
+    },
+    {
+      "id": "obra_m71_proj_w38_3",
+      "nome": "IHM-500",
+      "obra_id": "obra_m71",
+      "raw_json": "{\"id\": \"obra_m71_proj_w38_3\", \"obra_id\": \"obra_m71\", \"nome\": \"IHM-500\"}",
+      "sort_order": 0
+    },
+    {
+      "id": "obra_t32_proj_i73_3",
+      "nome": "MEC-020",
+      "obra_id": "obra_t32",
+      "raw_json": "{\"id\": \"obra_t32_proj_i73_3\", \"obra_id\": \"obra_t32\", \"nome\": \"MEC-020\"}",
+      "sort_order": 0
+    },
+    {
+      "id": "obra_u98_proj_l28_3",
+      "nome": "ELETROCENTRO MOAGEM",
+      "obra_id": "obra_u98",
+      "raw_json": "{\"id\": \"obra_u98_proj_l28_3\", \"obra_id\": \"obra_u98\", \"nome\": \"ELETROCENTRO MOAGEM\"}",
+      "sort_order": 0
+    },
+    {
+      "id": "obra_w60_proj_j86_3",
+      "nome": "TOS-018",
+      "obra_id": "obra_w60",
+      "raw_json": "{\"id\": \"obra_w60_proj_j86_3\", \"obra_id\": \"obra_w60\", \"nome\": \"TOS-018\"}",
+      "sort_order": 0
+    }
+  ],
+  "salas": [
+    {
+      "id": "obra_a28_proj_a68_3_sala_f34_1",
+      "nome": "SP",
+      "projeto_id": "obra_a28_proj_a68_3",
+      "raw_json": "{\"id\": \"obra_a28_proj_a68_3_sala_f34_1\", \"projeto_id\": \"obra_a28_proj_a68_3\", \"nome\": \"SP\"}",
+      "sort_order": 0
+    },
+    {
+      "id": "obra_c61_proj_t96_3_sala_i53_2",
+      "nome": "SA",
+      "projeto_id": "obra_c61_proj_t96_3",
+      "raw_json": "{\"id\": \"obra_c61_proj_t96_3_sala_i53_2\", \"projeto_id\": \"obra_c61_proj_t96_3\", \"nome\": \"SA\"}",
+      "sort_order": 1
+    },
+    {
+      "id": "obra_c61_proj_t96_3_sala_r63_1",
+      "nome": "SP",
+      "projeto_id": "obra_c61_proj_t96_3",
+      "raw_json": "{\"id\": \"obra_c61_proj_t96_3_sala_r63_1\", \"projeto_id\": \"obra_c61_proj_t96_3\", \"nome\": \"SP\"}",
+      "sort_order": 0
+    },
+    {
+      "id": "obra_k89_proj_u89_3_sala_g87_1",
+      "nome": "Sala1",
+      "projeto_id": "obra_k89_proj_u89_3",
+      "raw_json": "{\"id\": \"obra_k89_proj_u89_3_sala_g87_1\", \"projeto_id\": \"obra_k89_proj_u89_3\", \"nome\": \"Sala1\"}",
+      "sort_order": 0
+    },
+    {
+      "id": "obra_l69_proj_o80_3_sala_t55_1",
+      "nome": "SP",
+      "projeto_id": "obra_l69_proj_o80_3",
+      "raw_json": "{\"id\": \"obra_l69_proj_o80_3_sala_t55_1\", \"projeto_id\": \"obra_l69_proj_o80_3\", \"nome\": \"SP\"}",
+      "sort_order": 0
+    },
+    {
+      "id": "obra_m71_proj_w38_3_sala_t63_1",
+      "nome": "Sala de Painéis",
+      "projeto_id": "obra_m71_proj_w38_3",
+      "raw_json": "{\"id\": \"obra_m71_proj_w38_3_sala_t63_1\", \"projeto_id\": \"obra_m71_proj_w38_3\", \"nome\": \"Sala de Painéis\"}",
+      "sort_order": 0
+    },
+    {
+      "id": "obra_t32_proj_i73_3_sala_d38_1",
+      "nome": "SALA DE PAINÉIS BT",
+      "projeto_id": "obra_t32_proj_i73_3",
+      "raw_json": "{\"id\": \"obra_t32_proj_i73_3_sala_d38_1\", \"projeto_id\": \"obra_t32_proj_i73_3\", \"nome\": \"SALA DE PAINÉIS BT\"}",
+      "sort_order": 0
+    },
+    {
+      "id": "obra_u98_proj_l28_3_sala_w85_1",
+      "nome": "SP",
+      "projeto_id": "obra_u98_proj_l28_3",
+      "raw_json": "{\"id\": \"obra_u98_proj_l28_3_sala_w85_1\", \"projeto_id\": \"obra_u98_proj_l28_3\", \"nome\": \"SP\"}",
+      "sort_order": 0
+    },
+    {
+      "id": "obra_w60_proj_j86_3_sala_u51_1",
+      "nome": "SP",
+      "projeto_id": "obra_w60_proj_j86_3",
+      "raw_json": "{\"id\": \"obra_w60_proj_j86_3_sala_u51_1\", \"projeto_id\": \"obra_w60_proj_j86_3\", \"nome\": \"SP\"}",
+      "sort_order": 0
+    }
+  ],
+  "sala_maquinas": [
+    {
+      "id": "obra_a28_proj_a68_3_sala_f34_1::machine::0",
+      "machine_type": "Wall Mounted",
+      "raw_json": "{\"id\": \"obra_a28_proj_a68_3_sala_f34_1::machine::0\", \"sala_id\": \"obra_a28_proj_a68_3_sala_f34_1\", \"tipo\": \"Wall Mounted\"}",
+      "sala_id": "obra_a28_proj_a68_3_sala_f34_1",
+      "sort_order": 0
+    },
+    {
+      "id": "obra_a28_proj_a68_3_sala_f34_1::machine::1",
+      "machine_type": "Pressurizador Inline",
+      "raw_json": "{\"id\": \"obra_a28_proj_a68_3_sala_f34_1::machine::1\", \"sala_id\": \"obra_a28_proj_a68_3_sala_f34_1\", \"tipo\": \"Pressurizador Inline\"}",
+      "sala_id": "obra_a28_proj_a68_3_sala_f34_1",
+      "sort_order": 1
+    },
+    {
+      "id": "obra_l69_proj_o80_3_sala_t55_1::machine::0",
+      "machine_type": "Wall Mounted",
+      "raw_json": "{\"id\": \"obra_l69_proj_o80_3_sala_t55_1::machine::0\", \"sala_id\": \"obra_l69_proj_o80_3_sala_t55_1\", \"tipo\": \"Wall Mounted\"}",
+      "sala_id": "obra_l69_proj_o80_3_sala_t55_1",
+      "sort_order": 0
+    },
+    {
+      "id": "obra_m71_proj_w38_3_sala_t63_1::machine::0",
+      "machine_type": "Wall Mounted",
+      "raw_json": "{\"id\": \"obra_m71_proj_w38_3_sala_t63_1::machine::0\", \"sala_id\": \"obra_m71_proj_w38_3_sala_t63_1\", \"tipo\": \"Wall Mounted\"}",
+      "sala_id": "obra_m71_proj_w38_3_sala_t63_1",
+      "sort_order": 0
+    },
+    {
+      "id": "obra_m71_proj_w38_3_sala_t63_1::machine::1",
+      "machine_type": "Pressurizador Inline",
+      "raw_json": "{\"id\": \"obra_m71_proj_w38_3_sala_t63_1::machine::1\", \"sala_id\": \"obra_m71_proj_w38_3_sala_t63_1\", \"tipo\": \"Pressurizador Inline\"}",
+      "sala_id": "obra_m71_proj_w38_3_sala_t63_1",
+      "sort_order": 1
+    },
+    {
+      "id": "obra_t32_proj_i73_3_sala_d38_1::machine::0",
+      "machine_type": "Wall Mounted",
+      "raw_json": "{\"id\": \"obra_t32_proj_i73_3_sala_d38_1::machine::0\", \"sala_id\": \"obra_t32_proj_i73_3_sala_d38_1\", \"tipo\": \"Wall Mounted\"}",
+      "sala_id": "obra_t32_proj_i73_3_sala_d38_1",
+      "sort_order": 0
+    },
+    {
+      "id": "obra_t32_proj_i73_3_sala_d38_1::machine::1",
+      "machine_type": "Wall Mounted",
+      "raw_json": "{\"id\": \"obra_t32_proj_i73_3_sala_d38_1::machine::1\", \"sala_id\": \"obra_t32_proj_i73_3_sala_d38_1\", \"tipo\": \"Wall Mounted\"}",
+      "sala_id": "obra_t32_proj_i73_3_sala_d38_1",
+      "sort_order": 1
+    },
+    {
+      "id": "obra_u98_proj_l28_3_sala_w85_1::machine::0",
+      "machine_type": "Wall Mounted",
+      "raw_json": "{\"id\": \"obra_u98_proj_l28_3_sala_w85_1::machine::0\", \"sala_id\": \"obra_u98_proj_l28_3_sala_w85_1\", \"tipo\": \"Wall Mounted\"}",
+      "sala_id": "obra_u98_proj_l28_3_sala_w85_1",
+      "sort_order": 0
+    }
+  ],
+  "sessions": [
+    {
+      "payload_json": "{\"obras\": []}",
+      "session_id": "session_active"
+    }
+  ],
+  "admin_email_config": [
+    {
+      "config_key": "default",
+      "email": "matheus@esienergia.com.br",
+      "nome": "ESI Energia",
+      "updated_at": "2026-04-14T17:09:05.132313"
+    }
+  ],
+  "obra_notifications": [
+    {
+      "fingerprint": "6aa07587e1510a136aa11942fd9b90718e29cc4fe8f1cef215882d22990c500b",
+      "last_message": "Nova obra cadastrada/atualizada:\n\nNome: AMC-1\nEmpresa: AMC SOLUÇÕES (AMC)\nCliente Final: dfg\nCodigo Cliente: sdfg\nNumero Cliente: 1\nData: 23/03/2026\nResponsavel: dfg\nValor: R$ 83.488,68",
+      "last_sent_at": "2026-03-23T23:08:13.214717",
+      "last_subject": "Nova obra cadastrada: AMC-1",
+      "obra_id": "obra_t23"
+    },
+    {
+      "fingerprint": "ec534883f0b4e9d08a1f09b2a4252eff3580e24981b432ea732ef1de80ed4924",
+      "last_message": "Atualizacao nos valores de ACT-1:\n\nNome: ACT-1\nEmpresa: ACTEMIUM (ACT)\nCliente Final: teste cliente final\nCodigo Cliente: codigo\nNumero Cliente: 1\nData: 20/03/2026\nResponsavel: orçamentista\nValor: R$ 601.709,20",
+      "last_sent_at": "2026-03-20T19:56:00.827230",
+      "last_subject": "Atualizacao nos valores de ACT-1",
+      "obra_id": "obra_u57"
+    }
+  ]
+}

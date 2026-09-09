@@ -19,6 +19,10 @@
             box-shadow: var(--card-shadow);
         }
 
+        .manage-obras-filter[hidden] {
+            display: none;
+        }
+
         .manage-obras-filter-field {
             display: flex;
             flex-direction: column;
@@ -92,6 +96,197 @@
         .manage-obras-page .input-valor {
             visibility: hidden;
         }
+
+        .obra-history {
+            margin: var(--spacing-lg) 0;
+            color: var(--color-gray-700);
+        }
+
+        .obra-history-open {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 0 var(--spacing-lg);
+            border: 1px solid #b6bbc3;
+            border-radius: 6px;
+            padding: 10px 16px;
+            background: #f3f4f6;
+            color: #5f6670;
+            cursor: pointer;
+            font: inherit;
+            font-weight: 600;
+            box-shadow: 0 1px 2px rgba(15, 23, 42, .08);
+            transition: background .2s ease, border-color .2s ease, color .2s ease;
+        }
+
+        .obra-history-open:hover {
+            border-color: #8f96a0;
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .saved-obras-title {
+            margin: 0 0 var(--spacing-md);
+            color: var(--color-gray-700);
+            font-size: 1.25rem;
+        }
+
+        .obra-history-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .obra-history-title {
+            margin: 0;
+            color: #6b7280;
+            font-size: 1.25rem;
+        }
+
+        .obra-history-back {
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 8px 12px;
+            background: #f9fafb;
+            color: #6b7280;
+            cursor: pointer;
+            font: inherit;
+        }
+
+        .obra-history-back:hover { background: #f3f4f6; color: #374151; }
+
+        .obra-history-filter {
+            max-width: 420px;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .obra-history-list {
+            display: grid;
+            gap: 18px;
+        }
+
+        .obra-history-company {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            margin: 0;
+            padding: 16px 18px;
+            border: 0;
+            background: #1e293b;
+            color: #fff;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: 700;
+            text-align: left;
+        }
+
+        .obra-history-company:hover { background: #334155; }
+        .obra-history-company-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border: 1px solid rgba(255, 255, 255, .35);
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        .obra-history-group {
+            margin-bottom: var(--spacing-xl);
+            border: 1px solid var(--color-gray-light);
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, .06);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .obra-history-group:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px var(--card-hover-shadow);
+        }
+
+        .obra-history-company-items {
+            display: grid;
+            gap: 12px;
+            padding: 14px;
+        }
+        .obra-history-company-items[hidden],
+        .obra-history-versions[hidden] { display: none; }
+
+        .obra-history-obra-group {
+            margin: 0 0 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background: #fff;
+            overflow: hidden;
+        }
+        .obra-history-obra {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            border: 0;
+            padding: 12px 14px;
+            background: #f1f5f9;
+            color: #1e293b;
+            cursor: pointer;
+            font: inherit;
+            font-weight: 600;
+            text-align: left;
+        }
+        .obra-history-obra:hover { color: #374151; }
+        .obra-history-obra-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            color: #6b7280;
+            font-size: 16px;
+        }
+        .obra-history-versions {
+            display: grid;
+            gap: 12px;
+            padding: 14px;
+        }
+
+        .obra-history-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-md);
+            padding: 10px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background: #f8fafc;
+        }
+
+        .obra-history-item-info { min-width: 0; }
+        .obra-history-item-name { margin: 0 0 4px; font-weight: 600; }
+        .obra-history-item-meta { margin: 0; color: var(--color-gray-600); font-size: 12px; }
+        .obra-history-files { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+        .obra-history-file, .obra-history-delete {
+            border: 0;
+            border-radius: var(--border-radius);
+            padding: 6px 9px;
+            cursor: pointer;
+            font: inherit;
+            font-size: 12px;
+        }
+        .obra-history-file { background: var(--color-gray-100); color: var(--color-gray-700); text-decoration: none; }
+        .obra-history-delete { background: #fee2e2; color: #991b1b; }
+
+        @media (max-width: 700px) {
+            .obra-history-item { align-items: flex-start; flex-direction: column; }
+            .obra-history-files { justify-content: flex-start; }
+        }
     </style>
 </head>
 
@@ -119,6 +314,7 @@
 
     <main class="main-content">
         <div class="container">
+            <h2 class="saved-obras-title" id="saved-obras-title">Obras salvas</h2>
             <div class="manage-obras-filter" role="search" aria-label="Filtrar obras">
                 <div class="manage-obras-filter-field">
                     <label for="manage-obras-filter-empresa">Empresa</label>
@@ -134,6 +330,21 @@
                     <input type="search" id="manage-obras-filter-nome-obra" placeholder="Nome da obra" autocomplete="off">
                 </div>
             </div>
+
+            <button type="button" class="obra-history-open" id="open-obra-history">🕘 Histórico de obras</button>
+
+            <section class="obra-history" id="obra-history-panel" aria-labelledby="obra-history-title" hidden>
+                <div class="obra-history-header">
+                    <button type="button" class="obra-history-back" id="back-to-managed-obras">← Voltar ao gerenciamento</button>
+                    <h2 class="obra-history-title" id="obra-history-title">🕘 Histórico de obras</h2>
+                </div>
+                <div class="manage-obras-filter-field obra-history-filter">
+                    <label for="obra-history-filter-empresa">Empresa</label>
+                    <input type="search" id="obra-history-filter-empresa" placeholder="Empresa" autocomplete="off">
+                    <div id="obra-history-filter-empresa-dropdown" class="manage-obras-company-dropdown" role="listbox"></div>
+                </div>
+                <div id="obra-history-list" class="obra-history-list" aria-live="polite"></div>
+            </section>
 
             <div id="projects-container">
                 <!-- Hierarquia: Obra -> Projeto -> Sala -->
@@ -160,6 +371,7 @@
 
     <script type="module" src="/public/scripts/01_Create_Obra/pages/create-obras-page.js"></script>
     <script type="module" src="/public/scripts/01_Create_Obra/pages/manage-obras-filter.js"></script>
+    <script type="module" src="/public/scripts/01_Create_Obra/pages/obra-history.js"></script>
     <script type="module" src="/public/scripts/01_Create_Obra/pages/manage-obras-visibility.js?v=20260906-1"></script>
     <script type="module" src="/public/scripts/01_Create_Obra/main.js"></script>
 </body>
