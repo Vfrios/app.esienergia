@@ -221,11 +221,13 @@ class ObraRepository:
                 (str(sigla),),
             ).fetchone()
         max_numero = row["max_numero"] if row and row["max_numero"] is not None else 0
-        if not supports_numero_cliente_column:
-            max_numero = max(
-                int(max_numero),
-                self._get_empresa_numero_cliente_atual_from_json(str(sigla)),
-            )
+        # O painel antigo persiste o ultimo numero dentro do JSON da empresa,
+        # enquanto o schema novo tambem possui uma coluna dedicada. Considere
+        # as duas fontes para nao reiniciar a numeracao no modo cliente.
+        max_numero = max(
+            int(max_numero),
+            self._get_empresa_numero_cliente_atual_from_json(str(sigla)),
+        )
         return int(max_numero) + 1
 
     def delete_by_path(self, path_array):

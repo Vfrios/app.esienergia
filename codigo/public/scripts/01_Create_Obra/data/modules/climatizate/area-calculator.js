@@ -34,6 +34,7 @@ function createInitialState(roomId = "") {
     snapActive: false,
     gridSnapActive: false,
     snapPoint: null,
+    alignSnap: null,
     snapIndex: -1,
     shiftPressed: false,
     selectedWallIndex: -1,
@@ -121,6 +122,7 @@ function restoreSavedAreaShape(roomId) {
   state.walls = savedShape.walls.map((wall) => ({
     length: Number(wall.length) || 0,
     angle: Number(wall.angle) || 0,
+    deleted: !!wall.deleted,
   }));
   state.closed = !!savedShape.closed;
   state.isDrawing = !state.closed;
@@ -169,7 +171,7 @@ function getCanvas() {
 }
 
 function getPixelsPerMeter() {
-  return PIXELS_PER_METER * state.scale;
+  return PIXELS_PER_METER;
 }
 
 function metersToPixels(value) {
@@ -182,7 +184,7 @@ function pixelsToMeters(value) {
 
 // ============ HISTÓRICO (UNDO/REDO) ============
 function snapshotWalls() {
-  return state.walls.map((w) => ({ length: w.length, angle: w.angle }));
+  return state.walls.map((w) => ({ length: w.length, angle: w.angle, deleted: !!w.deleted }));
 }
 
 function pushHistory() {
@@ -277,15 +279,21 @@ function getWallLetter(index) {
 function recalculatePointsFromWalls() {
   if (state.points.length === 0) return;
 
-  let current = { ...state.points[0] };
-  const points = [current];
+  const points = state.points.map((point) => ({ ...point }));
+  let current = { ...points[0] };
 
-  state.walls.forEach((wall) => {
+  state.walls.forEach((wall, index) => {
+    if (wall.deleted) {
+      current = { ...points[index + 1] };
+      return;
+    }
+
+    points[index] = { ...current };
     current = {
       x: current.x + Math.cos(wall.angle) * metersToPixels(wall.length),
       y: current.y + Math.sin(wall.angle) * metersToPixels(wall.length),
     };
-    points.push(current);
+    points[index + 1] = { ...current };
   });
 
   state.points = points;
@@ -304,25 +312,12 @@ function findWallNearPoint(point) {
 }
 
 function showFloatingInput(wallIndex) {
-  const input = document.getElementById("areaFloatingInput");
-  if (!input) return;
+  const inputElement = document.querySelector(
+    `#areaWallList input[data-wall-index="${wallIndex}"]`,
+  );
+  if (!inputElement || !state.walls[wallIndex] || state.walls[wallIndex].deleted) return;
 
-  const start = state.points[wallIndex];
-  const end = state.points[wallIndex + 1];
-  if (!start || !end) return;
-
-  const canvas = getCanvas();
-  const rect = canvas.getBoundingClientRect();
-  const meioX = (start.x + end.x) / 2 + state.offsetX;
-  const meioY = (start.y + end.y) / 2 + state.offsetY;
-
-  input.style.display = "flex";
-  input.style.left = (rect.left + meioX) + "px";
-  input.style.top = (rect.top + meioY) + "px";
-
-  const inputElement = input.querySelector("input");
   inputElement.value = state.walls[wallIndex].length.toFixed(2);
-  inputElement.dataset.wallIndex = wallIndex;
   inputElement.focus();
   inputElement.select();
 
@@ -339,10 +334,6 @@ function showFloatingInput(wallIndex) {
 }
 
 function hideFloatingInput() {
-  const input = document.getElementById("areaFloatingInput");
-  if (input) {
-    input.style.display = "none";
-  }
   state.selectedWallIndex = -1;
   state.editingWallIndex = -1;
   state.showDeleteButton = false;
@@ -384,29 +375,30 @@ function hideDeleteButton() {
 function deleteWall(wallIndex) {
   if (wallIndex < 0 || wallIndex >= state.walls.length) return;
 
-  state.walls.splice(wallIndex, 1);
-
-  if (state.walls.length === 0) {
-    state.points = state.points.length ? [state.points[0]] : [];
-    state.closed = false;
-  } else {
-    recalculatePointsFromWalls();
-  }
+  state.walls[wallIndex].deleted = true;
+  state.closed = false;
+  state.isDrawing = true;
 
   hideFloatingInput();
   pushHistory();
   updateAreaUI();
 }
 
+function hasDeletedWalls() {
+  return state.walls.some((wall) => wall.deleted);
+}
+
 // ============ FECHAR / REABRIR FORMA ============
 function closeShape() {
-  if (state.points.length < 3) {
+  if (state.points.length < 3 || hasDeletedWalls()) {
     // Mostra mensagem mais amigável
     const status = document.getElementById("areaCalculatorStatus");
     if (status) {
-      status.textContent = "⚠️ Crie pelo menos 3 pontos antes de fechar a forma.";
+      status.textContent = state.points.length < 3
+        ? "⚠️ Crie pelo menos 3 pontos antes de fechar a forma."
+        : "⚠️ Não é possível fechar uma forma com paredes apagadas.";
       setTimeout(() => {
-        if (status.textContent === "⚠️ Crie pelo menos 3 pontos antes de fechar a forma.") {
+        if (status.textContent.startsWith("⚠️")) {
           updateAreaUI();
         }
       }, 2000);
@@ -445,7 +437,7 @@ function calculatePolygonArea() {
 }
 
 function calculatePerimeter() {
-  return state.walls.reduce((sum, wall) => sum + wall.length, 0);
+  return state.walls.reduce((sum, wall) => sum + (wall.deleted ? 0 : wall.length), 0);
 }
 
 // ============ LISTA DE PAREDES ============
@@ -460,6 +452,7 @@ function renderWallList() {
 
   list.innerHTML = state.walls
     .map((wall, index) => {
+      if (wall.deleted) return "";
       const letter = getWallLetter(index);
       const isEditing = index === state.editingWallIndex;
       const isTooShort = wall.length < 0.02;
@@ -578,10 +571,12 @@ function updateAreaUI() {
   
   if (closeBtn) {
     closeBtn.style.display = state.closed ? "none" : "inline-block";
-    closeBtn.disabled = state.points.length < 3;
+    closeBtn.disabled = state.points.length < 3 || hasDeletedWalls();
     // Se tiver menos de 3 pontos, mostra tooltip
     if (state.points.length < 3) {
       closeBtn.title = "Crie pelo menos 3 pontos antes de fechar";
+    } else if (hasDeletedWalls()) {
+      closeBtn.title = "Não é possível fechar uma forma com paredes apagadas";
     } else {
       closeBtn.title = "Fechar a forma";
     }
@@ -603,7 +598,9 @@ function updateAreaUI() {
     } else if (!state.isDrawing) {
       status.textContent = "🔍 Modo navegação | Botão direito para mover | ESC para voltar a desenhar";
     } else {
-      const snapText = state.snapActive ? " ⚡ Snap ativado!" : (state.gridSnapActive ? " ⊞ Grade" : "");
+      const snapText = state.snapActive
+        ? " ⚡ Snap ativado!"
+        : (state.alignSnap ? " 📐 Alinhado" : (state.gridSnapActive ? " ⊞ Grade" : ""));
       const orthoText = canvasManager && canvasManager.isOrthoActive() ? " 🔒 " : "";
       status.textContent = `🖱️ Clique para adicionar paredes | Duplo clique na parede para editar${orthoText}${snapText}`;
     }
@@ -683,6 +680,7 @@ function handleCanvasClick(event) {
   const resolved = manager.resolvePoint(raw);
   state.snapActive = !!resolved.snap;
   state.gridSnapActive = !!resolved.gridSnap;
+  state.alignSnap = resolved.align || null;
   state.snapPoint = resolved.snap || (resolved.gridSnap ? resolved.point : null);
 
   if (state.points.length === 0) {
@@ -856,11 +854,6 @@ function ensureModal() {
         </div>
       </div>
 
-      <div class="area-float-input" id="areaFloatingInput" style="display:none;">
-        <span class="area-float-label">📏 Medida</span>
-        <input type="number" step="0.01" placeholder="0.00">
-        <span class="area-float-unit">m</span>
-      </div>
       <button type="button" class="area-delete-wall-btn" id="areaDeleteWallBtn" style="display:none;" title="Deletar parede">
         <span class="delete-icon">🗑️</span>
         <span class="delete-text">Deletar</span>
@@ -883,7 +876,6 @@ function ensureModal() {
   document.body.appendChild(modal);
 
   bindCanvasEvents();
-  bindFloatingInputEvents();
   bindDeleteButtonEvents();
   bindConfigEvents();
 
@@ -1083,65 +1075,6 @@ function updateCoordsInfo(event) {
   const mx = pixelsToMeters(point.x);
   const my = pixelsToMeters(point.y);
   coordsInfo.textContent = `X: ${mx.toFixed(2)}m  Y: ${my.toFixed(2)}m`;
-}
-
-function bindFloatingInputEvents() {
-  const container = document.getElementById("areaFloatingInput");
-  if (!container) return;
-
-  const input = container.querySelector("input");
-  if (!input) return;
-
-  input.addEventListener("input", () => {
-    const index = Number(input.dataset.wallIndex);
-    const value = Number.parseFloat(input.value);
-    if (Number.isFinite(value) && value > 0 && state.walls[index]) {
-      updateWallLength(index, value);
-    }
-  });
-
-  input.addEventListener("change", () => {
-    const index = Number(input.dataset.wallIndex);
-    const value = Number.parseFloat(input.value);
-    if (Number.isFinite(value) && value > 0 && state.walls[index]) {
-      updateWallLength(index, value);
-    }
-  });
-
-  input.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      const index = Number(input.dataset.wallIndex);
-      const value = Number.parseFloat(input.value);
-      if (Number.isFinite(value) && value > 0 && state.walls[index]) {
-        updateWallLength(index, value);
-        pushHistory();
-        hideFloatingInput();
-      }
-    }
-    if (event.key === "Escape") {
-      hideFloatingInput();
-    }
-    if (event.key === "Delete") {
-      const index = Number(input.dataset.wallIndex);
-      if (index >= 0 && index < state.walls.length) {
-        deleteWall(index);
-      }
-    }
-  });
-
-  document.addEventListener("click", (event) => {
-    if (container.style.display !== "none" &&
-      !container.contains(event.target) &&
-      event.target !== getCanvas() &&
-      !event.target.closest("#areaDeleteWallBtn")) {
-      const index = Number(input.dataset.wallIndex);
-      const value = Number.parseFloat(input.value);
-      if (Number.isFinite(value) && value > 0 && state.walls[index]) {
-        pushHistory();
-      }
-      hideFloatingInput();
-    }
-  });
 }
 
 function toggleOrthoMode() {

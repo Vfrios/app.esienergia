@@ -595,7 +595,7 @@ const FilterSystem = (function () {
     if (window.createEmptyObra) {
       const createPromises = obrasFiltradas.map((obra) =>
         window
-          .createEmptyObra(obra.nome || `Obra ${obra.id}`, obra.id)
+          .createEmptyObra(obra.nome || `Obra ${obra.id}`, obra.id, true)
           .catch((e) => {
             console.warn(` Falha ao criar obra ${obra.id}:`, e.message);
             return null;

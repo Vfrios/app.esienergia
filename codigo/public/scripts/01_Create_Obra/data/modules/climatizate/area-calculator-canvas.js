@@ -7,6 +7,7 @@ export class AreaCalculatorCanvas {
     this.ctx = this.canvas?.getContext("2d");
     this.SNAP_RAIO = 15;
     this.GRID_SNAP_RAIO = 9;
+    this.ALIGN_SNAP_RAIO = 10;
     // Single source of truth for the base scale. The parent module passes
     // the same constant in so the two files can never drift apart.
     this.PIXELS_PER_METER = options.pixelsPerMeter || 40;
@@ -82,8 +83,8 @@ export class AreaCalculatorCanvas {
   getCanvasCoords(clientX, clientY) {
     const rect = this.canvas.getBoundingClientRect();
     return {
-      x: (clientX - rect.left) - this.state.offsetX,
-      y: (clientY - rect.top) - this.state.offsetY,
+      x: ((clientX - rect.left) - this.state.offsetX) / this.state.scale,
+      y: ((clientY - rect.top) - this.state.offsetY) / this.state.scale,
     };
   }
 
@@ -96,7 +97,7 @@ export class AreaCalculatorCanvas {
     if (this.state.snapVertices.length === 0) return null;
 
     let closest = null;
-    let closestDist = this.SNAP_RAIO;
+    let closestDist = this.SNAP_RAIO / this.state.scale;
 
     for (let vertex of this.state.snapVertices) {
       const dx = x - vertex.x;
@@ -114,18 +115,48 @@ export class AreaCalculatorCanvas {
 
   // ---------- Snap na grade (precisão tipo CAD) ----------
   findGridSnapPoint(x, y) {
-    const ppm = this.getPixelsPerMeter();
-    const passo = this.getGridStepMeters(ppm) * ppm;
-    if (passo < 5) return null;
+    const screenPpm = this.getPixelsPerMeter();
+    const stepMeters = this.getGridStepMeters(screenPpm);
+    const screenStepPx = stepMeters * screenPpm;
+    if (screenStepPx < 5) return null;
+
+    const passo = stepMeters * this.PIXELS_PER_METER;
 
     const nearX = Math.round(x / passo) * passo;
     const nearY = Math.round(y / passo) * passo;
     const dist = Math.sqrt((x - nearX) ** 2 + (y - nearY) ** 2);
 
-    if (dist < this.GRID_SNAP_RAIO) {
+    if (dist < this.GRID_SNAP_RAIO / this.state.scale) {
       return { x: nearX, y: nearY, isGrid: true };
     }
     return null;
+  }
+
+  // Alinhamento com qualquer vértice já criado, tipo "smart guides" do Figma.
+  findAlignmentSnap(rawPoint) {
+    const threshold = this.ALIGN_SNAP_RAIO / this.state.scale;
+    let bestV = null;
+    let bestH = null;
+
+    this.state.points.forEach((vertex) => {
+      const dx = Math.abs(rawPoint.x - vertex.x);
+      const dy = Math.abs(rawPoint.y - vertex.y);
+
+      if (dx < threshold && (!bestV || dx < bestV.dist)) {
+        bestV = { coord: vertex.x, vertex, dist: dx };
+      }
+      if (dy < threshold && (!bestH || dy < bestH.dist)) {
+        bestH = { coord: vertex.y, vertex, dist: dy };
+      }
+    });
+
+    if (!bestV && !bestH) return null;
+    return {
+      x: bestV ? bestV.coord : rawPoint.x,
+      y: bestH ? bestH.coord : rawPoint.y,
+      vAlign: bestV,
+      hAlign: bestH,
+    };
   }
 
   getGridStepMeters(ppm) {
@@ -136,15 +167,20 @@ export class AreaCalculatorCanvas {
   resolvePoint(rawPoint) {
     const vertexSnap = this.findSnapPoint(rawPoint.x, rawPoint.y);
     if (vertexSnap) {
-      return { point: { x: vertexSnap.x, y: vertexSnap.y }, snap: vertexSnap, gridSnap: false };
+      return { point: { x: vertexSnap.x, y: vertexSnap.y }, snap: vertexSnap, gridSnap: false, align: null };
+    }
+
+    const alignSnap = this.findAlignmentSnap(rawPoint);
+    if (alignSnap) {
+      return { point: { x: alignSnap.x, y: alignSnap.y }, snap: null, gridSnap: false, align: alignSnap };
     }
 
     const gridSnap = this.findGridSnapPoint(rawPoint.x, rawPoint.y);
     if (gridSnap) {
-      return { point: { x: gridSnap.x, y: gridSnap.y }, snap: null, gridSnap: true };
+      return { point: { x: gridSnap.x, y: gridSnap.y }, snap: null, gridSnap: true, align: null };
     }
 
-    return { point: rawPoint, snap: null, gridSnap: false };
+    return { point: rawPoint, snap: null, gridSnap: false, align: null };
   }
 
   isOrthoActive() {
@@ -171,7 +207,7 @@ export class AreaCalculatorCanvas {
   // Vertex-snap and grid-snap now both bypass ortho, since they are already
   // fully resolved, precise target points.
   resolveTargetForOrtho(last, resolved) {
-    if (resolved.snap || resolved.gridSnap) return resolved.point;
+    if (resolved.snap || resolved.gridSnap || resolved.align) return resolved.point;
     return this.applyOrtho(last, resolved.point);
   }
 
@@ -181,6 +217,7 @@ export class AreaCalculatorCanvas {
       this.state.snapActive = false;
       this.state.snapPoint = null;
       this.state.gridSnapActive = false;
+      this.state.alignSnap = null;
       this.hoveredWallIndex = -1;
       this.draw();
       return;
@@ -190,29 +227,11 @@ export class AreaCalculatorCanvas {
     this.hoveredWallIndex = this.findWallNearPoint(raw);
 
     const resolved = this.resolvePoint(raw);
-
-    if (resolved.snap) {
-      this.state.snapActive = true;
-      this.state.gridSnapActive = false;
-      this.state.snapPoint = resolved.snap;
-      this.mouse = resolved.point;
-      this.draw();
-      return;
-    }
-
-    if (resolved.gridSnap) {
-      this.state.snapActive = false;
-      this.state.gridSnapActive = true;
-      this.state.snapPoint = resolved.point;
-      this.mouse = resolved.point;
-      this.draw();
-      return;
-    }
-
-    this.state.snapActive = false;
-    this.state.gridSnapActive = false;
-    this.state.snapPoint = null;
-    this.mouse = raw;
+    this.state.snapActive = !!resolved.snap;
+    this.state.gridSnapActive = !!resolved.gridSnap;
+    this.state.alignSnap = resolved.align || null;
+    this.state.snapPoint = resolved.snap || (resolved.gridSnap ? resolved.point : null);
+    this.mouse = resolved.point;
     this.draw();
   }
 
@@ -221,6 +240,7 @@ export class AreaCalculatorCanvas {
     this.state.snapActive = false;
     this.state.gridSnapActive = false;
     this.state.snapPoint = null;
+    this.state.alignSnap = null;
     this.hoveredWallIndex = -1;
     this.draw();
   }
@@ -229,8 +249,9 @@ export class AreaCalculatorCanvas {
   // area-calculator.js has been removed; that module now calls this one via
   // the shared canvas manager instance so the two can't drift out of sync.
   findWallNearPoint(point) {
-    const radius = 20;
+    const radius = 20 / this.state.scale;
     for (let index = 0; index < this.state.walls.length; index += 1) {
+      if (this.state.walls[index].deleted) continue;
       const start = this.state.points[index];
       const end = this.state.points[index + 1];
       if (!start || !end) continue;
@@ -277,10 +298,10 @@ export class AreaCalculatorCanvas {
 
     // The on-screen position of content is (point + offset). Keep at least
     // a sliver of the bounding box within [-margin, view+margin].
-    const minOffsetX = -bounds.maxX - margin + 40;
-    const maxOffsetX = viewW + margin - bounds.minX - 40;
-    const minOffsetY = -bounds.maxY - margin + 40;
-    const maxOffsetY = viewH + margin - bounds.minY - 40;
+    const minOffsetX = -bounds.maxX * this.state.scale - margin + 40;
+    const maxOffsetX = viewW + margin - bounds.minX * this.state.scale - 40;
+    const minOffsetY = -bounds.maxY * this.state.scale - margin + 40;
+    const maxOffsetY = viewH + margin - bounds.minY * this.state.scale - 40;
 
     if (minOffsetX <= maxOffsetX) {
       this.state.offsetX = Math.min(Math.max(this.state.offsetX, minOffsetX), maxOffsetX);
@@ -305,25 +326,17 @@ export class AreaCalculatorCanvas {
     const availH = this.height - padding * 2;
     const scaleX = bounds.width > 0 ? availW / bounds.width : Infinity;
     const scaleY = bounds.height > 0 ? availH / bounds.height : Infinity;
-    let factor = Math.min(scaleX, scaleY, 5); // don't over-zoom tiny shapes
-    if (!Number.isFinite(factor) || factor <= 0) factor = 1;
+    let targetScale = Math.min(scaleX, scaleY, 5); // don't over-zoom tiny shapes
+    if (!Number.isFinite(targetScale) || targetScale <= 0) targetScale = 1;
 
     const ESCALA_MIN = 0.05;
     const ESCALA_MAX = 5.0;
-    const newScale = Math.min(Math.max(this.state.scale * factor, ESCALA_MIN), ESCALA_MAX);
-    const actualFactor = newScale / this.state.scale;
-    this.state.scale = newScale;
+    this.state.scale = Math.min(Math.max(targetScale, ESCALA_MIN), ESCALA_MAX);
 
-    // Re-derive geometry at the new scale, then center it.
-    if (typeof this.state.onScaleChanged === "function") {
-      this.state.onScaleChanged();
-    }
-
-    const newBounds = this.getContentBounds() || bounds;
-    const cx = (newBounds.minX + newBounds.maxX) / 2;
-    const cy = (newBounds.minY + newBounds.maxY) / 2;
-    this.state.offsetX = this.width / 2 - cx;
-    this.state.offsetY = this.height / 2 - cy;
+    const cx = (bounds.minX + bounds.maxX) / 2;
+    const cy = (bounds.minY + bounds.maxY) / 2;
+    this.state.offsetX = this.width / 2 - cx * this.state.scale;
+    this.state.offsetY = this.height / 2 - cy * this.state.scale;
   }
 
   // =====================================================
@@ -348,9 +361,11 @@ export class AreaCalculatorCanvas {
     // Everything below is "world space" content: it pans with offsetX/Y.
     this.ctx.save();
     this.ctx.translate(this.state.offsetX, this.state.offsetY);
+    this.ctx.scale(this.state.scale, this.state.scale);
 
     this.drawWalls();
     this.drawOrthoGuides();
+    this.drawAlignmentGuides();
     this.drawGuideLine();
     this.drawDimensions();
     this.drawVertices();
@@ -555,6 +570,7 @@ export class AreaCalculatorCanvas {
     const thicknessPx = Math.max((this.state.wallThickness || 0.15) * ppm, 3);
 
     this.state.walls.forEach((wall, index) => {
+      if (wall.deleted) return;
       const start = this.state.points[index];
       const end = this.state.points[index + 1];
       if (!start || !end) return;
@@ -673,20 +689,50 @@ export class AreaCalculatorCanvas {
     this.ctx.restore();
   }
 
+  drawAlignmentGuides() {
+    const align = this.state.alignSnap;
+    if (!align || this.state.closed || !this.state.isDrawing) return;
+
+    const BIG = 20000;
+    this.ctx.save();
+    this.ctx.setLineDash([2, 4]);
+    this.ctx.strokeStyle = "#f97316";
+    this.ctx.lineWidth = 1 / this.state.scale;
+
+    if (align.vAlign) {
+      this.ctx.beginPath();
+      this.ctx.moveTo(align.vAlign.coord, -BIG);
+      this.ctx.lineTo(align.vAlign.coord, BIG);
+      this.ctx.stroke();
+    }
+    if (align.hAlign) {
+      this.ctx.beginPath();
+      this.ctx.moveTo(-BIG, align.hAlign.coord);
+      this.ctx.lineTo(BIG, align.hAlign.coord);
+      this.ctx.stroke();
+    }
+    this.ctx.restore();
+  }
+
   drawGuideLine() {
     if (this.state.closed || !this.mouse || !this.state.isDrawing) {
       return;
     }
 
     const last = this.state.points[this.state.points.length - 1];
-    const resolved = { point: { x: this.mouse.x, y: this.mouse.y }, snap: this.state.snapActive, gridSnap: this.state.gridSnapActive };
+    const resolved = {
+      point: { x: this.mouse.x, y: this.mouse.y },
+      snap: this.state.snapActive,
+      gridSnap: this.state.gridSnapActive,
+      align: this.state.alignSnap,
+    };
     const target = this.resolveTargetForOrtho(last, resolved);
 
     this.ctx.save();
     this.ctx.setLineDash([6, 6]);
     this.ctx.strokeStyle = this.state.snapActive
       ? "#27ae60"
-      : (this.isOrthoActive() ? "#6366f1" : "#64748b");
+      : (this.state.alignSnap ? "#f97316" : (this.isOrthoActive() ? "#6366f1" : "#64748b"));
     this.ctx.lineWidth = 2;
     this.ctx.beginPath();
     this.ctx.moveTo(last.x, last.y);
@@ -714,6 +760,10 @@ export class AreaCalculatorCanvas {
       this.ctx.fillStyle = "#27ae60";
       this.ctx.font = "bold 10px Arial";
       this.ctx.fillText("⚡ SNAP", target.x + 15, target.y - 42);
+    } else if (this.state.alignSnap) {
+      this.ctx.fillStyle = "#f97316";
+      this.ctx.font = "bold 10px Arial";
+      this.ctx.fillText("📐 ALINHADO", target.x + 15, target.y - 42);
     } else if (this.isOrthoActive()) {
       const angulo = Math.round((Math.atan2(dy, dx) * 180) / Math.PI);
       this.ctx.fillStyle = "#6366f1";
@@ -736,6 +786,7 @@ export class AreaCalculatorCanvas {
     const offsets = this.computeDimensionOffsets(BASE_OFFSET);
 
     this.state.walls.forEach((wall, index) => {
+      if (wall.deleted) return;
       const start = this.state.points[index];
       const end = this.state.points[index + 1];
       if (!start || !end) return;
@@ -815,6 +866,7 @@ export class AreaCalculatorCanvas {
     const MIN_LEN_FOR_TEXT = 45; // px — abaixo disso o texto da cota não cabe confortavelmente
 
     for (let index = 0; index < walls.length; index += 1) {
+      if (walls[index].deleted) continue;
       const start = this.state.points[index];
       const end = this.state.points[index + 1];
       if (!start || !end) continue;
@@ -959,13 +1011,13 @@ export class AreaCalculatorCanvas {
     if (this.state.snapActive && this.state.snapPoint) {
       indicator.style.display = "block";
       indicator.classList.remove("grid-snap");
-      indicator.style.left = (rect.left + this.state.snapPoint.x + this.state.offsetX - 11) + "px";
-      indicator.style.top = (rect.top + this.state.snapPoint.y + this.state.offsetY - 11) + "px";
+      indicator.style.left = (rect.left + this.state.snapPoint.x * this.state.scale + this.state.offsetX - 11) + "px";
+      indicator.style.top = (rect.top + this.state.snapPoint.y * this.state.scale + this.state.offsetY - 11) + "px";
     } else if (this.state.gridSnapActive && this.state.snapPoint) {
       indicator.style.display = "block";
       indicator.classList.add("grid-snap");
-      indicator.style.left = (rect.left + this.state.snapPoint.x + this.state.offsetX - 11) + "px";
-      indicator.style.top = (rect.top + this.state.snapPoint.y + this.state.offsetY - 11) + "px";
+      indicator.style.left = (rect.left + this.state.snapPoint.x * this.state.scale + this.state.offsetX - 11) + "px";
+      indicator.style.top = (rect.top + this.state.snapPoint.y * this.state.scale + this.state.offsetY - 11) + "px";
     } else {
       indicator.style.display = "none";
     }

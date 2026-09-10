@@ -2089,9 +2089,11 @@ EmpresaCadastroInline.prototype.calcularNumeroClienteFinal = async function (
 
     let novoNumero;
     try {
-      novoNumero = await obterProximoNumeroClienteDoServidor(sigla);
+      const numeroDoServidor = await obterProximoNumeroClienteDoServidor(sigla);
+      const numeroLocal = calcularProximoNumeroClienteLocal(obrasDaEmpresa, sigla);
+      novoNumero = Math.max(numeroDoServidor, numeroLocal);
       console.log(
-        `[EMPRESA] Numero calculado no servidor: ${novoNumero} para ${sigla}`,
+        `[EMPRESA] Numero calculado: ${novoNumero} (servidor: ${numeroDoServidor}, local: ${numeroLocal}) para ${sigla}`,
       );
     } catch (serverError) {
       console.warn(

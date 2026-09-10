@@ -123,7 +123,7 @@ async function loadObrasFromServer() {
         if (window.createEmptyObra) {
             await Promise.allSettled(
                 obrasPermitidas.map((obra) =>
-                    window.createEmptyObra(obra.nome, obra.id)
+                    window.createEmptyObra(obra.nome, obra.id, true)
                 )
             )
         }
@@ -167,7 +167,7 @@ async function loadSingleObra(obraData) {
 
         if (window.createEmptyObra) {
             await Promise.allSettled(
-                obrasPermitidas.map((obra) => window.createEmptyObra(obra.nome, obra.id))
+                obrasPermitidas.map((obra) => window.createEmptyObra(obra.nome, obra.id, true))
             )
         }
 

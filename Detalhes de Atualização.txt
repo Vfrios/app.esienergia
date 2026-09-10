@@ -1,3 +1,5 @@
-adicional dentro e fora de serviço
-Ocultar ventilação
-Adicionar uma chave de visualização de itens da criaçãode obras
+ajustar a area do cad para nao ser por pixel e manter esticando pela metragem, atualmente ele fica por pixel ai quando eu diminuo o zoom essa metragem aumenta, o que deveria aumentar eh Mx ou seja a velocidade da metragem deve aumentar ao inves de contar com pixel
+numero da obra para o cliente nao ta atualizando para o numero correto, eu crio o login dele com o ultimo numero de obra criada 151 e quando o cliente vai criar a sua obra ele gera o umero 1 ao inves de gerar 152
+
+capacidade de maquinas wall mounted deve ser puxada automaticamente  de acordo com esses campos 
+
