@@ -109,7 +109,7 @@ function buildAcessoriosSection(obraId, projectId, roomName, finalRoomId) {
   );
 
   return `
- <div class="section-block">
+ <div class="section-block" data-client-section="acessorios">
  <div class="section-header">
  <button class="minimizer" onclick="toggleSection('${roomId}acessorios')">+</button>
  <h4 class="section-title">Acessórios de Difusão e Controle de Ar</h4>

@@ -1,7 +1,7 @@
 // scripts/03_Edit_data/empresas.js
 // Gerenciamento de empresas com credenciais - Integrado com sistema geral
 
-import { systemData, addPendingChange } from '../config/state.js';
+import { systemData, addPendingChange, getClientModuleVisibility } from '../config/state.js';
 import { escapeHtml, showError, showInfo, showWarning, showConfirmation, showSuccess } from '../config/ui.js';
 import { normalizeEmpresa, normalizeEmpresas } from '../../01_Create_Obra/core/shared-utils.js';
 
@@ -942,6 +942,12 @@ async function removeCredentials(index, sigla) {
 export function loadEmpresas() {
     const tbody = document.getElementById('empresasTableBody');
     if (!tbody) return;
+
+    const moduleVisibility = getClientModuleVisibility();
+    document.querySelectorAll('#clientModulesVisibility input[data-client-module]').forEach((input) => {
+        input.checked = moduleVisibility[input.dataset.clientModule] !== false;
+        input.onchange = () => window.updateClientModuleVisibility?.(input.dataset.clientModule, input.checked);
+    });
     
     tbody.innerHTML = '';
     

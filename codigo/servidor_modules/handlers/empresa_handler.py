@@ -92,6 +92,7 @@ class EmpresaHandler:
         return {
             "codigo": empresa_normalizada.get("codigo", ""),
             "nome": empresa_normalizada.get("nome", ""),
+            "numeroClienteAtual": empresa_normalizada.get("numeroClienteAtual", 0),
         }
 
     def _parse_datetime(self, value):

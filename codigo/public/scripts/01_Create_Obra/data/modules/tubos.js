@@ -237,7 +237,7 @@ function buildTubosSection(obraId, projectId, roomName, finalRoomId) {
   const roomId = finalRoomId;
 
   return `
- <div class="section-block">
+ <div class="section-block" data-client-section="tubulacao">
  <div class="section-header">
  <button class="minimizer" onclick="toggleSection('${roomId}tubos')">+</button>
  <h4 class="section-title">Tubulação de Cobre</h4>

@@ -149,7 +149,7 @@
             <button class="tab" onclick="switchTab('constants')">Constantes</button>
             <button class="tab" onclick="switchTab('machines')">Máquinas</button>
             <button class="tab" onclick="switchTab('materials')">Materiais</button>
-            <button class="tab" onclick="switchTab('empresas')">Empresas</button>
+            <button class="tab" onclick="switchTab('empresas')">Empresas/clientes</button>
             <button class="tab" onclick="switchTab('acessories')">Acessórios</button>
             <button class="tab" onclick="switchTab('dutos')">Dutos</button>
             <button class="tab" onclick="switchTab('tubos')">Tubos</button>
@@ -278,7 +278,13 @@
             <!-- Tab Empresas -->
             <div id="empresasTab" class="tab-pane">
                 <div class="tab-header">
-                    <h2><i class="icon-company"></i> Empresas Cadastradas</h2>
+                    <h2><i class="icon-company"></i> Empresas/clientes Cadastradas</h2>
+                    <div id="clientModulesVisibility" class="client-modules-visibility">
+                        <strong class="client-modules-visibility-title">Módulos visíveis para todos os clientes</strong>
+                        <label class="client-module-option"><input type="checkbox" data-client-module="acessorios"> <span>Acessórios</span></label>
+                        <label class="client-module-option"><input type="checkbox" data-client-module="tubulacao"> <span>Tubulação</span></label>
+                        <label class="client-module-option"><input type="checkbox" data-client-module="dutos"> <span>Dutos</span></label>
+                    </div>
                 </div>
                 <div class="table-container">
                     <table class="data-table">

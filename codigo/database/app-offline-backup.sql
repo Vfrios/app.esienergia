@@ -28,38 +28,39 @@ CREATE TABLE admins (
     raw_json TEXT NOT NULL,
     sort_order INTEGER NOT NULL
 );
-INSERT INTO "admins" VALUES('adm','5tgrySVdG458','{"usuario": "adm", "token": "5tgrySVdG458", "email": "matheus@esienergia.com.br", "criadoEm": "2026-03-19T14:30:59.996Z", "ultimoAcesso": "2026-09-09T17:40:12.627583-03:00"}',0);
+INSERT INTO "admins" VALUES('adm','5tgrySVdG458','{"usuario": "adm", "token": "5tgrySVdG458", "email": "matheus@esienergia.com.br", "criadoEm": "2026-03-19T14:30:59.996Z", "ultimoAcesso": "2026-09-11T20:09:47.800352-03:00"}',0);
 CREATE TABLE constants (
     key TEXT PRIMARY KEY,
     value_json TEXT NOT NULL,
     description TEXT
 );
-INSERT INTO "constants" VALUES('AUX_c_ArExterno','{"value": 0.24, "description": "Calor específico do ar"}','Calor específico do ar');
+INSERT INTO "constants" VALUES('AUX_Fator_Conver_Painel','{"value": 1, "description": "Fator de conversão térmica dos painéis"}','Fator de conversão térmica dos painéis');
+INSERT INTO "constants" VALUES('AUX_Fator_Iluminacao','{"value": 7, "description": "Fator de carga térmica por iluminação"}','Fator de carga térmica por iluminação');
+INSERT INTO "constants" VALUES('AUX_Fs_Iluminacao','{"value": 1, "description": "Fator de simultaneidade da iluminação"}','Fator de simultaneidade da iluminação');
+INSERT INTO "constants" VALUES('AUX_Fs_Paineis','{"value": 100, "description": "Fator de simultaneidade dos painéis"}','Fator de simultaneidade dos painéis');
 INSERT INTO "constants" VALUES('AUX_OCp_Clp','{"value": 133.3, "description": "Carga latente por ocupante"}','Carga latente por ocupante');
 INSERT INTO "constants" VALUES('AUX_OCp_Csp','{"value": 86.5, "description": "Carga sensível por ocupante"}','Carga sensível por ocupante');
 INSERT INTO "constants" VALUES('AUX_U_Value_Piso','{"value": 2.7, "description": "Coeficiente U de transmissão térmica do piso"}','Coeficiente U de transmissão térmica do piso');
+INSERT INTO "constants" VALUES('AUX_c_ArExterno','{"value": 0.24, "description": "Calor específico do ar"}','Calor específico do ar');
+INSERT INTO "constants" VALUES('AUX_deltaT_ArExterno','{"value": 10, "description": "Diferença de temperatura do ar externo"}','Diferença de temperatura do ar externo');
+INSERT INTO "constants" VALUES('AUX_deltaUa_ArExterno','{"value": 8.47, "description": "Diferença de umidade absoluta do ar externo"}','Diferença de umidade absoluta do ar externo');
+INSERT INTO "constants" VALUES('AUX_f_ArExterno','{"value": 3.01, "description": "Fator de renovação do ar externo"}','Fator de renovação do ar externo');
+INSERT INTO "constants" VALUES('Densi_ar','{"value": 1, "description": "Densidade do ar"}','Densidade do ar');
+INSERT INTO "constants" VALUES('FATOR_SEGURANCA_CAPACIDADE','{"value": 10, "description": "Margem de segurança aplicada à capacidade final"}','Margem de segurança aplicada à capacidade final');
 INSERT INTO "constants" VALUES('VARIAVEL_PD','{"value": 0.0402, "description": "Coeficiente de perda térmica por densidade"}','Coeficiente de perda térmica por densidade');
 INSERT INTO "constants" VALUES('VARIAVEL_PS','{"value": 0.024, "description": "Coeficiente de perda térmica por superfície"}','Coeficiente de perda térmica por superfície');
-INSERT INTO "constants" VALUES('deltaT_divi_clim1','{"value": 3, "description": "Delta T divisória climatizada 1"}','Delta T divisória climatizada 1');
-INSERT INTO "constants" VALUES('deltaT_divi_clim2','{"value": 3, "description": "Delta T divisória climatizada 2"}','Delta T divisória climatizada 2');
 INSERT INTO "constants" VALUES('deltaT_divi_N_clim1','{"value": 10, "description": "Delta T divisória não climatizada 1"}','Delta T divisória não climatizada 1');
 INSERT INTO "constants" VALUES('deltaT_divi_N_clim2','{"value": 10, "description": "Delta T divisória não climatizada 2"}','Delta T divisória não climatizada 2');
-INSERT INTO "constants" VALUES('Densi_ar','{"value": 1, "description": "Densidade do ar"}','Densidade do ar');
+INSERT INTO "constants" VALUES('deltaT_divi_clim1','{"value": 3, "description": "Delta T divisória climatizada 1"}','Delta T divisória climatizada 1');
+INSERT INTO "constants" VALUES('deltaT_divi_clim2','{"value": 3, "description": "Delta T divisória climatizada 2"}','Delta T divisória climatizada 2');
 INSERT INTO "constants" VALUES('deltaT_parede_Les','{"value": 13, "description": "Diferença de temperatura da parede leste"}','Diferença de temperatura da parede leste');
 INSERT INTO "constants" VALUES('deltaT_parede_Nor','{"value": 13, "description": "Diferença de temperatura da parede norte"}','Diferença de temperatura da parede norte');
 INSERT INTO "constants" VALUES('deltaT_parede_Oes','{"value": 13, "description": "Diferença de temperatura da parede oeste"}','Diferença de temperatura da parede oeste');
 INSERT INTO "constants" VALUES('deltaT_parede_Sul','{"value": 13, "description": "Diferença de temperatura da parede sul"}','Diferença de temperatura da parede sul');
-INSERT INTO "constants" VALUES('AUX_deltaT_ArExterno','{"value": 10, "description": "Diferença de temperatura do ar externo"}','Diferença de temperatura do ar externo');
 INSERT INTO "constants" VALUES('deltaT_piso','{"value": 7.5, "description": "Diferença de temperatura do piso"}','Diferença de temperatura do piso');
 INSERT INTO "constants" VALUES('deltaT_teto','{"value": 20, "description": "Diferença de temperatura do teto"}','Diferença de temperatura do teto');
-INSERT INTO "constants" VALUES('AUX_deltaUa_ArExterno','{"value": 8.47, "description": "Diferença de umidade absoluta do ar externo"}','Diferença de umidade absoluta do ar externo');
-INSERT INTO "constants" VALUES('AUX_Fator_Iluminacao','{"value": 7, "description": "Fator de carga térmica por iluminação"}','Fator de carga térmica por iluminação');
-INSERT INTO "constants" VALUES('AUX_Fator_Conver_Painel','{"value": 1, "description": "Fator de conversão térmica dos painéis"}','Fator de conversão térmica dos painéis');
-INSERT INTO "constants" VALUES('AUX_f_ArExterno','{"value": 3.01, "description": "Fator de renovação do ar externo"}','Fator de renovação do ar externo');
-INSERT INTO "constants" VALUES('AUX_Fs_Iluminacao','{"value": 1, "description": "Fator de simultaneidade da iluminação"}','Fator de simultaneidade da iluminação');
-INSERT INTO "constants" VALUES('AUX_Fs_Paineis','{"value": 100, "description": "Fator de simultaneidade dos painéis"}','Fator de simultaneidade dos painéis');
-INSERT INTO "constants" VALUES('FATOR_SEGURANCA_CAPACIDADE','{"value": 10, "description": "Margem de segurança aplicada à capacidade final"}','Margem de segurança aplicada à capacidade final');
 INSERT INTO "constants" VALUES('fatorEspecifico','{"value": 0.24, "description": "Varivel referente ao calor específico"}','Varivel referente ao calor específico');
+INSERT INTO "constants" VALUES('CLIENT_MODULE_VISIBILITY','{"value": 0, "description": "Módulos exibidos na tela geral dos clientes"}','Módulos exibidos na tela geral dos clientes');
 CREATE TABLE dutos (
     type TEXT PRIMARY KEY,
     descricao TEXT,
@@ -100,7 +101,6 @@ INSERT INTO "empresas" VALUES('SIT','SIMATEC',0,NULL,'{"codigo": "SIT", "nome": 
 INSERT INTO "empresas" VALUES('SRA','SRA',6,'{}','{"codigo": "SRA", "nome": "SRA", "credenciais": {}, "numeroClienteAtual": 6}',17);
 INSERT INTO "empresas" VALUES('TEC','TECNOTEMP',0,NULL,'{"codigo": "TEC", "nome": "TECNOTEMP", "credenciais": null, "numeroClienteAtual": 0}',8);
 INSERT INTO "empresas" VALUES('TESTE','Empresa Teste',0,NULL,'{"codigo": "TESTE", "nome": "Empresa Teste", "credenciais": null, "numeroClienteAtual": 0}',20);
-INSERT INTO "empresas" VALUES('IHM','sadasdds',141,'{"usuario": "ihm", "email": "", "token": "mtu4rwj1.rgopcr0rdsj.bcef0d92832", "data_criacao": "2026-09-09T13:25:03.471Z", "data_expiracao": "2026-10-09T13:25:10.883Z", "tempoUso": 30, "source": "manual-edit"}','{"codigo": "IHM", "nome": "sadasdds", "numeroClienteAtual": 141, "credenciais": {"usuario": "ihm", "email": "", "token": "mtu4rwj1.rgopcr0rdsj.bcef0d92832", "data_criacao": "2026-09-09T13:25:03.471Z", "data_expiracao": "2026-10-09T13:25:10.883Z", "tempoUso": 30, "source": "manual-edit"}}',21);
 CREATE TABLE machine_catalog (
     type TEXT PRIMARY KEY,
     aplicacao TEXT,

@@ -85,6 +85,58 @@ class WordPCGenerator:
             return "R$ 0,00"
         return f"R$ {value:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
+    @staticmethod
+    def _numeric(value, default=0.0) -> float:
+        if isinstance(value, str):
+            normalized = value.strip().replace("R$", "").replace(".", "").replace(",", ".")
+        else:
+            normalized = value
+        try:
+            return float(normalized)
+        except (TypeError, ValueError):
+            return float(default)
+
+    def _load_catalog_item(self, table: str, key_column: str, key: str) -> Dict:
+        try:
+            from servidor_modules.database.storage import get_storage
+
+            storage = get_storage(self.project_root)
+            row = storage.conn.execute(
+                f"SELECT raw_json FROM {table} WHERE {key_column} = ?",
+                (str(key),),
+            ).fetchone()
+            return json.loads(row["raw_json"]) if row and row["raw_json"] else {}
+        except Exception:
+            return {}
+
+    def _calculate_machine_total(self, machine: Dict, machine_data: Dict) -> float:
+        saved_total = self._numeric(machine.get("precoTotal"))
+        if saved_total > 0:
+            return saved_total
+
+        potency = str(machine.get("potencia") or "").strip()
+        values = machine_data.get("baseValues", {})
+        total = self._numeric(values.get(potency))
+        for option in machine.get("opcoesSelecionadas", []) or []:
+            option_name = option.get("name") if isinstance(option, dict) else option
+            catalog_option = next(
+                (item for item in machine_data.get("options", [])
+                 if str(item.get("name") or item.get("nome") or "") == str(option_name)),
+                {},
+            )
+            total += self._numeric((catalog_option.get("values") or {}).get(potency))
+
+        return total * max(self._numeric(machine.get("quantidade"), 1), 1)
+
+    def _calculate_accessory_total(self, accessory: Dict) -> float:
+        saved_total = self._numeric(accessory.get("valor_total"))
+        if saved_total > 0:
+            return saved_total
+
+        catalog = self._load_catalog_item("acessorios", "tipo", accessory.get("tipo", ""))
+        unit_value = self._numeric((catalog.get("valores_padrao") or {}).get(accessory.get("dimensao", "")))
+        return unit_value * max(self._numeric(accessory.get("quantidade"), 1), 1)
+
     # ----------------------------------------------------------------------
     # Agrupamento otimizado de máquinas
     # ----------------------------------------------------------------------
@@ -232,8 +284,8 @@ class WordPCGenerator:
                         "nome": maquina.get("nome", ""),
                         "potencia": maquina.get("potencia", ""),
                         "quantidade": maquina.get("quantidade", 1),
-                        "preco_total": maquina.get("precoTotal", 0),
-                        "preco_total_formatado": self.format_currency(maquina.get("precoTotal", 0)),
+                        "preco_total": self._calculate_machine_total(maquina, machine_data),
+                        "preco_total_formatado": self.format_currency(self._calculate_machine_total(maquina, machine_data)),
                         "ambiente": ambiente_nome,
                         "opcoes": maquina.get("opcoesSelecionadas", []),
                         "configuracoes": maquina.get("configuracoesSelecionadas", []),
@@ -288,8 +340,8 @@ class WordPCGenerator:
                         "dimensao": acessorio.get("dimensao", ""),
                         "quantidade": acessorio.get("quantidade", 1),
                         "descricao": acessorio.get("descricao", ""),
-                        "preco_total": acessorio.get("valor_total", 0),
-                        "preco_total_formatado": self.format_currency(acessorio.get("valor_total", 0)),
+                        "preco_total": self._calculate_accessory_total(acessorio),
+                        "preco_total_formatado": self.format_currency(self._calculate_accessory_total(acessorio)),
                         "ambiente": ambiente_nome,
                         "valor_unitario": acessorio.get("valor_unitario", 0),
                         "valor_unitario_formatado": self.format_currency(acessorio.get("valor_unitario", 0)),
@@ -333,10 +385,18 @@ class WordPCGenerator:
             servicos = self._extract_servicos_from_projeto(projeto)
 
             # Adicionar projeto ao resultado (usando valor original)
+            itens_total = sum(item["total_aplicacao"] for item in aplicacoes_com_totais)
+            servicos_total = self._numeric(servicos.get("engenharia", {}).get("valor")) + sum(
+                self._numeric(item.get("valor")) for item in servicos.get("adicionais", [])
+            )
+            valor_total_projeto = self._numeric(projeto.get("valorTotalProjeto"))
+            if valor_total_projeto <= 0:
+                valor_total_projeto = itens_total + servicos_total
+
             projetos_resultado.append({
                 "nome": projeto_nome,
-                "valor_total_projeto": projeto.get("valorTotalProjeto", 0),   # ← valor original
-                "valor_total_projeto_formatado": self.format_currency(projeto.get("valorTotalProjeto", 0)),
+                "valor_total_projeto": valor_total_projeto,
+                "valor_total_projeto_formatado": self.format_currency(valor_total_projeto),
                 "aplicacoes_groups": aplicacoes_com_totais,
                 "servicos": servicos,
                 "tem_servicos": servicos["tem_engenharia"] or servicos["tem_adicionais"]
@@ -439,7 +499,9 @@ class WordPCGenerator:
                 data_atual = datetime.now()
 
             # Total global da obra (usar o valor salvo)
-            total_global = obra_data.get("valorTotalObra", 0)
+            total_global = self._numeric(obra_data.get("valorTotalObra"))
+            if total_global <= 0:
+                total_global = sum(self._numeric(proj.get("valor_total_projeto")) for proj in projetos_com_dados)
 
             # Preparar projetos para o template (sem recálculo)
             projetos_para_template = []

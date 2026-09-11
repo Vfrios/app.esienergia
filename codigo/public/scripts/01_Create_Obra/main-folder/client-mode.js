@@ -158,6 +158,41 @@ function scrubClientFinancialUi(root = document) {
     });
 }
 
+function applyClientModuleVisibility(root = document) {
+    if (!isClientMode() || !root?.querySelectorAll) {
+        return;
+    }
+
+    const constants = window.systemConstants || window.__SYSTEM_BOOTSTRAP__?.constants || {};
+    const visibilityValue = constants.CLIENT_MODULE_VISIBILITY?.value;
+    const visibilityMask = Number(visibilityValue);
+    const moduleVisibility = Number.isFinite(visibilityMask)
+        ? {
+            acessorios: (visibilityMask & 1) !== 0,
+            tubulacao: (visibilityMask & 2) !== 0,
+            dutos: (visibilityMask & 4) !== 0
+        }
+        : {
+            acessorios: visibilityValue?.acessorios !== false,
+            tubulacao: visibilityValue?.tubulacao !== false,
+            dutos: visibilityValue?.dutos !== false
+        };
+    const visibilityBySection = {
+        acessorios: moduleVisibility.acessorios !== false,
+        tubulacao: moduleVisibility.tubulacao !== false,
+        dutos: moduleVisibility.dutos !== false
+    };
+
+    Object.entries(visibilityBySection).forEach(([sectionName, visible]) => {
+        if (!visible) {
+            root.querySelectorAll(`[data-client-section="${sectionName}"]`).forEach((section) => {
+                section.style.display = 'none';
+                section.setAttribute('aria-hidden', 'true');
+            });
+        }
+    });
+}
+
 function queueClientFinancialScrub() {
     if (!isClientMode() || financialScrubQueued) {
         return;
@@ -167,6 +202,7 @@ function queueClientFinancialScrub() {
     requestAnimationFrame(() => {
         financialScrubQueued = false;
         scrubClientFinancialUi(document);
+        applyClientModuleVisibility(document);
     });
 }
 
@@ -193,6 +229,8 @@ function applyStaticUiRestrictions() {
     if (!isFeatureEnabled('filtros')) {
         hideElement('.filtro-bloco-altura');
     }
+
+    applyClientModuleVisibility(document);
 
     queueClientFinancialScrub();
 }
@@ -298,7 +336,7 @@ function sincronizarIdentificadoresObra(obraElement, empresaSigla, numeroCliente
     obraElement.dataset.identificadorObra = `${empresaSigla}-${numeroClienteFinal}`;
 }
 
-function applyClientEmpresaRestrictions(obraId, obraData = null) {
+async function applyClientEmpresaRestrictions(obraId, obraData = null) {
     if (!isClientMode() || !APP_CONFIG.ui?.lockEmpresaField) {
         return false;
     }
@@ -378,7 +416,7 @@ function applyClientEmpresaRestrictions(obraId, obraData = null) {
     if (numeroExistente) {
         sincronizarIdentificadoresObra(obraElement, empresaSigla, numeroExistente);
     } else if (typeof window.empresaCadastro?.calcularNumeroClienteFinal === 'function') {
-        const novoNumero = window.empresaCadastro.calcularNumeroClienteFinal(empresaSigla, obraId);
+        const novoNumero = await window.empresaCadastro.calcularNumeroClienteFinal(empresaSigla, obraId);
         if (novoNumero) {
             sincronizarIdentificadoresObra(obraElement, empresaSigla, novoNumero);
         }

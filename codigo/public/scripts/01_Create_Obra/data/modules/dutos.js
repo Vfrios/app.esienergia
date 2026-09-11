@@ -83,7 +83,7 @@ function buildDutosSection(obraId, projectId, roomName, finalRoomId) {
   const roomId = finalRoomId;
 
   const html = `
- <div class="section-block">
+ <div class="section-block" data-client-section="dutos">
  <div class="section-header">
  <button class="minimizer" onclick="toggleSection('${roomId}dutos')">+</button>
  <h4 class="section-title">Dutos para Climatização</h4>

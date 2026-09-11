@@ -18,6 +18,29 @@ export let systemData = {
   tubos: [],
 };
 
+export const CLIENT_MODULE_VISIBILITY_KEY = "CLIENT_MODULE_VISIBILITY";
+
+function normalizeClientModuleVisibilityConstant(constants) {
+  const setting = constants?.[CLIENT_MODULE_VISIBILITY_KEY];
+  if (!setting || typeof setting !== "object") return;
+
+  if (typeof setting.value === "object" && setting.value !== null) {
+    setting.value = (setting.value.acessorios !== false ? 1 : 0)
+      | (setting.value.tubulacao !== false ? 2 : 0)
+      | (setting.value.dutos !== false ? 4 : 0);
+  }
+}
+
+export function getClientModuleVisibility() {
+  const value = systemData.constants?.[CLIENT_MODULE_VISIBILITY_KEY]?.value;
+  const mask = Number.isFinite(Number(value)) ? Number(value) : 7;
+  return {
+    acessorios: (mask & 1) !== 0,
+    tubulacao: (mask & 2) !== 0,
+    dutos: (mask & 4) !== 0,
+  };
+}
+
 export let originalData = {};
 export let pendingChanges = new Set();
 export let currentEditItem = null;
@@ -61,6 +84,7 @@ export function updateSystemData(newData) {
     dutos: Array.isArray(newData?.dutos) ? newData.dutos : [],
     tubos: Array.isArray(newData?.tubos) ? newData.tubos : [],
   };
+  normalizeClientModuleVisibilityConstant(systemData.constants);
 
   // Manter referência global
   window.systemData = systemData;

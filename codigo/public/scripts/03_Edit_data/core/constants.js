@@ -1,7 +1,7 @@
 // scripts/03_Edit_data/constants.js
 // Gerenciamento de constantes
 
-import { systemData, addPendingChange } from '../config/state.js';
+import { systemData, addPendingChange, CLIENT_MODULE_VISIBILITY_KEY, getClientModuleVisibility } from '../config/state.js';
 import { escapeHtml, showError, showInfo } from '../config/ui.js';
 
 export function loadConstants() {
@@ -14,7 +14,10 @@ export function loadConstants() {
         systemData.constants = {};
     }
     
+    renderClientModuleVisibilityControls();
+
     Object.entries(systemData.constants).forEach(([key, constantData]) => {
+        if (key === CLIENT_MODULE_VISIBILITY_KEY) return;
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>
@@ -48,6 +51,34 @@ export function loadConstants() {
     tbody.appendChild(emptyRow);
 }
 
+function renderClientModuleVisibilityControls() {
+    const container = document.getElementById('clientModulesVisibility');
+    if (!container) return;
+
+    const visibility = getClientModuleVisibility();
+    container.querySelectorAll('input[data-client-module]').forEach((input) => {
+        input.checked = visibility[input.dataset.clientModule] !== false;
+        input.onchange = () => updateClientModuleVisibility(input.dataset.clientModule, input.checked);
+    });
+}
+
+export function updateClientModuleVisibility(moduleName, enabled) {
+    const allowedModules = ['acessorios', 'tubulacao', 'dutos'];
+    if (!allowedModules.includes(moduleName)) return;
+
+    if (!systemData.constants) systemData.constants = {};
+    const currentVisibility = getClientModuleVisibility();
+    currentVisibility[moduleName] = Boolean(enabled);
+    const visibilityMask = (currentVisibility.acessorios ? 1 : 0)
+        | (currentVisibility.tubulacao ? 2 : 0)
+        | (currentVisibility.dutos ? 4 : 0);
+    systemData.constants[CLIENT_MODULE_VISIBILITY_KEY] = {
+        value: visibilityMask,
+        description: 'Módulos exibidos na tela geral dos clientes'
+    };
+    addPendingChange('constants');
+}
+
 export function updateConstantDescription(key, description) {
     if (systemData.constants[key]) {
         if (systemData.constants[key].description !== description) {
@@ -77,3 +108,4 @@ export function updateConstantValue(key, value) {
 window.loadConstants = loadConstants;
 window.updateConstantDescription = updateConstantDescription;
 window.updateConstantValue = updateConstantValue;
+window.updateClientModuleVisibility = updateClientModuleVisibility;

@@ -80,8 +80,8 @@ async function obterProximoNumeroClienteDoServidor(sigla) {
   return numero;
 }
 
-function calcularProximoNumeroClienteLocal(obrasDaEmpresa, sigla) {
-  let maiorNumero = 0;
+function calcularProximoNumeroClienteLocal(obrasDaEmpresa, sigla, numeroAtual = 0) {
+  let maiorNumero = Number.parseInt(numeroAtual, 10) || 0;
 
   obrasDaEmpresa.forEach((obra) => {
     if (obra.numeroClienteFinal) {
@@ -2090,7 +2090,11 @@ EmpresaCadastroInline.prototype.calcularNumeroClienteFinal = async function (
     let novoNumero;
     try {
       const numeroDoServidor = await obterProximoNumeroClienteDoServidor(sigla);
-      const numeroLocal = calcularProximoNumeroClienteLocal(obrasDaEmpresa, sigla);
+      const empresa = this.empresas.find(
+        (item) => String(item.codigo || "").trim().toUpperCase() === String(sigla).trim().toUpperCase(),
+      );
+      const numeroAtual = empresa?.numeroClienteAtual || 0;
+      const numeroLocal = calcularProximoNumeroClienteLocal(obrasDaEmpresa, sigla, numeroAtual);
       novoNumero = Math.max(numeroDoServidor, numeroLocal);
       console.log(
         `[EMPRESA] Numero calculado: ${novoNumero} (servidor: ${numeroDoServidor}, local: ${numeroLocal}) para ${sigla}`,
@@ -2100,7 +2104,14 @@ EmpresaCadastroInline.prototype.calcularNumeroClienteFinal = async function (
         `[EMPRESA] Falha ao consultar numero no servidor para ${sigla}:`,
         serverError,
       );
-      novoNumero = calcularProximoNumeroClienteLocal(obrasDaEmpresa, sigla);
+      const empresa = this.empresas.find(
+        (item) => String(item.codigo || "").trim().toUpperCase() === String(sigla).trim().toUpperCase(),
+      );
+      novoNumero = calcularProximoNumeroClienteLocal(
+        obrasDaEmpresa,
+        sigla,
+        empresa?.numeroClienteAtual || 0,
+      );
       console.log(
         `[EMPRESA] Numero calculado localmente: ${novoNumero} para ${sigla}`,
       );
