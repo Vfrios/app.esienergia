@@ -271,6 +271,56 @@ function getClimatizationRequiredCapacity(roomId) {
   return cargaEstimada * (1 + fatorSeguranca);
 }
 
+function getClimatizationUnitCapacity(roomId) {
+  const capacityInput = document.getElementById(`capacidade-unitaria-${roomId}`);
+  const capacity = Number.parseFloat(capacityInput?.value || "");
+  return Number.isFinite(capacity) && capacity > 0 ? capacity : null;
+}
+
+function updateClimatizationCapacityFromRoom(machineId, options = {}) {
+  const { force = false } = options;
+  const machineElement = document.querySelector(`[data-machine-id="${machineId}"]`);
+  if (!machineElement) return false;
+
+  const applicationSelect = machineElement.querySelector(".machine-aplicacao-select");
+  const powerSelect = machineElement.querySelector(".machine-power-select");
+  const roomId = machineElement.dataset.roomId;
+  if (!applicationSelect || applicationSelect.value !== "climatizacao" || !powerSelect || !roomId) {
+    return false;
+  }
+
+  if (!force && isCapacityUserEdited(powerSelect)) return false;
+
+  const targetCapacity = getClimatizationUnitCapacity(roomId);
+  if (!targetCapacity || !powerSelect.options.length) return false;
+
+  const options = Array.from(powerSelect.options)
+    .filter((option) => option.value)
+    .map((option) => ({
+      option,
+      value: getGenericCapacityValue(option.text || option.value),
+    }))
+    .filter((item) => item.value > 0);
+
+  if (!options.length) return false;
+
+  const selected = options.reduce((best, item) =>
+    Math.abs(item.value - targetCapacity) < Math.abs(best.value - targetCapacity)
+      ? item
+      : best,
+  );
+
+  if (powerSelect.value !== selected.option.value) {
+    powerSelect.value = selected.option.value;
+    markCapacityAutoChange(powerSelect, true);
+    powerSelect.dispatchEvent(new Event("change", { bubbles: true }));
+    markCapacityAutoChange(powerSelect, false);
+  }
+
+  setCapacityUserEdited(powerSelect, false);
+  return true;
+}
+
 function getBackupAdditionalUnits(backupType) {
   switch (backupType) {
     case "n+1":
@@ -362,6 +412,7 @@ function syncClimatizationMachineQuantitiesFromCapacity(roomId) {
     const machineId = machineElement.dataset.machineId;
     if (!machineId) return;
 
+    updateClimatizationCapacityFromRoom(machineId);
     updateClimatizationQuantityFromCapacity(machineId);
   });
 }
@@ -463,6 +514,7 @@ function handleAplicacaoChange(machineId) {
 
   if (aplicacao === "climatizacao") {
     qntInput.setAttribute("data-user-edited", "false");
+    updateClimatizationCapacityFromRoom(machineId);
   }
 
   console.log(` - Aplicação selecionada: ${aplicacao}`);
