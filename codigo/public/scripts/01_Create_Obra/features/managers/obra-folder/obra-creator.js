@@ -4,6 +4,8 @@ import { deleteObra } from './obra-utils.js';
 import { parseCurrency,formatCurrency } from '../project-manager.js';
 import { APP_CONFIG } from '../../../core/config.js';
 
+let obraCreationQueue = Promise.resolve();
+
 /**
  * ATUALIZA O TOTAL DA OBRA (NÍVEL 4)
  * Escuta eventos dos projetos
@@ -184,24 +186,30 @@ async function createEmptyObra(obraName, obraId, isFromServer = false, hasProjec
  *  FUNÇÕES PRINCIPAIS DE GERENCIAMENTO
  */
 
-async function addNewObra() {
-    try {
+function addNewObra() {
+    const creation = obraCreationQueue.then(async () => {
         const obraNumber = getNextObraNumber();
         const obraName = `Obra${obraNumber}`;
         const obraId = generateObraId();
 
         await createEmptyObra(obraName, obraId, false, false);
 
-        setTimeout(async () => {
-            if (typeof window.addNewProjectToObra === 'function') {
-                await window.addNewProjectToObra(obraId);
-                setTimeout(() => updateObraTotal(obraId), 62);
-            }
-        }, 150);
+        await new Promise((resolve) => setTimeout(resolve, 150));
+        if (typeof window.addNewProjectToObra === 'function') {
+            await window.addNewProjectToObra(obraId);
+            updateObraTotal(obraId);
+        }
 
-    } catch (error) {
+        return { obraId, obraName };
+    });
+
+    obraCreationQueue = creation.catch((error) => {
+        console.error("Erro ao criar nova obra:", error);
         alert("Erro ao criar nova obra.");
-    }
+        return false;
+    });
+
+    return creation;
 }
 
 // Função para criação de obra a partir de dados do servidor

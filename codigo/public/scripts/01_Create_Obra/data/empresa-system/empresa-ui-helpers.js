@@ -338,21 +338,6 @@ function validarDataInput(input) {
  */
 async function calcularNumeroLocal(sigla, obraId) {
   try {
-    {
-      const numeroResponse = await fetch(
-        `/api/dados/empresas/numero/${encodeURIComponent(sigla)}`,
-      );
-      if (!numeroResponse.ok) {
-        throw new Error("Nao foi possivel calcular o numero");
-      }
-
-      const numeroPayload = await numeroResponse.json();
-      const numeroCalculado = Number(numeroPayload?.numero || 1);
-      atualizarNumeroClienteInput(numeroCalculado, obraId);
-      console.log(` [EMPRESA] Numero calculado no servidor: ${numeroCalculado} para ${sigla}`);
-      return;
-    }
-
     // Buscar todas as obras para calcular localmente
     const response = await fetch("/api/obras/catalog");
     if (!response.ok) {

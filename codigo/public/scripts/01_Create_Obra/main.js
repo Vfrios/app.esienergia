@@ -61,6 +61,7 @@ window.obraCounter = 0;
 window.GeralCount = 0;
 window.systemLoaded = false;
 window.systemInitializationCompleted = false;
+window.obraCreationReady = false;
 
 console.log(" Variáveis globais inicializadas:", {
   systemConstants: window.systemConstants,
@@ -119,7 +120,15 @@ function updateAddObraButtonState() {
   }
 
   if (window.systemLoaded) {
-    // Sistema carregado - botão funciona normalmente
+    if (!window.obraCreationReady) {
+      addButton.disabled = true;
+      addButton.style.opacity = "0.6";
+      addButton.style.cursor = "not-allowed";
+      addButton.title = "Aguardando carregamento das obras e empresas";
+      return;
+    }
+
+    // Sistema carregado e dados de numeracao restaurados
     addButton.disabled = false;
     addButton.style.opacity = "1";
     addButton.style.cursor = "pointer";
@@ -198,9 +207,9 @@ function setupAddObraButtonProtection() {
   const originalAddNewObra = window.addNewObra;
 
   const protectedAddNewObra = function (...args) {
-    if (!window.systemLoaded) {
+    if (!window.systemLoaded || !window.obraCreationReady) {
       console.warn(
-        " Tentativa de adicionar obra bloqueada - sistema não carregado",
+        " Tentativa de adicionar obra bloqueada - dados ainda carregando",
       );
       showSystemNotLoadedMessage();
       return false;
@@ -233,9 +242,9 @@ function setupDirectButtonProtection() {
       addButton.parentNode.replaceChild(newButton, addButton);
 
       newButton.addEventListener("click", function (e) {
-        if (!window.systemLoaded) {
+        if (!window.systemLoaded || !window.obraCreationReady) {
           console.warn(
-            " Clique direto no botão bloqueado - sistema não carregado",
+            " Clique direto no botão bloqueado - dados ainda carregando",
           );
           showSystemNotLoadedMessage();
           e.preventDefault();
@@ -908,6 +917,10 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     // Verificar obras existentes
     await verifyAndCreateBaseObra();
+
+    window.obraCreationReady = true;
+    updateAddObraButtonState();
+    console.log(" Dados de empresas e numeracao carregados - Nova Obra liberada");
 
     console.log(" Sistema inicializado com sucesso - PRONTO PARA USO");
 

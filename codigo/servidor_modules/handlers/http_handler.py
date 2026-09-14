@@ -1055,6 +1055,9 @@ class UniversalHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         if path in self.PUBLIC_API_ROUTES:
             return True
 
+        if path.startswith("/api/dados/empresas/numero/"):
+            return self._require_roles(path, {"client", "admin"})
+
         if path in self.ADMIN_ONLY_API_ROUTES or any(
             path.startswith(prefix) for prefix in self.ADMIN_ONLY_API_PREFIXES
         ):

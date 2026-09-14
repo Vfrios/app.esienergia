@@ -54,6 +54,9 @@ const CLIENT_FINANCIAL_NODE_SELECTORS = [
     '[id^="duto-valor-total-"]',
     '[id^="valor-material-duto-"]'
 ];
+const CLIENT_RESTRICTED_ACTION_SELECTORS = [
+    'button[onclick*="deleteObra"]'
+];
 
 let clientFinancialUiObserver = null;
 let financialScrubQueued = false;
@@ -148,6 +151,12 @@ function scrubClientFinancialUi(root = document) {
 
     scrubSelectorMatches(root);
     scrubFinancialAttributes(root);
+
+    CLIENT_RESTRICTED_ACTION_SELECTORS.forEach((selector) => {
+        root.querySelectorAll(selector).forEach((element) => {
+            removeElement(element);
+        });
+    });
 
     root.querySelectorAll('.dutos-table').forEach((table) => {
         stripTableColumns(table, [5, 6, 7]);
