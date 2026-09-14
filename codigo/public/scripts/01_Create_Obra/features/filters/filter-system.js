@@ -588,7 +588,7 @@ const FilterSystem = (function () {
    */
   async function carregarObrasComEmpresa(obrasFiltradas) {
     console.log(
-      ` [FILTER-SYSTEM] Carregando ${obrasFiltradas.length} obras com suporte a empresa...`,
+      ` [FILTER-SYSTEM] Carregando ${obrasFiltradas.length} obras com suporte a empresa (PARALELO)...`,
     );
 
     // Criar todas as estruturas primeiro (em paralelo)
@@ -604,15 +604,15 @@ const FilterSystem = (function () {
 
       await Promise.allSettled(createPromises);
 
-      // Aguardar DOM se estabilizar
-      await new Promise((resolve) => setTimeout(resolve, 12));
+      // Aguardar DOM se estabilizar (minimal)
+      await new Promise((resolve) => setTimeout(resolve, 1));
     }
 
-    // Usar loadSingleObra para cada obra (já inclui prepararDadosEmpresaNaObra)
-    for (const obraData of obrasFiltradas) {
+    // Carregar todas as obras EM PARALELO (não sequencial!)
+    const loadPromises = obrasFiltradas.map(async (obraData) => {
       try {
         console.log(
-          ` [FILTER-SYSTEM] Carregando obra ${obraData.nome} com dados de empresa...`,
+          ` [FILTER-SYSTEM] Carregando obra ${obraData.nome} (paralelo)...`,
         );
 
         // Opção 1: Usar loadSingleObra se disponível (que já chama prepararDadosEmpresaNaObra)
@@ -621,6 +621,7 @@ const FilterSystem = (function () {
           console.log(
             ` [FILTER-SYSTEM] Obra ${obraData.nome} carregada: ${result ? "sucesso" : "falha"}`,
           );
+          return result;
         }
         // Opção 2: Usar populateObraData + prepararDadosEmpresaNaObra manualmente
         else if (typeof window.populateObraData === "function") {
@@ -642,26 +643,34 @@ const FilterSystem = (function () {
                 ` [FILTER-SYSTEM] prepararDadosEmpresaNaObra não disponível para ${obraData.nome}`,
               );
             }
+            return true;
           } else {
             console.error(
               ` [FILTER-SYSTEM] Elemento não encontrado para obra ${obraData.id}`,
             );
+            return false;
           }
         } else {
           console.error(
             ` [FILTER-SYSTEM] Nenhuma função de carregamento disponível para ${obraData.id}`,
           );
+          return false;
         }
       } catch (error) {
         console.error(
           ` [FILTER-SYSTEM] Erro ao carregar obra ${obraData.id}:`,
           error,
         );
+        return false;
       }
-    }
+    });
+
+    // Aguardar TODAS as obras serem carregadas em paralelo
+    const results = await Promise.allSettled(loadPromises);
+    const successCount = results.filter(r => r.status === 'fulfilled' && r.value === true).length;
 
     console.log(
-      ` [FILTER-SYSTEM] ${obrasFiltradas.length} obras carregadas com suporte a empresa`,
+      ` [FILTER-SYSTEM] ${successCount}/${obrasFiltradas.length} obras carregadas com sucesso (paralelo)`,
     );
   }
 
