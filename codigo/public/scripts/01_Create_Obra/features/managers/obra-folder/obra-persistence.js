@@ -39,7 +39,7 @@ async function fetchObraById(obraId) {
   return response.json();
 }
 
-async function atualizarObra(obraId, obraData) {
+async function atualizarObra(obraId, obraData, { autosave = false } = {}) {
   try {
     if (!obraId || obraId === "undefined" || obraId === "null") {
       console.error(
@@ -81,7 +81,9 @@ async function atualizarObra(obraId, obraData) {
     }
 
     const updatedObra = await response.json();
-    showSystemStatus("Obra atualizada com sucesso!", "success");
+    if (!autosave) {
+      showSystemStatus("Obra atualizada com sucesso!", "success");
+    }
 
     console.log(" OBRA ATUALIZADA:", {
       id: updatedObra.id,

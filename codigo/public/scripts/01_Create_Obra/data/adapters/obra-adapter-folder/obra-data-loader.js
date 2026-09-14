@@ -9,6 +9,8 @@ import {
     getSessionScopedObrasRuntimeData
 } from '../../../core/runtime-data.js'
 
+const AUTO_SAVE_LOAD_GRACE_MS = 2000
+
 /**
  * Remove todas as obras base do container HTML
  */
@@ -109,12 +111,14 @@ async function ensureFullObraData(obraData) {
  */
 async function loadObrasFromServer() {
     console.log('[LOAD OBRAS] Iniciando carregamento com suporte a empresa...')
+    window.obrasCarregamentoCompleto = false
     const startTime = performance.now()
 
     try {
         const obrasPermitidas = await resolveObrasToLoad()
 
         if (obrasPermitidas.length === 0) {
+            window.obrasCarregamentoCompleto = true
             return 0
         }
 
@@ -142,6 +146,10 @@ async function loadObrasFromServer() {
             (count, result) => (result.status === 'fulfilled' ? count + result.value : count),
             0
         )
+
+        await new Promise((resolve) => setTimeout(resolve, AUTO_SAVE_LOAD_GRACE_MS))
+        window.obrasCarregamentoCompleto = true
+        window.dispatchEvent(new CustomEvent('obrasCarregamentoCompleto'))
 
         const endTime = performance.now()
         console.log(`[LOAD OBRAS] ${successCount} obra(s) carregadas em ${Math.round(endTime - startTime)}ms`)
@@ -187,6 +195,7 @@ async function loadSingleObra(obraData) {
                 }
 
                 await prepararDadosEmpresaNaObra(obraCompleta, element)
+                element.dataset.autoSaveReady = 'true'
                 return true
             } catch (error) {
                 console.warn(`[LOAD OBRAS] Erro ao carregar obra ${obra.id}:`, error.message)
@@ -233,6 +242,7 @@ async function loadSingleObra(obraData) {
         }
 
         await prepararDadosEmpresaNaObra(obraCompleta, element)
+        element.dataset.autoSaveReady = 'true'
 
         return 1
     } catch (error) {

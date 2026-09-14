@@ -9,6 +9,10 @@ const EMBED_LOADING_RELEASE_DELAY_MS = 1500;
 
 let embeddedObraLoadCompleted = false;
 let embeddedOverlayHideTimeout = null;
+window.obrasCarregamentoCompleto = false;
+const autoSaveTimers = new Map();
+const autoSaveRevisions = new Map();
+const autoSaveInFlight = new Map();
 
 function getModeBaseTitle(modoEdicao) {
     if (window.location.pathname.toLowerCase().startsWith('/admin/obras/manage')) {
@@ -412,11 +416,81 @@ function getVisibleObraIds() {
 }
 
 async function autoSaveVisibleObrasBeforeContextSwitch({ reason = 'context-switch' } = {}) {
-    return {
-        success: true,
-        skipped: true,
-        reason: `disabled-on-create-page:${reason}`
-    };
+    const visibleObras = getVisibleObraIds()
+        .map((obraId) => document.querySelector(`[data-obra-id="${obraId}"]`))
+        .filter((obraBlock) => obraBlock?.dataset.autoSaveDirty === 'true');
+
+    if (visibleObras.length === 0) {
+        return { success: true, skipped: true, reason };
+    }
+
+    const results = await Promise.all(visibleObras.map((obraBlock) => saveChangedObra(obraBlock)));
+    return { success: results.every(Boolean), saved: results.filter(Boolean).length, reason };
+}
+
+async function saveChangedObra(obraBlock) {
+    const obraId = String(obraBlock?.dataset.obraId || '').trim();
+    if (!obraBlock || !obraId || !obraBlock.querySelector('.obra-actions-footer .btn-update')) {
+        return true;
+    }
+
+    const ongoingSave = autoSaveInFlight.get(obraId);
+    if (ongoingSave) {
+        await ongoingSave;
+        return obraBlock.dataset.autoSaveDirty === 'true'
+            ? saveChangedObra(obraBlock)
+            : true;
+    }
+
+    const revision = autoSaveRevisions.get(obraId) || 0;
+    if (autoSaveTimers.has(obraId)) {
+        clearTimeout(autoSaveTimers.get(obraId));
+        autoSaveTimers.delete(obraId);
+    }
+
+    const savePromise = Promise.resolve(
+        typeof window.saveObra === 'function'
+            ? window.saveObra(obraId, undefined, { autosave: true })
+            : false,
+    );
+    autoSaveInFlight.set(obraId, savePromise);
+    let saved = false;
+    try {
+        saved = await savePromise;
+    } finally {
+        autoSaveInFlight.delete(obraId);
+    }
+    if (saved && autoSaveRevisions.get(obraId) === revision) {
+        delete obraBlock.dataset.autoSaveDirty;
+    }
+    return saved !== false;
+}
+
+function scheduleAutoSave(obraBlock) {
+    const obraId = String(obraBlock.dataset.obraId || '').trim();
+    if (
+        !obraId ||
+        window.obrasCarregamentoCompleto !== true ||
+        obraBlock.dataset.autoSaveReady !== 'true' ||
+        !obraBlock.querySelector('.obra-actions-footer .btn-update')
+    ) {
+        return;
+    }
+
+    obraBlock.dataset.autoSaveDirty = 'true';
+    autoSaveRevisions.set(obraId, (autoSaveRevisions.get(obraId) || 0) + 1);
+
+    if (autoSaveTimers.has(obraId)) {
+        clearTimeout(autoSaveTimers.get(obraId));
+    }
+
+    const timer = window.setTimeout(() => {
+        autoSaveTimers.delete(obraId);
+        saveChangedObra(obraBlock).catch((error) => {
+            console.error('[AUTOSAVE] Falha ao atualizar obra:', error);
+        });
+    }, 700);
+    autoSaveTimers.set(obraId, timer);
 }
 
 function resolveAutoSaveNavigationTarget(target) {
@@ -439,7 +513,17 @@ function resolveAutoSaveNavigationTarget(target) {
 }
 
 function bindAutoSaveNavigation() {
-    return;
+    document.addEventListener('change', (event) => {
+        if (!event.isTrusted) {
+            return;
+        }
+
+        const field = event.target.closest?.('input, select, textarea');
+        const obraBlock = field?.closest('.obra-block[data-obra-id]');
+        if (obraBlock) {
+            scheduleAutoSave(obraBlock);
+        }
+    });
 }
 
 document.addEventListener('DOMContentLoaded', () => {

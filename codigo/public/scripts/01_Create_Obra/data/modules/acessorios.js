@@ -662,6 +662,13 @@ function carregarAcessoriosSilencioso(roomId) {
  */
 function salvarAcessorios(roomId) {
   const tbody = document.getElementById(`acessorios-list-${roomId}`);
+  
+  // Proteção contra elemento não encontrado
+  if (!tbody) {
+    console.warn(` Tabela de acessorios nao encontrada para sala ${roomId}, ignorando save`);
+    return;
+  }
+  
   const rows = tbody.querySelectorAll(".acessorio-row");
 
   const acessorios = [];

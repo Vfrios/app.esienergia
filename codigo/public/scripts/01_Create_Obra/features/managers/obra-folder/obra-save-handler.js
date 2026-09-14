@@ -73,26 +73,28 @@ async function notificarAdminSobreObra(obraId) {
   }
 }
 
-function agendarTarefasPosSalvamento(obraId) {
+function agendarTarefasPosSalvamento(obraId, { autosave = false } = {}) {
   setTimeout(() => {
     atualizarHeaderObraAposSalvamento(obraId).catch((error) => {
       console.error(" [HEADER] Falha no pos-salvamento:", error);
     });
 
-    minimizarTogglesAposSalvamento(obraId).catch((error) => {
-      console.error(" [TOGGLES] Falha no pos-salvamento:", error);
-    });
+    if (!autosave) {
+      minimizarTogglesAposSalvamento(obraId).catch((error) => {
+        console.error(" [TOGGLES] Falha no pos-salvamento:", error);
+      });
 
-    notificarAdminSobreObra(obraId).catch((notificationError) => {
-      console.error(
-        " [NOTIFICACAO] Falha ao enviar email ao ADM:",
-        notificationError,
-      );
-    });
+      notificarAdminSobreObra(obraId).catch((notificationError) => {
+        console.error(
+          " [NOTIFICACAO] Falha ao enviar email ao ADM:",
+          notificationError,
+        );
+      });
+    }
   }, 0);
 }
 
-async function saveObra(obraId, event) {
+async function saveObra(obraId, event, { autosave = false } = {}) {
   if (event) {
     event.preventDefault();
     event.stopPropagation();
@@ -150,13 +152,6 @@ async function saveObra(obraId, event) {
     return false;
   }
 
-  if (!String(obraData.emailEmpresa || "").trim()) {
-    showSystemStatus(
-      "O email da empresa nao foi preenchido. Isso pode dificultar a recuperacao do acesso posteriormente.",
-      "warning",
-    );
-  }
-
   const obraIdFromDOM = obraBlock.dataset.obraId;
   const obraIdFromData = obraData.id;
   const finalObraId = obraIdFromDOM || obraIdFromData;
@@ -199,7 +194,7 @@ async function saveObra(obraId, event) {
       return false;
     }
 
-    novoFluxoResultado = await atualizarObra(finalObraId, obraData);
+    novoFluxoResultado = await atualizarObra(finalObraId, obraData, { autosave });
   }
 
   if (!novoFluxoResultado) {
@@ -266,7 +261,7 @@ async function saveObra(obraId, event) {
   }
 
   console.log(" [POS-SAVE] Agendando tarefas secundarias apos o salvamento...");
-  agendarTarefasPosSalvamento(novoFluxoFinalId);
+  agendarTarefasPosSalvamento(novoFluxoFinalId, { autosave });
 
   console.log(
     ` OBRA SALVA/ATUALIZADA COM SUCESSO! ID SEGURO: ${novoFluxoFinalId}`,
@@ -276,7 +271,9 @@ async function saveObra(obraId, event) {
     ? "Obra salva com sucesso!"
     : "Obra atualizada com sucesso!";
 
-  showSystemStatus(successMessage, "success");
+  if (!autosave) {
+    showSystemStatus(successMessage, "success");
+  }
   return true;
 }
 

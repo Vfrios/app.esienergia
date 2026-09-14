@@ -125,73 +125,60 @@ async function populateRoomData(roomElement, roomData) {
 
         if (roomData.ventilacao && Object.keys(roomData.ventilacao).length > 0) {
             console.log(` Preenchendo dados de ventilacao para sala ${roomName}`);
-            scheduleDeferredTask(() => {
-                if (typeof window.fillVentilacaoInputs === 'function') {
-                    window.fillVentilacaoInputs(roomElement, roomData.ventilacao);
-                    console.log(' Ventilacao preenchida via funcao global');
-                } else {
-                    console.error(' Funcao fillVentilacaoInputs nao disponivel no window');
-                }
-            }, { delay: 150, idle: true, timeout: 800 });
+            if (typeof window.fillVentilacaoInputs === 'function') {
+                window.fillVentilacaoInputs(roomElement, roomData.ventilacao);
+                console.log(' Ventilacao preenchida');
+            } else {
+                console.error(' Funcao fillVentilacaoInputs nao disponivel no window');
+            }
         }
 
         if (roomData.acessorios && Array.isArray(roomData.acessorios)) {
             console.log(` Preenchendo ${roomData.acessorios.length} acessorio(s) para sala ${roomName}`);
-            scheduleDeferredTask(() => {
-                if (typeof window.fillAcessoriosData === 'function') {
-                    window.fillAcessoriosData(roomElement, roomData.acessorios);
-                    console.log(' Acessorios preenchidos via funcao global');
-                } else {
-                    console.error(' Funcao fillAcessoriosData nao disponivel no window');
-                }
-            }, { delay: 100, idle: true, timeout: 800 });
+            if (typeof window.fillAcessoriosData === 'function') {
+                window.fillAcessoriosData(roomElement, roomData.acessorios);
+                console.log(' Acessorios preenchidos');
+            } else {
+                console.error(' Funcao fillAcessoriosData nao disponivel no window');
+            }
         }
 
         if (roomData.dutos && Array.isArray(roomData.dutos)) {
             console.log(` Preenchendo ${roomData.dutos.length} duto(s) para sala ${roomName}`);
-            scheduleDeferredTask(() => {
-                if (typeof window.fillDutosData === 'function') {
-                    window.fillDutosData(roomElement, roomData.dutos);
-                    console.log(' Dutos preenchidos via funcao global');
-                } else {
-                    console.error(' Funcao fillDutosData nao disponivel no window');
-                }
-            }, { delay: 125, idle: true, timeout: 800 });
+            if (typeof window.fillDutosData === 'function') {
+                window.fillDutosData(roomElement, roomData.dutos);
+                console.log(' Dutos preenchidos');
+            } else {
+                console.error(' Funcao fillDutosData nao disponivel no window');
+            }
         }
 
         if (roomData.tubulacao && roomData.tubulacao.conjuntos && Array.isArray(roomData.tubulacao.conjuntos)) {
             console.log(` Preenchendo ${roomData.tubulacao.conjuntos.length} conjunto(s) de tubulacao para sala ${roomName}`);
-            scheduleDeferredTask(() => {
-                if (typeof window.fillTubulacaoData === 'function') {
-                    window.fillTubulacaoData(roomElement, roomData.tubulacao);
-                    console.log(' Tubulacao preenchida via funcao global', {
-                        conjuntos: roomData.tubulacao.conjuntos.length,
-                        estrutura: 'conjuntos array dentro de objeto tubulacao'
-                    });
-                } else {
-                    console.error(' Funcao fillTubulacaoData nao disponivel no window');
-                }
-            }, { delay: 175, idle: true, timeout: 1000 });
+            if (typeof window.fillTubulacaoData === 'function') {
+                window.fillTubulacaoData(roomElement, roomData.tubulacao);
+                console.log(' Tubulacao preenchida');
+            } else {
+                console.error(' Funcao fillTubulacaoData nao disponivel no window');
+            }
         } else if (roomData.tubulacao) {
             console.warn(` Estrutura de tubulacao invalida ou vazia para sala ${roomName}:`, roomData.tubulacao);
         }
 
         if (roomData.maquinas && Array.isArray(roomData.maquinas)) {
-            console.log(` Agendando preenchimento de ${roomData.maquinas.length} maquina(s) para sala ${roomName}`);
-            scheduleDeferredTask(async () => {
-                try {
-                    console.log(` Iniciando preenchimento de maquinas para sala ${roomName}`);
-                    const success = await fillMachinesData(roomElement, roomData.maquinas);
+            console.log(` Preenchendo ${roomData.maquinas.length} maquina(s) para sala ${roomName}`);
+            try {
+                // Executa hidratação de máquinas sem delays (await apenas se necessário)
+                const success = await fillMachinesData(roomElement, roomData.maquinas);
 
-                    if (success) {
-                        console.log(` Todas as maquinas preenchidas com sucesso para sala ${roomName}`);
-                    } else {
-                        console.error(` Falha ao preencher maquinas para sala ${roomName}`);
-                    }
-                } catch (error) {
-                    console.error(` Erro ao preencher maquinas para sala ${roomName}:`, error);
+                if (success) {
+                    console.log(` Todas as maquinas preenchidas com sucesso para sala ${roomName}`);
+                } else {
+                    console.error(` Falha ao preencher maquinas para sala ${roomName}`);
                 }
-            }, { delay: 220, idle: true, timeout: 1200 });
+            } catch (error) {
+                console.error(` Erro ao preencher maquinas para sala ${roomName}:`, error);
+            }
         }
 
         console.log(` Sala "${roomName}" preenchida com sucesso`);

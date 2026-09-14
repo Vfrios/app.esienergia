@@ -208,35 +208,36 @@ async function fillMachinesData(roomElement, machinesData) {
       );
 
       try {
-        // Usar addMachine com retry
+        // Usar addMachine com retry mínimo
         let machineAdded = false;
         let retryCount = 0;
 
-        while (!machineAdded && retryCount < 3) {
+        while (!machineAdded && retryCount < 2) {
           machineAdded = await addMachine(roomId, machineData.tipo);
 
           if (!machineAdded) {
             retryCount++;
             console.log(
-              ` Tentativa ${retryCount}/3 para adicionar máquina ${machineData.tipo}`,
+              ` Tentativa ${retryCount}/2 para adicionar máquina ${machineData.tipo}`,
             );
-            await new Promise((resolve) => setTimeout(resolve, 12));
+            // Esperar apenas 1ms antes de retry
+            await new Promise((resolve) => setTimeout(resolve, 1));
           }
         }
 
         if (!machineAdded) {
           console.error(
-            ` Falha ao adicionar máquina ${machineData.tipo} após ${retryCount} tentativas`,
+            ` Falha ao adicionar máquina ${machineData.tipo} após retries`,
           );
           continue;
         }
 
         console.log(
-          ` Máquina ${machineData.tipo} adicionada, aguardando renderização...`,
+          ` Máquina ${machineData.tipo} adicionada com sucesso`,
         );
 
-        // Aguardar renderização completa
-        await new Promise((resolve) => setTimeout(resolve, 18));
+        // Aguardar renderização completa (minimal wait)
+        await new Promise((resolve) => setTimeout(resolve, 1));
 
         // Encontrar a máquina mais recente
         const machineElements = machinesContainer.querySelectorAll(
@@ -248,8 +249,6 @@ async function fillMachinesData(roomElement, machinesData) {
           console.error(` Elemento da máquina não encontrado após adição`);
           continue;
         }
-
-        console.log(` Elemento da máquina encontrado, preenchendo dados...`);
 
         // Preencher dados da máquina
         const populated = await populateMachineData(lastMachine, machineData);
@@ -265,8 +264,7 @@ async function fillMachinesData(roomElement, machinesData) {
         console.error(` Erro ao processar máquina ${machineData.tipo}:`, error);
       }
 
-      // Pequena pausa entre máquinas
-      await new Promise((resolve) => setTimeout(resolve, 12));
+      // Sem pausa entre máquinas (removido)
     }
 
     console.log(
