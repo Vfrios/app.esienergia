@@ -169,12 +169,26 @@ export class EmpresaCadastroInline {
       // Substituir span por botão
       span.parentNode.replaceChild(button, span);
 
-      // Vincular eventos
-      button.addEventListener("click", (e) => this.ativarCadastro(e));
+      // Usar o gerenciador único de formulários para evitar IDs duplicados.
+      const obraId = button.closest(".obra-block")?.dataset?.obraId;
+      const ativarFormulario = (event) => {
+        if (
+          obraId &&
+          typeof window.ativarCadastroEmpresa === "function"
+        ) {
+          event.preventDefault();
+          window.ativarCadastroEmpresa(obraId);
+          return;
+        }
+
+        this.ativarCadastro(event);
+      };
+
+      button.addEventListener("click", ativarFormulario);
       button.addEventListener("keydown", (e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          this.ativarCadastro(e);
+          ativarFormulario(e);
         }
       });
     });
@@ -1702,14 +1716,21 @@ window.ativarCadastroEmpresa = function (obraId) {
     }
 
     // Verificar se já existe formulário
-    const formularioExistente = empresaContainer.querySelector(
+    const formulariosExistentes = empresaContainer.querySelectorAll(
       ".empresa-formulario-ativo",
     );
-    if (formularioExistente) {
+    if (formulariosExistentes.length === 1) {
       // Se já existe, apenas garantir que está visível
-      formularioExistente.style.display = "block";
+      formulariosExistentes[0].style.display = "block";
       console.log(` [EMPRESA] Formulário já existe, apenas exibindo`);
       return;
+    }
+
+    if (formulariosExistentes.length > 1) {
+      formulariosExistentes.forEach((formulario) => formulario.remove());
+      console.warn(
+        ` [EMPRESA] ${formulariosExistentes.length} formulários duplicados removidos`,
+      );
     }
 
     // Verificar se há dados salvos

@@ -1,6 +1,8 @@
 import {
   buildMachinesSection,
   addMachine,
+  calculateMachinePrice,
+  updateOptionValues,
 } from "../../modules/machines/machines-core.js";
 
 function safePriceNumber(value) {
@@ -531,23 +533,9 @@ async function populateMachineData(machineElement, machineData) {
     // =========================================================
     // PASSO 10: PREÇOS
     // =========================================================
-    if (machineData.precoBase !== undefined) {
-      const basePriceElement = document.getElementById(
-        `base-price-${machineId}`,
-      );
-      if (basePriceElement) {
-        basePriceElement.textContent = `R$ ${safePriceNumber(machineData.precoBase).toLocaleString("pt-BR")}`;
-      }
-    }
-
-    if (machineData.precoTotal !== undefined) {
-      const totalPriceElement = document.getElementById(
-        `total-price-${machineId}`,
-      );
-      if (totalPriceElement) {
-        totalPriceElement.textContent = `R$ ${safePriceNumber(machineData.precoTotal).toLocaleString("pt-BR")}`;
-      }
-    }
+    // Recalcula pelo catalogo atual; registros antigos podem conter precos 0.
+    updateOptionValues(machineId);
+    calculateMachinePrice(machineId);
 
     // =========================================================
     // PASSO 11: VERIFICAÇÃO DA QUANTIDADE

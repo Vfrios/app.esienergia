@@ -846,6 +846,47 @@ function atualizarCamposEmpresaForm(obraData, formElement) {
   }
 }
 
+function atualizarNumeroClienteNaInterface(obraId, input) {
+  const numero = Number.parseInt(input?.value, 10);
+  if (!Number.isInteger(numero) || numero < 1) return;
+
+  const obraElement = document.querySelector(`[data-obra-id="${obraId}"]`);
+  if (!obraElement) return;
+
+  const empresaInput = obraElement.querySelector(
+    ".empresa-input-cadastro, .empresa-input-readonly",
+  );
+  const empresaSigla = String(
+    empresaInput?.dataset?.siglaSelecionada ||
+      obraElement.dataset.empresaSigla ||
+      "",
+  ).trim();
+  if (!empresaSigla) return;
+
+  const empresaNome = String(
+    empresaInput?.dataset?.nomeSelecionado ||
+      obraElement.dataset.empresaNome ||
+      "",
+  ).trim();
+  const identificador = `${empresaSigla}-${numero}`;
+
+  obraElement.dataset.empresaSigla = empresaSigla;
+  obraElement.dataset.empresaNome = empresaNome;
+  obraElement.dataset.numeroClienteFinal = String(numero);
+  obraElement.dataset.idGerado = `obra_${empresaSigla}_${numero}`;
+  obraElement.dataset.identificadorObra = identificador;
+
+  window.empresaCadastro?.atualizarHeaderObra?.(obraElement, {
+    empresaSigla,
+    empresaNome,
+    numeroClienteFinal: numero,
+    clienteFinal: obraElement.dataset.clienteFinal || "",
+    codigoCliente: obraElement.dataset.codigoCliente || "",
+    dataCadastro: obraElement.dataset.dataCadastro || "",
+    orcamentistaResponsavel: obraElement.dataset.orcamentistaResponsavel || "",
+  });
+}
+
 /**
  * Cria formulário de empresa com dados existentes - CORRIGIDO
  * Layout em 3 linhas:
@@ -989,11 +1030,10 @@ function criarFormularioEmpresa(obraId, container, dadosExistentes = null) {
 </div>
   `;
 
-  // Remove formulário anterior se existir
-  const formularioAnterior = container.querySelector(
-    ".empresa-formulario-ativo",
-  );
-  if (formularioAnterior) formularioAnterior.remove();
+  // Remove qualquer formulário anterior para manter IDs únicos por obra.
+  container
+    .querySelectorAll(".empresa-formulario-ativo")
+    .forEach((formularioAnterior) => formularioAnterior.remove());
 
   container.insertAdjacentHTML("beforeend", formularioHTML);
 
@@ -1024,6 +1064,14 @@ function criarFormularioEmpresa(obraId, container, dadosExistentes = null) {
         numeroInput.removeAttribute("readonly");
         numeroInput.readOnly = false;
       }
+    }
+
+    const numeroInput = document.getElementById(`numero-cliente-${obraId}`);
+    if (numeroInput) {
+      const atualizarNumero = () =>
+        atualizarNumeroClienteNaInterface(obraId, numeroInput);
+      numeroInput.addEventListener("input", atualizarNumero);
+      numeroInput.addEventListener("change", atualizarNumero);
     }
 
     if (typeof window.applyClientEmpresaRestrictions === "function") {

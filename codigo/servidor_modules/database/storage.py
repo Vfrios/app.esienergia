@@ -389,13 +389,8 @@ class DatabaseStorage:
         for row in rows:
             empresa = json.loads(row["raw_json"])
             if isinstance(empresa, dict):
-                empresa["numeroClienteAtual"] = max(
-                    normalize_numero_cliente_atual(
-                        empresa.get("numeroClienteAtual")
-                    ),
-                    normalize_numero_cliente_atual(
-                        row.get("ultimo_numero_cliente")
-                    ),
+                empresa["numeroClienteAtual"] = normalize_numero_cliente_atual(
+                    row.get("ultimo_numero_cliente")
                 )
             empresas.append(empresa)
         return empresas

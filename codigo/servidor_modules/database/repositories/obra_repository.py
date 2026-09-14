@@ -290,10 +290,7 @@ class ObraRepository:
                 cursor.execute(
                     f"""
                     UPDATE empresas AS empresas_destino
-                    SET ultimo_numero_cliente = MAX(
-                        COALESCE(empresas_destino.ultimo_numero_cliente, 0),
-                        COALESCE(obras_agrupadas.max_numero_cliente, 0)
-                    )
+                    SET ultimo_numero_cliente = COALESCE(obras_agrupadas.max_numero_cliente, 0)
                     FROM (
                         SELECT
                             empresa_codigo,
@@ -311,10 +308,7 @@ class ObraRepository:
             cursor.execute(
                 """
                 UPDATE empresas AS empresas_destino
-                SET ultimo_numero_cliente = MAX(
-                    COALESCE(empresas_destino.ultimo_numero_cliente, 0),
-                    COALESCE(obras_agrupadas.max_numero_cliente, 0)
-                )
+                SET ultimo_numero_cliente = COALESCE(obras_agrupadas.max_numero_cliente, 0)
                 FROM (
                     SELECT
                         empresa_codigo,

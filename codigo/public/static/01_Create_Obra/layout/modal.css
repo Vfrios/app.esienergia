@@ -26,6 +26,7 @@ body:has(.confirmation-modal.active) {
 
 .confirmation-modal.active {
     display: flex;
+    pointer-events: auto;
     animation: modalFadeIn 0.3s ease;
 }
 
@@ -45,6 +46,7 @@ body:has(.confirmation-modal.active) {
     border-left: 4px solid #4299e1;
     border: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
+    pointer-events: auto;
     animation: modalSlideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -110,6 +112,7 @@ body:has(.confirmation-modal.active) {
     text-transform: uppercase;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    pointer-events: auto;
 }
 
 .btn-cancel {

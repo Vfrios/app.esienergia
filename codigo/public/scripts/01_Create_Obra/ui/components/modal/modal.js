@@ -61,7 +61,7 @@ export function showConfirmationModal(obraName, obraId, obraBlock) {
   }
 
   modalMessage.innerHTML = `
- <strong>"${obraName}"</strong> será removida <span style="color: #ff6b6b; font-weight: bold; text-decoration: underline;">apenas da tela</span>.<br><br>
+ <div><strong>"${obraName}"</strong> será removida <span style="color: #ff6b6b; font-weight: bold; text-decoration: underline;">apenas da tela</span>.</div><br>
  <div style="display: flex; align-items: center; gap: 0.5rem; padding: 0.8rem; border-radius: 8px;">
  <span style="color: #51f956ff; font-size: 2rem;">✓</span>
  <small style="color: #ffffffff;">A obra permanece salva no servidor e pode ser recuperada a qualquer momento.</small>
@@ -71,11 +71,19 @@ export function showConfirmationModal(obraName, obraId, obraBlock) {
  </div>
  `;
 
+  modal.style.display = "flex";
+  modal.style.visibility = "visible";
+  modal.style.pointerEvents = "auto";
+  const confirmButton = modal.querySelector(".btn-confirm");
+  if (confirmButton) {
+    confirmButton.disabled = false;
+    confirmButton.removeAttribute("aria-busy");
+  }
   modal.classList.remove("hidden");
   modal.classList.add("active");
 
   setTimeout(() => {
-    const btn = document.querySelector(".btn-cancel");
+    const btn = modal.querySelector(".btn-cancel");
     if (btn) btn.focus();
   }, 12);
 }
@@ -87,6 +95,9 @@ export function closeConfirmationModal() {
   console.log(" Fechando modal de confirmação");
   const modal = document.getElementById("confirmationModal");
   if (modal) {
+    modal.style.display = "";
+    modal.style.visibility = "";
+    modal.style.pointerEvents = "";
     modal.classList.remove("active");
     modal.classList.add("hidden");
   }
@@ -106,6 +117,9 @@ function closeConfirmationModalWithoutClearing() {
   console.log(" Fechando modal sem limpar dados");
   const modal = document.getElementById("confirmationModal");
   if (!modal) return;
+  modal.style.display = "";
+  modal.style.visibility = "";
+  modal.style.pointerEvents = "";
   modal.classList.remove("active");
   modal.classList.add("hidden");
 }
@@ -505,9 +519,20 @@ export async function confirmDeletion() {
     return;
   }
 
+  const modal = document.getElementById("confirmationModal");
+  const confirmButton = modal?.querySelector(".btn-confirm");
+  if (confirmButton) {
+    confirmButton.disabled = true;
+    confirmButton.setAttribute("aria-busy", "true");
+  }
+
   // Validar ID seguro antes de salvar
   if (obraId === "undefined" || obraId === "null") {
     console.error(` ID de obra inválido para deleção: ${obraId}`);
+    if (confirmButton) {
+      confirmButton.disabled = false;
+      confirmButton.removeAttribute("aria-busy");
+    }
     return;
   }
 
