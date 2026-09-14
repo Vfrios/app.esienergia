@@ -98,7 +98,7 @@ function renderHistory() {
                                     <p class="obra-history-item-meta">Versão da obra · ${escapeHtml(formatDate(item.created_at))}</p>
                                 </div>
                                 <div class="obra-history-files">
-                                    <a class="obra-history-file" href="/api/obras/historico/${encodeURIComponent(item.id)}/download">Baixar Excel</a>
+                                    <button type="button" class="obra-history-file" data-download-history="${escapeHtml(item.id)}" data-history-path="/api/obras/historico/${encodeURIComponent(item.id)}/download">Baixar Excel</button>
                                     <button type="button" class="obra-history-delete" data-delete-history="${escapeHtml(item.id)}">Excluir</button>
                                 </div>
                             </article>
@@ -129,6 +129,41 @@ function renderHistory() {
         const toggle = button.querySelector(".obra-history-company-toggle, .obra-history-obra-toggle");
         if (toggle) toggle.textContent = collapsed ? "−" : "+";
     }));
+
+    // Interceptar downloads de Excel para enviar headers bridge
+    listElement.querySelectorAll("[data-download-history]").forEach((button) => {
+        button.addEventListener("click", async (event) => {
+            event.preventDefault();
+            const historyId = button.dataset.downloadHistory;
+            const downloadUrl = button.dataset.historyPath;
+            
+            try {
+                button.textContent = "Baixando...";
+                button.disabled = true;
+                
+                const response = await fetch(downloadUrl);
+                if (!response.ok) {
+                    throw new Error(`Erro ${response.status}: ${response.statusText}`);
+                }
+                
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = blobUrl;
+                a.download = `folha-dados-${historyId}.xlsx`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(blobUrl);
+            } catch (error) {
+                console.error("[HISTÓRICO] Erro ao baixar Excel:", error);
+                alert("Erro ao baixar arquivo: " + error.message);
+            } finally {
+                button.textContent = "Baixar Excel";
+                button.disabled = false;
+            }
+        });
+    });
 
     listElement.querySelectorAll("[data-delete-history]").forEach((button) => button.addEventListener("click", async () => {
         if (!window.confirm("Excluir este histórico de obra?")) return;

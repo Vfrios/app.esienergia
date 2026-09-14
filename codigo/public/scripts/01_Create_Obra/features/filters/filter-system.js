@@ -60,9 +60,18 @@ const FilterSystem = (function () {
     filterSwitchArea = document.querySelector(".filtro-switch-area");
 
     if (!filterToggle) {
-      console.error(" [FILTER-SYSTEM] Switch de filtro não encontrado");
+      console.error(" [FILTER-SYSTEM] Switch de filtro não encontrado - tentando novamente em 500ms");
+      // Se não encontrar, tentar novamente em 500ms
+      setTimeout(() => {
+        console.log(" [FILTER-SYSTEM] Tentando inicializar novamente...");
+        initialize();
+      }, 500);
       return false;
     }
+
+    console.log(" [FILTER-SYSTEM] Elementos DOM encontrados");
+    console.log("  - filterToggle:", filterToggle);
+    console.log("  - filterSwitchArea:", filterSwitchArea);
 
     // Inicializar outros módulos
     if (window.FilterDOM) {

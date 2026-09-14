@@ -320,13 +320,17 @@ function setupSystemLoadObserver() {
 /**
  * INICIALIZAR SISTEMA DE FILTROS
  */
+let filterInitAttempts = 0;
+const MAX_FILTER_INIT_ATTEMPTS = 10;
+
 function initializeFilterSystem() {
   if (!isFeatureEnabled("filtros")) {
     console.log("[MAIN] Sistema de filtros desativado pela configuracao atual");
     return;
   }
 
-  console.log(" [MAIN] Inicializando sistema de filtros...");
+  filterInitAttempts++;
+  console.log(` [MAIN] Inicializando sistema de filtros (tentativa ${filterInitAttempts}/${MAX_FILTER_INIT_ATTEMPTS})...`);
 
   // DEBUG: Verificar se módulos foram carregados
   console.log(" [DEBUG] Módulos disponíveis:", {
@@ -338,13 +342,16 @@ function initializeFilterSystem() {
 
   // Verificar se módulos foram carregados
   if (!window.FilterSystem || !window.FilterDOM || !window.FilterAutocomplete) {
-    console.warn(
-      " [MAIN] Módulos de filtro não carregados, tentando novamente em 1s...",
-    );
-
-    // Tentar novamente após 1 segundo
-    setTimeout(initializeFilterSystem, 62);
-    return;
+    if (filterInitAttempts < MAX_FILTER_INIT_ATTEMPTS) {
+      console.warn(
+        ` [MAIN] Módulos de filtro não carregados (tentativa ${filterInitAttempts}), tentando novamente em 500ms...`,
+      );
+      setTimeout(initializeFilterSystem, 500);
+      return;
+    } else {
+      console.error(" [MAIN] Falha ao carregar módulos de filtro após múltiplas tentativas");
+      return;
+    }
   }
 
   try {
@@ -356,27 +363,36 @@ function initializeFilterSystem() {
       const success = window.FilterSystem.initialize();
       if (success) {
         console.log(" [MAIN] Sistema de filtros inicializado com sucesso");
+        filterInitAttempts = 0; // Reset counter on success
 
         // Atualizar estado do switch após sistema carregar
         setupFilterSwitchState();
       } else {
-        console.error(" [MAIN] Falha ao inicializar FilterSystem");
+        console.warn(` [MAIN] Falha ao inicializar FilterSystem (tentativa ${filterInitAttempts})`);
 
-        // Tentar novamente em caso de falha
-        setTimeout(() => {
-          initializeFilterSystem();
-        }, 125);
+        if (filterInitAttempts < MAX_FILTER_INIT_ATTEMPTS) {
+          // Tentar novamente em caso de falha
+          setTimeout(() => {
+            initializeFilterSystem();
+          }, 500);
+        } else {
+          console.error(" [MAIN] Falha ao inicializar FilterSystem após múltiplas tentativas");
+        }
       }
     } else {
       console.error(" [MAIN] FilterSystem.initialize não é uma função");
     }
   } catch (error) {
-    console.error(" [MAIN] Erro ao inicializar sistema de filtros:", error);
+    console.error(` [MAIN] Erro ao inicializar sistema de filtros (tentativa ${filterInitAttempts}):`, error);
 
-    // Tentar novamente em caso de erro
-    setTimeout(() => {
-      initializeFilterSystem();
-    }, 125);
+    if (filterInitAttempts < MAX_FILTER_INIT_ATTEMPTS) {
+      // Tentar novamente em caso de erro
+      setTimeout(() => {
+        initializeFilterSystem();
+      }, 500);
+    } else {
+      console.error(" [MAIN] Falha ao inicializar FilterSystem após múltiplas tentativas");
+    }
   }
 }
 
@@ -937,11 +953,17 @@ window.addEventListener("DOMContentLoaded", async () => {
     setTimeout(verifyCriticalFunctions, 125);
 
     // INICIALIZAR SISTEMA DE FILTROS
-    // Aguardar 500ms para garantir que o DOM está pronto e outros módulos carregaram
-    if (isFeatureEnabled("filtros")) {
+    // Desabilitar filtros em /admin/obras/create (apenas em gerenciar obras)
+    const routePath = String(window.location.pathname || "").trim();
+    const isManageObrasPage = routePath === "/admin/obras/manage";
+    
+    if (isFeatureEnabled("filtros") && isManageObrasPage) {
+      console.log(" [MAIN] Página de gerenciar obras detectada - inicializando sistema de filtros");
       setTimeout(() => {
         initializeFilterSystem();
-      }, 250);
+      }, 1000);
+    } else if (!isManageObrasPage) {
+      console.log(" [MAIN] Página de criação de obras - sistema de filtros desabilitado");
     }
   } catch (error) {
     handleInitializationError(error);
