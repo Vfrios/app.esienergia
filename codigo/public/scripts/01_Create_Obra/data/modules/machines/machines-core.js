@@ -294,7 +294,7 @@ function updateClimatizationCapacityFromRoom(machineId, options = {}) {
   const targetCapacity = getClimatizationUnitCapacity(roomId);
   if (!targetCapacity || !powerSelect.options.length) return false;
 
-  const options = Array.from(powerSelect.options)
+  const powerOptions = Array.from(powerSelect.options)
     .filter((option) => option.value)
     .map((option) => ({
       option,
@@ -302,9 +302,9 @@ function updateClimatizationCapacityFromRoom(machineId, options = {}) {
     }))
     .filter((item) => item.value > 0);
 
-  if (!options.length) return false;
+  if (!powerOptions.length) return false;
 
-  const selected = options.reduce((best, item) =>
+  const selected = powerOptions.reduce((best, item) =>
     Math.abs(item.value - targetCapacity) < Math.abs(best.value - targetCapacity)
       ? item
       : best,

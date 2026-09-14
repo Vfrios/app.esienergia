@@ -201,6 +201,7 @@ _SQLITE_SYNC_TABLES = (
     "sessions",
     "admin_email_config",
     "obra_notifications",
+    "obra_history",
 )
 _SQLITE_SYNC_DELETE_ORDER = tuple(reversed(_SQLITE_SYNC_TABLES))
 _SYNC_PRIMARY_KEYS = {
@@ -219,6 +220,7 @@ _SYNC_PRIMARY_KEYS = {
     "sessions": ("session_id",),
     "admin_email_config": ("config_key",),
     "obra_notifications": ("obra_id",),
+    "obra_history": ("id",),
 }
 _SYNC_CONFLICT_METADATA_LIMIT = 50
 _SYNC_VALUE_MISSING = object()

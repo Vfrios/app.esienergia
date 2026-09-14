@@ -647,7 +647,7 @@ def get_storage(project_root):
 def release_storage_handles(project_root) -> None:
     root_key = str(Path(project_root).resolve())
     with _STORAGES_LOCK:
-        storage = _STORAGES.get(root_key)
+        storage = _STORAGES.pop(root_key, None)
 
     if storage is None:
         return

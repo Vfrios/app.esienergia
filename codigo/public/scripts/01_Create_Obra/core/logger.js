@@ -165,7 +165,7 @@ export function createSmartLogger(appConfig = null) {
         processLog(level, args) {
             const message = args.map((arg) => stringifyLogArg(arg)).join(' ');
 
-            if (this.shouldSilence(message)) {
+            if (level !== 'ERROR' && this.shouldSilence(message)) {
                 return;
             }
 
@@ -183,6 +183,10 @@ export function createSmartLogger(appConfig = null) {
         }
 
         shouldShow(level) {
+            if (level === 'ERROR') {
+                return true;
+            }
+
             return this.levels[level] <= this.levels[this.config.globalLevel];
         }
 
@@ -305,4 +309,3 @@ export function createSmartLogger(appConfig = null) {
 
     return new SmartLogger(appConfig);
 }
-
